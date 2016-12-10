@@ -1,0 +1,16 @@
+package model; /***********************************************************************
+ * Module:  Experience.java
+ * Author:  Reda BENCHRAA
+ * Purpose: Defines the Class Experience
+ ***********************************************************************/
+
+import java.util.*;
+
+/** @pdOid 92091e55-7206-466d-99de-d49e6aac8e51 */
+public class Experience {
+   /** @pdOid 2d151617-25f1-4ac1-b53c-0cd7196dfb27 */
+   private String nomExperience;
+   /** @pdOid 77bf5897-9a06-4560-bb4b-9f429bac3a67 */
+   private String logoExperience;
+
+}
