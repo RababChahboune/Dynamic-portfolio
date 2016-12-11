@@ -83,6 +83,10 @@ public class ProfileDA {
         p.setImageProfile(resultSet.getString("imageProfile"));
         p.setBiographieProfile(resultSet.getString("biographieProfile"));
         p.setIdProfile(resultSet.getInt("idProfile"));
+        p.setCursus(cursusDA.getCursusList(p));
+        p.setLien(lienDA.getLienList(p));
+        p.setCompetance(CompetanceDA.getCompetanceList(p));
         return p;
     }
+
 }
