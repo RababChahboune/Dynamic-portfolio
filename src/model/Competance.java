@@ -18,4 +18,36 @@ public class Competance {
    /** @pdRoleInfo migr=no name=Categorie_competance assc=association15 mult=1..1 type=Aggregation */
    public Categorie_competance categorie_competance;
 
+   public void setIdCompetance(int idCompetance) {
+      this.idCompetance = idCompetance;
+   }
+
+   public void setNomCompetance(String nomCompetance) {
+      this.nomCompetance = nomCompetance;
+   }
+
+   public void setPourcentageCompetance(int pourcentageCompetance) {
+      this.pourcentageCompetance = pourcentageCompetance;
+   }
+
+   public void setCategorie_competance(Categorie_competance categorie_competance) {
+      this.categorie_competance = categorie_competance;
+   }
+
+   public int getIdCompetance() {
+
+      return idCompetance;
+   }
+
+   public String getNomCompetance() {
+      return nomCompetance;
+   }
+
+   public int getPourcentageCompetance() {
+      return pourcentageCompetance;
+   }
+
+   public Categorie_competance getCategorie_competance() {
+      return categorie_competance;
+   }
 }

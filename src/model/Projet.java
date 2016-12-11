@@ -21,6 +21,7 @@ public class Projet {
    /** @pdOid 1eb27f25-3867-4151-9e44-f3597f59effa */
    private boolean etoileProjet;
 
+
    @Override
    public String toString() {
       return "Projet{" +
@@ -36,6 +37,7 @@ public class Projet {
 
    /** @pdRoleInfo migr=no name=Categorie_projet assc=association8 mult=1..1 type=Aggregation */
    public Categorie_projet categorie_projet;
+
 
    public void setIdProjet(int idProjet) {
       this.idProjet = idProjet;
@@ -65,10 +67,7 @@ public class Projet {
       this.categorie_projet = categorie_projet;
    }
 
-   public int getIdProjet() {
 
-      return idProjet;
-   }
 
    public String getNomProjet() {
       return nomProjet;
@@ -92,5 +91,10 @@ public class Projet {
 
    public Categorie_projet getCategorie_projet() {
       return categorie_projet;
+   }
+
+   public int getIdProjet() {
+
+      return idProjet;
    }
 }

@@ -15,4 +15,28 @@ public class Categorie_competance {
    /** @pdOid a972b876-78ed-4c61-91b5-d69feda211ef */
    private String descriptionCompetanceCategorie;
 
+   public void setIdCompetanceCategorie(int idCompetanceCategorie) {
+      this.idCompetanceCategorie = idCompetanceCategorie;
+   }
+
+   public void setNomCompetanceCategorie(String nomCompetanceCategorie) {
+      this.nomCompetanceCategorie = nomCompetanceCategorie;
+   }
+
+   public void setDescriptionCompetanceCategorie(String descriptionCompetanceCategorie) {
+      this.descriptionCompetanceCategorie = descriptionCompetanceCategorie;
+   }
+
+   public int getIdCompetanceCategorie() {
+
+      return idCompetanceCategorie;
+   }
+
+   public String getNomCompetanceCategorie() {
+      return nomCompetanceCategorie;
+   }
+
+   public String getDescriptionCompetanceCategorie() {
+      return descriptionCompetanceCategorie;
+   }
 }
