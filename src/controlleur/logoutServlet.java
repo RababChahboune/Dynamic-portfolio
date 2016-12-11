@@ -23,7 +23,6 @@ public class logoutServlet extends HttpServlet {
         out.print("You are successfully logged out!");
         out.close();
     }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
