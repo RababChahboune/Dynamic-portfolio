@@ -3,6 +3,7 @@ package dataAccess;
 import DB.dataAccess;
 import DB.dataAccessException;
 import model.Lien;
+import model.Profile;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -14,11 +15,11 @@ import java.util.ArrayList;
  */
 public class lienDA {
     private final static String tableName = "Lien";
-    public static ArrayList<Lien> getLienList()throws SQLException {
+    public static ArrayList<Lien> getLienList(Profile p)throws SQLException {
         dataAccess.setDbname("Portfolio");
         Connection con = dataAccess.getInstance().getConnection();
-        String sql = "SELECT * FROM "+tableName;
-        ResultSet result = dataAccess.select(con, sql);
+        String sql = "SELECT * FROM "+tableName+ " where idProfile=?";
+        ResultSet result = dataAccess.select(con, sql,p.getIdProfile());
         ArrayList<Lien> list = new ArrayList<Lien>();
         while (result.next()) {
             list.add(map(result));

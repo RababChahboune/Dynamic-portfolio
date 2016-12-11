@@ -3,6 +3,7 @@ package dataAccess;
 import DB.dataAccess;
 import DB.dataAccessException;
 import model.Cursus;
+import model.Profile;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -14,11 +15,11 @@ import java.util.ArrayList;
  */
 public class cursusDA {
     private final static String tableName = "Cursus";
-    public static ArrayList<Cursus> getCursusList()throws SQLException {
+    public static ArrayList<Cursus> getCursusList(Profile p)throws SQLException {
         dataAccess.setDbname("Portfolio");
         Connection con = dataAccess.getInstance().getConnection();
-        String sql = "SELECT * FROM "+tableName;
-        ResultSet result = dataAccess.select(con, sql);
+        String sql = "SELECT * FROM "+tableName+ " where idProfile=?";
+        ResultSet result = dataAccess.select(con, sql,p.getIdProfile());
         ArrayList<Cursus> list = new ArrayList<Cursus>();
         while (result.next()) {
             list.add(map(result));

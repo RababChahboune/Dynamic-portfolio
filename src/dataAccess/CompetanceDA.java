@@ -20,26 +20,17 @@ public class CompetanceDA {
 
     private final static String tableName = "competance";
     private final static String tableName1 = "categorie_competance";
-    public static ArrayList<Competance> getCompetanceList()throws SQLException {
-
-        // get database connection
+    public static ArrayList<Competance> getCompetanceList(Profile p)throws SQLException {
         dataAccess.setDbname("Portfolio");
         Connection con = dataAccess.getInstance().getConnection();
-
-        // String sql = "SELECT * FROM `" + tableName + "` ORDER BY id DESC";
         String sql = "SELECT * FROM " + tableName + " INNER JOIN "+tableName1+" ON "
-                +tableName+".idCompetanceCategorie="+tableName1+".idCompetanceCategorie ;" ;
-
-        // get customer data from database
-        ResultSet result = dataAccess.select(con, sql);
-
+                +tableName+".idCompetanceCategorie="+tableName1+".idCompetanceCategorie where idProfile=?" ;
+        ResultSet result = dataAccess.select(con, sql,p.getIdProfile());
         ArrayList<Competance> list = new ArrayList<Competance>();
-
         while (result.next()) {
             list.add(map(result));
         }
         result.close();
-
         return list;
     }
     private static Competance map(ResultSet resultSet) throws SQLException {
