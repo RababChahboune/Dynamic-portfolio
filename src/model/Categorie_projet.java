@@ -17,4 +17,45 @@ public class Categorie_projet {
    /** @pdOid 1cc6b7ff-45b9-49ba-828f-d90bc2131ebd */
    private String imageProjetCategorie;
 
+   @Override
+   public String toString() {
+      return "Categorie_projet{" +
+              "idProjetCategorie=" + idProjetCategorie +
+              ", nomProjetCategorie='" + nomProjetCategorie + '\'' +
+              ", descriptionProjetCategorie='" + descriptionProjetCategorie + '\'' +
+              ", imageProjetCategorie='" + imageProjetCategorie + '\'' +
+              '}';
+   }
+
+   public int getIdProjetCategorie() {
+      return idProjetCategorie;
+   }
+
+   public void setIdProjetCategorie(int idProjetCategorie) {
+      this.idProjetCategorie = idProjetCategorie;
+   }
+
+   public String getNomProjetCategorie() {
+      return nomProjetCategorie;
+   }
+
+   public void setNomProjetCategorie(String nomProjetCategorie) {
+      this.nomProjetCategorie = nomProjetCategorie;
+   }
+
+   public String getDescriptionProjetCategorie() {
+      return descriptionProjetCategorie;
+   }
+
+   public void setDescriptionProjetCategorie(String descriptionProjetCategorie) {
+      this.descriptionProjetCategorie = descriptionProjetCategorie;
+   }
+
+   public String getImageProjetCategorie() {
+      return imageProjetCategorie;
+   }
+
+   public void setImageProjetCategorie(String imageProjetCategorie) {
+      this.imageProjetCategorie = imageProjetCategorie;
+   }
 }
