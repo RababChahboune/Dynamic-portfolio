@@ -48,4 +48,14 @@ public class Lien {
    public void setImageLien(String imageLien) {
       this.imageLien = imageLien;
    }
+
+   @Override
+   public String toString() {
+      return "Lien{" +
+              "idLien=" + idLien +
+              ", nomLien='" + nomLien + '\'' +
+              ", urlLien='" + urlLien + '\'' +
+              ", imageLien='" + imageLien + '\'' +
+              '}';
+   }
 }

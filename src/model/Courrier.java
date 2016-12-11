@@ -68,4 +68,16 @@ public class Courrier {
     public void setNomComplet(String nomComplet) {
         this.nomComplet = nomComplet;
     }
+
+    @Override
+    public String toString() {
+        return "Courrier{" +
+                "idCourrier=" + idCourrier +
+                ", emailCourrier='" + emailCourrier + '\'' +
+                ", sujetCourrier='" + sujetCourrier + '\'' +
+                ", messageCourrier='" + messageCourrier + '\'' +
+                ", dateEnvoieCourrier='" + dateEnvoieCourrier + '\'' +
+                ", nomComplet='" + nomComplet + '\'' +
+                '}';
+    }
 }

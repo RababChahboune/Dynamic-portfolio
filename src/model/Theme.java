@@ -38,4 +38,13 @@ public class Theme {
    public void setPaletteTheme(String paletteTheme) {
       this.paletteTheme = paletteTheme;
    }
+
+   @Override
+   public String toString() {
+      return "Theme{" +
+              "nomTheme='" + nomTheme + '\'' +
+              ", lienTheme='" + lienTheme + '\'' +
+              ", paletteTheme='" + paletteTheme + '\'' +
+              '}';
+   }
 }

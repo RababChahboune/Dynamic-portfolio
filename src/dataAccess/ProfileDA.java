@@ -51,7 +51,7 @@ public class ProfileDA {
         Profile p = null;
         dataAccess.setDbname("portfolio");
         Connection con = dataAccess.getInstance().getConnection();
-        String sql = "SELECT * FROM " + tableName + " WHERE idProfil = ?";
+        String sql = "SELECT * FROM " + tableName + " WHERE idProfile = ?";
         ResultSet result = dataAccess.select(con, sql,id);
         if (result.next()) {
             p = map(result);

@@ -68,4 +68,16 @@ public class Cursus {
    public void setRemarqueCursus(String remarqueCursus) {
       this.remarqueCursus = remarqueCursus;
    }
+
+   @Override
+   public String toString() {
+      return "Cursus{" +
+              "id_cursus=" + id_cursus +
+              ", nomCursus='" + nomCursus + '\'' +
+              ", annee_debutCursus='" + annee_debutCursus + '\'' +
+              ", annee_finCursus='" + annee_finCursus + '\'' +
+              ", etablissementCursus='" + etablissementCursus + '\'' +
+              ", remarqueCursus='" + remarqueCursus + '\'' +
+              '}';
+   }
 }

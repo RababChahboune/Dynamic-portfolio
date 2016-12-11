@@ -232,4 +232,20 @@ public class Profile {
    public String getBiographieProfile() {
       return biographieProfile;
    }
+
+   @Override
+   public String toString() {
+      return "Profile{" +
+              "idProfile=" + idProfile +
+              ", nomProfile='" + nomProfile + '\'' +
+              ", prenomProfile='" + prenomProfile + '\'' +
+              ", emailProfile='" + emailProfile + '\'' +
+              ", telephoneProfile='" + telephoneProfile + '\'' +
+              ", imageProfile='" + imageProfile + '\'' +
+              ", biographieProfile='" + biographieProfile + '\'' +
+              ", lien=" + lien +
+              ", cursus=" + cursus +
+              ", competance=" + competance +
+              '}';
+   }
 }

@@ -64,7 +64,8 @@ public class themeDA {
         return dataAccess.executeSQL(con, sql,
                 p.getNomTheme(),
                 p.getLienTheme(),
-                p.getPaletteTheme()
+                p.getPaletteTheme(),
+                p.getNomTheme()
         );
     }
     private static Theme map(ResultSet resultSet) throws SQLException {

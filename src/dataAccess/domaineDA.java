@@ -30,7 +30,7 @@ public class domaineDA {
         dataAccess.setDbname("portfolio");
         Connection con = dataAccess.getInstance().getConnection();
         String sql = "INSERT INTO " + tableName
-                + " (nomDomaine,urlDomaine,imageDomaine) "
+                + " (nomDomaine,descriptionDomaine,imageDomaine) "
                 + "VALUES ( ?, ? , ? )";
         return dataAccess.executeSQL(con, sql,
                 p.getNomDomaine(),

@@ -59,4 +59,15 @@ public class Portfolio {
    public void setTheme(Theme theme) {
       this.theme = theme;
    }
+
+   @Override
+   public String toString() {
+      return "Portfolio{" +
+              "nomPortfolio='" + nomPortfolio + '\'' +
+              ", aProposPortfolio='" + aProposPortfolio + '\'' +
+              ", logoPortfolio='" + logoPortfolio + '\'' +
+              ", salutationPortfolio='" + salutationPortfolio + '\'' +
+              ", theme=" + theme +
+              '}';
+   }
 }

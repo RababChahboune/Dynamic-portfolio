@@ -30,8 +30,8 @@ public class experienceDA {
         dataAccess.setDbname("portfolio");
         Connection con = dataAccess.getInstance().getConnection();
         String sql = "INSERT INTO " + tableName
-                + " (nomExperience,urlExperience,imageExperience) "
-                + "VALUES ( ? , ? )";
+                + " (nomExperience, logoExperience) "
+                + "VALUES (?, ? )";
         return dataAccess.executeSQL(con, sql,
                 p.getNomExperience(),
                 p.getLogoExperience()
@@ -62,7 +62,8 @@ public class experienceDA {
                 +" where nomExperience = ?";
         return dataAccess.executeSQL(con, sql,
                 p.getNomExperience(),
-                p.getLogoExperience()
+                p.getLogoExperience(),
+                p.getNomExperience()
         );
     }
     private static Experience map(ResultSet resultSet) throws SQLException {

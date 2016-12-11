@@ -28,4 +28,12 @@ public class Experience {
    public void setLogoExperience(String logoExperience) {
       this.logoExperience = logoExperience;
    }
+
+   @Override
+   public String toString() {
+      return "Experience{" +
+              "nomExperience='" + nomExperience + '\'' +
+              ", logoExperience='" + logoExperience + '\'' +
+              '}';
+   }
 }

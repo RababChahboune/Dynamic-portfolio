@@ -27,14 +27,15 @@ public class lienDA {
         result.close();
         return list;
     }
-    public static int insertLien(Lien p) throws SQLException {
+    public static int insertLien(Lien p,Profile profile) throws SQLException {
         dataAccess.setDbname("portfolio");
         Connection con = dataAccess.getInstance().getConnection();
         String sql = "INSERT INTO " + tableName
-                + " (nomLien,urlLien,imageLien) "
-                + "VALUES ( ?, ? , ? )";
+                + " (nomLien, idProfile ,urlLien,imageLien) "
+                + "VALUES ( ?, ? , ? , ? )";
         return dataAccess.executeSQL(con, sql,
                 p.getNomLien(),
+                profile.getIdProfile(),
                 p.getUrlLien(),
                 p.getImageLien()
         );
@@ -56,14 +57,15 @@ public class lienDA {
         }
         return p;
     }
-    public static int updateLien(Lien p) throws SQLException {
+    public static int updateLien(Lien p,Profile profile) throws SQLException {
         dataAccess.setDbname("portfolio");
         Connection con = dataAccess.getInstance().getConnection();
         String sql = "UPDATE "+ tableName
-                +" SET nomLien = ? , urlLien = ?,imageLien = ?"
+                +" SET nomLien = ? , idProfile = ? , urlLien = ?,imageLien = ?"
                 +" where idLien = ?";
         return dataAccess.executeSQL(con, sql,
                 p.getNomLien(),
+                profile.getIdProfile(),
                 p.getUrlLien(),
                 p.getImageLien(),
                 p.getIdLien()

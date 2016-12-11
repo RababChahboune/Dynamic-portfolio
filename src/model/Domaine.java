@@ -48,4 +48,14 @@ public class Domaine {
    public void setImageDomaine(String imageDomaine) {
       this.imageDomaine = imageDomaine;
    }
+
+   @Override
+   public String toString() {
+      return "Domaine{" +
+              "idDomaine=" + idDomaine +
+              ", nomDomaine='" + nomDomaine + '\'' +
+              ", descriptionDomaine='" + descriptionDomaine + '\'' +
+              ", imageDomaine='" + imageDomaine + '\'' +
+              '}';
+   }
 }

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 /**
  * Created by Reda BENCHRAA on 11/12/2016.
  */
-public class protfolioDA {
+public class portfolioDA {
     private final static String tableName = "Portfolio";
     private final static String tableName1 = "Theme";
     public static Portfolio getPortfolio()throws SQLException {
@@ -68,7 +68,7 @@ public class protfolioDA {
         Connection con = dataAccess.getInstance().getConnection();
 
         String sql = "UPDATE "+ tableName +
-                " SET nomTheme = ?,  aProposPortfolio= ?," +
+                " SET nomPortfolio = ?,  aProposPortfolio= ?," +
                 "logoPortfolio = ? , salutationPortfolio= ?, nomTheme= ?" +
                 "   WHERE 1=1";
 

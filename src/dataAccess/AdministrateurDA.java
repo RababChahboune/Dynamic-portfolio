@@ -37,6 +37,11 @@ public class AdministrateurDA {
         Administrateur c = new Administrateur();
         c.setUsername(resultSet.getString("username"));
         c.setPassword(resultSet.getString("password"));
+        c.setExperience(experienceDA.getExperienceList());
+        c.setDomaine(domaineDA.getDomaineList());
+        c.setProfile(ProfileDA.getProfileList());
+        c.setProjet(ProjetDA.getProjetList());
+        c.setPortfolio(portfolioDA.getPortfolio());
         return c;
     }
 }

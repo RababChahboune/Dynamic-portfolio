@@ -30,13 +30,14 @@ public class courrierDA {
         dataAccess.setDbname("portfolio");
         Connection con = dataAccess.getInstance().getConnection();
         String sql = "INSERT INTO " + tableName
-                + " (emailCourrier,sujetCourrier,messageCourrier,nomComplet) "
-                + "VALUES ( ?, ? , ? , ? )";
+                + " (emailCourrier,sujetCourrier,messageCourrier,nomCompletCourrier,dateEnvoieCourrier) "
+                + "VALUES ( ?, ? , ? , ? , now())";
         return dataAccess.executeSQL(con, sql,
                 p.getEmailCourrier(),
                 p.getSujetCourrier(),
                 p.getMessageCourrier(),
                 p.getNomComplet()
+
         );
     }
     public static int deleteCourrier(Courrier p) throws SQLException {
@@ -60,7 +61,7 @@ public class courrierDA {
         dataAccess.setDbname("portfolio");
         Connection con = dataAccess.getInstance().getConnection();
         String sql = "UPDATE "+ tableName
-                +" SET emailCourrier = ?,sujetCourrier = ?,messageCourrier = ?,nomComplet = ?"
+                +" SET emailCourrier = ?,sujetCourrier = ?,messageCourrier = ?,nomCompletCourrier = ?"
                 +" where idCourrier = ?";
         return dataAccess.executeSQL(con, sql,
                 p.getEmailCourrier(),
@@ -75,7 +76,8 @@ public class courrierDA {
         p.setEmailCourrier(resultSet.getString("emailCourrier"));
         p.setSujetCourrier(resultSet.getString("sujetCourrier"));
         p.setMessageCourrier(resultSet.getString("messageCourrier"));
-        p.setNomComplet(resultSet.getString("nomComplet"));
+        p.setDateEnvoieCourrier(resultSet.getString("dateEnvoieCourrier"));
+        p.setNomComplet(resultSet.getString("nomCompletCourrier"));
         p.setIdCourrier(resultSet.getInt("idCourrier"));
         return p;
     }

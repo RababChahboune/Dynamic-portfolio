@@ -27,14 +27,15 @@ public class cursusDA {
         result.close();
         return list;
     }
-    public static int insertCursus(Cursus p) throws SQLException {
+    public static int insertCursus(Cursus p,Profile profile) throws SQLException {
         dataAccess.setDbname("portfolio");
         Connection con = dataAccess.getInstance().getConnection();
         String sql = "INSERT INTO " + tableName
-                + " (nomCursus,annee_debutCursus,annee_finCursus,etablissementCursus,remarqueCursus) "
-                + "VALUES ( ? , ? , ? , ? , ? )";
+                + " (nomCursus,idProfile,annee_debutCursus,annee_finCursus,etablissementCursus,remarqueCursus) "
+                + "VALUES ( ? , ? , ? , ? , ? , ? )";
         return dataAccess.executeSQL(con, sql,
                 p.getNomCursus(),
+                profile.getIdProfile(),
                 p.getAnnee_debutCursus(),
                 p.getAnnee_finCursus(),
                 p.getEtablissementCursus(),
@@ -44,28 +45,30 @@ public class cursusDA {
     public static int deleteCursus(Cursus p) throws SQLException {
         dataAccess.setDbname("portfolio");
         Connection con = dataAccess.getInstance().getConnection();
-        String sql = "DELETE FROM " + tableName + " WHERE nomCursus = ?";
+        String sql = "DELETE FROM " + tableName + " WHERE id_cursus = ?";
         return dataAccess.executeSQL(con, sql, p.getId_cursus());
     }
     public static Cursus findCursus(int id) throws dataAccessException,SQLException {
         Cursus p = null;
         dataAccess.setDbname("portfolio");
         Connection con = dataAccess.getInstance().getConnection();
-        String sql = "SELECT * FROM " + tableName + " WHERE nomCursus = ?";
+        String sql = "SELECT * FROM " + tableName + " WHERE id_cursus = ?";
         ResultSet result = dataAccess.select(con, sql,id);
         if (result.next()) {
             p = map(result);
         }
         return p;
     }
-    public static int updateCursus(Cursus p) throws SQLException {
+    public static int updateCursus(Cursus p,Profile profile) throws SQLException {
         dataAccess.setDbname("portfolio");
         Connection con = dataAccess.getInstance().getConnection();
         String sql = "UPDATE "+ tableName
-        +"nomCursus  = ?,annee_debutCursus = ?,annee_finCursus = ?,etablissementCursus = ?,remarqueCursus = ?"
-                +" where idCursus = ?";
+        +" SET nomCursus  = ? , idProfile = ? , annee_debutCursus = ? , annee_finCursus = ? ," +
+                " etablissementCursus = ? , remarqueCursus = ? "
+                +" where id_Cursus = ?";
         return dataAccess.executeSQL(con, sql,
                 p.getNomCursus(),
+                profile.getIdProfile(),
                 p.getAnnee_debutCursus(),
                 p.getAnnee_finCursus(),
                 p.getEtablissementCursus(),
@@ -80,7 +83,7 @@ public class cursusDA {
         p.setAnnee_finCursus(resultSet.getString("annee_finCursus"));
         p.setEtablissementCursus(resultSet.getString("etablissementCursus"));
         p.setRemarqueCursus(resultSet.getString("remarqueCursus"));
-        p.setId_cursus(resultSet.getInt("IDCursus"));
+        p.setId_cursus(resultSet.getInt("id_Cursus"));
         return p;
     }
 }

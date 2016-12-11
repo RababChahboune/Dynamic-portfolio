@@ -233,4 +233,25 @@ public class Administrateur extends Utilisateur {
    public void setPassword(String password) {
       this.password = password;
    }
+
+   public Portfolio getPortfolio() {
+      return portfolio;
+   }
+
+   public void setPortfolio(Portfolio portfolio) {
+      this.portfolio = portfolio;
+   }
+
+   @Override
+   public String toString() {
+      return "Administrateur{" +
+              "username='" + username + '\'' +
+              ", password='" + password + '\'' +
+              ", portfolio=" + portfolio +
+              ", profile=" + profile +
+              ", projet=" + projet +
+              ", experience=" + experience +
+              ", domaine=" + domaine +
+              '}';
+   }
 }
