@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class testProjetAndCatDA {
 
     public static void main(String [] args) throws SQLException {
-        /*Categorie_projet cp = new Categorie_projet();
+        Categorie_projet cp = new Categorie_projet();
         cp.setNomProjetCategorie("3D");
         cp.setDescriptionProjetCategorie("All 3d Work");
         cp.setImageProjetCategorie("3D.jpg");
@@ -91,6 +91,6 @@ public class testProjetAndCatDA {
             else {
                 System.out.println(fff);
             }
-        }*/
+        }
     }
 }

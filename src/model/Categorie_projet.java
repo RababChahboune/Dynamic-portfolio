@@ -1,4 +1,5 @@
-package model; /***********************************************************************
+package model;
+/***********************************************************************
  * Module:  Categorie_projet.java
  * Author:  Reda BENCHRAA
  * Purpose: Defines the Class Categorie_projet
