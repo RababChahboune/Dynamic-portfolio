@@ -21,4 +21,51 @@ public class Cursus {
    /** @pdOid 0d458ac7-a9a2-4ed6-86b1-afc8da144a21 */
    private String remarqueCursus;
 
+   public int getId_cursus() {
+      return id_cursus;
+   }
+
+   public void setId_cursus(int id_cursus) {
+      this.id_cursus = id_cursus;
+   }
+
+   public String getNomCursus() {
+      return nomCursus;
+   }
+
+   public void setNomCursus(String nomCursus) {
+      this.nomCursus = nomCursus;
+   }
+
+   public String getAnnee_debutCursus() {
+      return annee_debutCursus;
+   }
+
+   public void setAnnee_debutCursus(String annee_debutCursus) {
+      this.annee_debutCursus = annee_debutCursus;
+   }
+
+   public String getAnnee_finCursus() {
+      return annee_finCursus;
+   }
+
+   public void setAnnee_finCursus(String annee_finCursus) {
+      this.annee_finCursus = annee_finCursus;
+   }
+
+   public String getEtablissementCursus() {
+      return etablissementCursus;
+   }
+
+   public void setEtablissementCursus(String etablissementCursus) {
+      this.etablissementCursus = etablissementCursus;
+   }
+
+   public String getRemarqueCursus() {
+      return remarqueCursus;
+   }
+
+   public void setRemarqueCursus(String remarqueCursus) {
+      this.remarqueCursus = remarqueCursus;
+   }
 }
