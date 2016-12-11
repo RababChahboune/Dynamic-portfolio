@@ -1,5 +1,6 @@
 package DB;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
 import java.util.Properties;
@@ -9,7 +10,7 @@ import java.util.Properties;
  */
 public class dataAccess {
 
-    private static final String FILE_PROPERTIES   = "FILE LOCATION";
+    private static final String FILE_PROPERTIES   = "dataAccess/dataAccess.properties";
     private static final String PROPERTY_DRIVER   = "DB_DRIVER";
     private static final String PROPERTY_URL      = "DB_URL";
     private static final String PROPERTY_NAME     = "DB_NAME";
@@ -21,8 +22,8 @@ public class dataAccess {
     public String db_user;
     public String db_pass;
 
-    public void setDB(String db_name){
-        this.db_name = db_name;
+    public static void setDbname(String name){
+        db_name = name;
     }
 
     public dataAccess(String db_url, String db_name,String db_user, String db_pass) {
@@ -34,6 +35,11 @@ public class dataAccess {
         Properties properties = new Properties();
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         InputStream propertiesFile= classLoader.getResourceAsStream(FILE_PROPERTIES);
+        try {
+            properties.load(propertiesFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         if (propertiesFile == null) {
             throw new dataAccessException("File " + FILE_PROPERTIES + " not found.");
