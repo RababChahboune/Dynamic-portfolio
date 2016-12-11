@@ -69,7 +69,7 @@ public class Categorie_competanceDA {
         dataAccess.setDbname("Portfolio");
         Connection con = dataAccess.getInstance().getConnection();
 
-        String sql = "DELETE FROM " + tableName + " WHERE id = ?";
+        String sql = "DELETE FROM " + tableName + " WHERE idCompetanceCategorie = ?";
 
         return dataAccess.executeSQL(con, sql, cc.getIdCompetanceCategorie());
     }
@@ -94,7 +94,7 @@ public class Categorie_competanceDA {
         dataAccess.setDbname("Portfolio");
         Connection con = dataAccess.getInstance().getConnection();
 
-        String sql = "SELECT * FROM " + tableName + " WHERE id = ?";
+        String sql = "SELECT * FROM " + tableName + " WHERE idCompetanceCategorie = ?";
         ResultSet result = dataAccess.select(con, sql, id);
 
         if (result.next()) {

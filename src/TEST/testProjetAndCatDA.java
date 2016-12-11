@@ -33,7 +33,7 @@ public class testProjetAndCatDA {
             System.out.println(c);
         }
 
-        Categorie_projet f= Categorie_projetDA.findCategorie_projet("idProjetCategorie",26);
+        Categorie_projet f= Categorie_projetDA.findCategorie_projet("idProjetCategorie",2);
         if(f == null) System.out.println("Caté not found");
         else {
             System.out.println(f);

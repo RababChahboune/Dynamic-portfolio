@@ -75,7 +75,7 @@ public class CompetanceDA {
         dataAccess.setDbname("Portfolio");
         Connection con = dataAccess.getInstance().getConnection();
 
-        String sql = "DELETE FROM " + tableName + " WHERE id = ?";
+        String sql = "DELETE FROM " + tableName + " WHERE idCompetance = ?";
 
         return dataAccess.executeSQL(con, sql, competance.getIdCompetance());
     }
@@ -91,7 +91,7 @@ public class CompetanceDA {
 
         return dataAccess.executeSQL(con, sql,
                 profile.getIdProfile(),
-                competance.getCategorie_competance(),
+                competance.getCategorie_competance().getIdCompetanceCategorie(),
                 competance.getNomCompetance(),
                 competance.getPourcentageCompetance(),
                 competance.getIdCompetance());
@@ -103,7 +103,8 @@ public class CompetanceDA {
         dataAccess.setDbname("Portfolio");
         Connection con = dataAccess.getInstance().getConnection();
 
-        String sql = "SELECT * FROM " + tableName + " WHERE id = ?";
+        String sql = "SELECT * FROM " + tableName+","+tableName1 + " WHERE idCompetance = ? and "+
+                tableName+".idCompetanceCategorie = "+tableName1+".idCompetanceCategorie";
         ResultSet result = dataAccess.select(con, sql, id);
 
         if (result.next()) {

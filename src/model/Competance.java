@@ -14,7 +14,8 @@ public class Competance {
    private String nomCompetance;
    /** @pdOid 2f117e31-61bc-4620-a5e2-7c7053a3e692 */
    private int pourcentageCompetance;
-   
+
+
    /** @pdRoleInfo migr=no name=Categorie_competance assc=association15 mult=1..1 type=Aggregation */
    public Categorie_competance categorie_competance;
 
@@ -49,5 +50,14 @@ public class Competance {
 
    public Categorie_competance getCategorie_competance() {
       return categorie_competance;
+   }
+   @Override
+   public String toString() {
+      return "Competance{" +
+              "idCompetance=" + idCompetance +
+              ", nomCompetance='" + nomCompetance + '\'' +
+              ", pourcentageCompetance=" + pourcentageCompetance +
+              ", categorie_competance=" + categorie_competance +
+              '}';
    }
 }
