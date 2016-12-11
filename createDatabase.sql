@@ -47,7 +47,7 @@ create table Administrateur
 /*==============================================================*/
 create table Categorie_competance
 (
-   idCompetanceCategorie int not null,
+   idCompetanceCategorie int not null AUTO_INCREMENT,
    nomCompetanceCategorie varchar(254),
    descriptionCompetanceCategorie varchar(254),
    primary key (idCompetanceCategorie)
@@ -58,7 +58,7 @@ create table Categorie_competance
 /*==============================================================*/
 create table Categorie_projet
 (
-   idProjetCategorie    int not null,
+   idProjetCategorie    int not null AUTO_INCREMENT,
    nomProjetCategorie   varchar(254),
    descriptionProjetCategorie varchar(254),
    imageProjetCategorie varchar(254),
@@ -70,7 +70,7 @@ create table Categorie_projet
 /*==============================================================*/
 create table Competance
 (
-   idCompetance         int not null,
+   idCompetance         int not null AUTO_INCREMENT,
    idProfile            int,
    idCompetanceCategorie int not null,
    nomCompetance        varchar(254) not null,
@@ -83,7 +83,7 @@ create table Competance
 /*==============================================================*/
 create table Courrier
 (
-   idCourrier           int not null,
+   idCourrier           int not null AUTO_INCREMENT,
    emailCourrier        varchar(254),
    sujetCourrier        varchar(254),
    messageCourrier      varchar(254),
@@ -97,7 +97,7 @@ create table Courrier
 /*==============================================================*/
 create table Cursus
 (
-   id_cursus            int not null,
+   id_cursus            int not null AUTO_INCREMENT,
    idProfile            int,
    nomCursus            varchar(254),
    annee_debutCursus    varchar(254),
@@ -112,7 +112,7 @@ create table Cursus
 /*==============================================================*/
 create table Domaine
 (
-   idDomaine            int not null,
+   idDomaine            int not null AUTO_INCREMENT,
    nomDomaine           varchar(254),
    descriptionDomaine   varchar(254),
    imageDomaine         varchar(254),
@@ -134,7 +134,7 @@ create table Experience
 /*==============================================================*/
 create table Lien
 (
-   idLien               int not null,
+   idLien               int not null AUTO_INCREMENT,
    idProfile            int,
    nomLien              varchar(254),
    urlLien              varchar(254),
@@ -159,7 +159,7 @@ create table Portfolio
 /*==============================================================*/
 create table Profile
 (
-   idProfile            int not null,
+   idProfile            int not null AUTO_INCREMENT,
    nomProfile           varchar(254),
    prenomProfile        varchar(254),
    emailProfile         varchar(254),
@@ -174,7 +174,7 @@ create table Profile
 /*==============================================================*/
 create table Projet
 (
-   idProjet             int not null,
+   idProjet             int not null AUTO_INCREMENT,
    idProjetCategorie    int not null,
    nomProjet            varchar(254),
    descriptionProjet    varchar(254),

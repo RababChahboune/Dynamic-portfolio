@@ -176,4 +176,60 @@ public class Profile {
          competance.clear();
    }
 
+   public void setIdProfile(int idProfile) {
+      this.idProfile = idProfile;
+   }
+
+   public void setNomProfile(String nomProfile) {
+      this.nomProfile = nomProfile;
+   }
+
+   public void setPrenomProfile(String prenomProfile) {
+      this.prenomProfile = prenomProfile;
+   }
+
+   public void setEmailProfile(String emailProfile) {
+      this.emailProfile = emailProfile;
+   }
+
+   public void setTelephoneProfile(String telephoneProfile) {
+      this.telephoneProfile = telephoneProfile;
+   }
+
+   public void setImageProfile(String imageProfile) {
+      this.imageProfile = imageProfile;
+   }
+
+   public void setBiographieProfile(String biographieProfile) {
+      this.biographieProfile = biographieProfile;
+   }
+
+   public int getIdProfile() {
+
+      return idProfile;
+   }
+
+   public String getNomProfile() {
+      return nomProfile;
+   }
+
+   public String getPrenomProfile() {
+      return prenomProfile;
+   }
+
+   public String getEmailProfile() {
+      return emailProfile;
+   }
+
+   public String getTelephoneProfile() {
+      return telephoneProfile;
+   }
+
+   public String getImageProfile() {
+      return imageProfile;
+   }
+
+   public String getBiographieProfile() {
+      return biographieProfile;
+   }
 }

@@ -21,8 +21,8 @@ public class dataAccess {
     public String db_user;
     public String db_pass;
 
-    public void setDB(String db_name){
-        this.db_name = db_name;
+    public static void setDbname(String name){
+        db_name = name;
     }
 
     public dataAccess(String db_url, String db_name,String db_user, String db_pass) {

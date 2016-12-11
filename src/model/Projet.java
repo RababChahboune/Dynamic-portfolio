@@ -20,8 +20,64 @@ public class Projet {
    private String imageProjet;
    /** @pdOid 1eb27f25-3867-4151-9e44-f3597f59effa */
    private boolean etoileProjet;
-   
+
+   public void setIdProjet(int idProjet) {
+      this.idProjet = idProjet;
+   }
+
+   public void setNomProjet(String nomProjet) {
+      this.nomProjet = nomProjet;
+   }
+
+   public void setDescriptionProjet(String descriptionProjet) {
+      this.descriptionProjet = descriptionProjet;
+   }
+
+   public void setProjetProjet(String projetProjet) {
+      this.projetProjet = projetProjet;
+   }
+
+   public void setImageProjet(String imageProjet) {
+      this.imageProjet = imageProjet;
+   }
+
+   public void setEtoileProjet(boolean etoileProjet) {
+      this.etoileProjet = etoileProjet;
+   }
+
+   public void setCategorie_projet(Categorie_projet categorie_projet) {
+      this.categorie_projet = categorie_projet;
+   }
+
    /** @pdRoleInfo migr=no name=Categorie_projet assc=association8 mult=1..1 type=Aggregation */
    public Categorie_projet categorie_projet;
 
+   public String getNomProjet() {
+      return nomProjet;
+   }
+
+   public String getDescriptionProjet() {
+      return descriptionProjet;
+   }
+
+   public String getProjetProjet() {
+      return projetProjet;
+   }
+
+   public String getImageProjet() {
+      return imageProjet;
+   }
+
+   public boolean isEtoileProjet() {
+      return etoileProjet;
+   }
+
+   public Categorie_projet getCategorie_projet() {
+      return categorie_projet;
+   }
+
+   public int getIdProjet() {
+
+      return idProjet;
+   }
 }
