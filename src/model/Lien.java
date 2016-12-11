@@ -17,4 +17,35 @@ public class Lien {
    /** @pdOid b800e25e-bc33-4640-bba5-011aeaeb0fd8 */
    private String imageLien;
 
+   public int getIdLien() {
+      return idLien;
+   }
+
+   public void setIdLien(int idLien) {
+      this.idLien = idLien;
+   }
+
+   public String getNomLien() {
+      return nomLien;
+   }
+
+   public void setNomLien(String nomLien) {
+      this.nomLien = nomLien;
+   }
+
+   public String getUrlLien() {
+      return urlLien;
+   }
+
+   public void setUrlLien(String urlLien) {
+      this.urlLien = urlLien;
+   }
+
+   public String getImageLien() {
+      return imageLien;
+   }
+
+   public void setImageLien(String imageLien) {
+      this.imageLien = imageLien;
+   }
 }

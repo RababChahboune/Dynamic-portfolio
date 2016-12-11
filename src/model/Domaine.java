@@ -17,4 +17,35 @@ public class Domaine {
    /** @pdOid 5b293ff8-6f26-4541-8925-e21861c7e50b */
    private String imageDomaine;
 
+   public int getIdDomaine() {
+      return idDomaine;
+   }
+
+   public void setIdDomaine(int idDomaine) {
+      this.idDomaine = idDomaine;
+   }
+
+   public String getNomDomaine() {
+      return nomDomaine;
+   }
+
+   public void setNomDomaine(String nomDomaine) {
+      this.nomDomaine = nomDomaine;
+   }
+
+   public String getDescriptionDomaine() {
+      return descriptionDomaine;
+   }
+
+   public void setDescriptionDomaine(String descriptionDomaine) {
+      this.descriptionDomaine = descriptionDomaine;
+   }
+
+   public String getImageDomaine() {
+      return imageDomaine;
+   }
+
+   public void setImageDomaine(String imageDomaine) {
+      this.imageDomaine = imageDomaine;
+   }
 }

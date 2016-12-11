@@ -20,4 +20,43 @@ public class Portfolio {
    /** @pdRoleInfo migr=no name=Theme assc=association11 mult=1..1 type=Aggregation */
    public Theme theme;
 
+   public String getNomPortfolio() {
+      return nomPortfolio;
+   }
+
+   public void setNomPortfolio(String nomPortfolio) {
+      this.nomPortfolio = nomPortfolio;
+   }
+
+   public String getaProposPortfolio() {
+      return aProposPortfolio;
+   }
+
+   public void setaProposPortfolio(String aProposPortfolio) {
+      this.aProposPortfolio = aProposPortfolio;
+   }
+
+   public String getLogoPortfolio() {
+      return logoPortfolio;
+   }
+
+   public void setLogoPortfolio(String logoPortfolio) {
+      this.logoPortfolio = logoPortfolio;
+   }
+
+   public String getSalutationPortfolio() {
+      return salutationPortfolio;
+   }
+
+   public void setSalutationPortfolio(String salutationPortfolio) {
+      this.salutationPortfolio = salutationPortfolio;
+   }
+
+   public Theme getTheme() {
+      return theme;
+   }
+
+   public void setTheme(Theme theme) {
+      this.theme = theme;
+   }
 }

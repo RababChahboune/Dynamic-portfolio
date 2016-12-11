@@ -15,4 +15,27 @@ public class Theme {
    /** @pdOid 23f424ed-dcdd-446f-b0da-e7519dbf961a */
    private String paletteTheme;
 
+   public String getNomTheme() {
+      return nomTheme;
+   }
+
+   public void setNomTheme(String nomTheme) {
+      this.nomTheme = nomTheme;
+   }
+
+   public String getLienTheme() {
+      return lienTheme;
+   }
+
+   public void setLienTheme(String lienTheme) {
+      this.lienTheme = lienTheme;
+   }
+
+   public String getPaletteTheme() {
+      return paletteTheme;
+   }
+
+   public void setPaletteTheme(String paletteTheme) {
+      this.paletteTheme = paletteTheme;
+   }
 }

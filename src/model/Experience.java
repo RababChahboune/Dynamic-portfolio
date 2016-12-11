@@ -13,4 +13,19 @@ public class Experience {
    /** @pdOid 77bf5897-9a06-4560-bb4b-9f429bac3a67 */
    private String logoExperience;
 
+   public String getNomExperience() {
+      return nomExperience;
+   }
+
+   public void setNomExperience(String nomExperience) {
+      this.nomExperience = nomExperience;
+   }
+
+   public String getLogoExperience() {
+      return logoExperience;
+   }
+
+   public void setLogoExperience(String logoExperience) {
+      this.logoExperience = logoExperience;
+   }
 }

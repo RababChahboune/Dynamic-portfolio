@@ -23,31 +23,31 @@ public class Profile {
    /** @pdOid f318eb2a-78fc-435f-a481-bba43bd42d19 */
    private String biographieProfile;
    
-   /** @pdRoleInfo migr=no name=Lien assc=association16 coll=java.util.Collection impl=java.util.HashSet mult=0..* type=Aggregation */
-   public Collection<Lien> lien;
-   /** @pdRoleInfo migr=no name=Cursus assc=association14 coll=java.util.Collection impl=java.util.HashSet mult=0..* type=Aggregation */
-   public Collection<Cursus> cursus;
-   /** @pdRoleInfo migr=no name=Competance assc=association13 coll=java.util.Collection impl=java.util.HashSet mult=0..* type=Aggregation */
-   public Collection<Competance> competance;
+   /** @pdRoleInfo migr=no name=Lien assc=association16 coll=java.util.ArrayList impl=java.util.ArrayList mult=0..* type=Aggregation */
+   public ArrayList<Lien> lien;
+   /** @pdRoleInfo migr=no name=Cursus assc=association14 coll=java.util.ArrayList impl=java.util.ArrayList mult=0..* type=Aggregation */
+   public ArrayList<Cursus> cursus;
+   /** @pdRoleInfo migr=no name=Competance assc=association13 coll=java.util.ArrayList impl=java.util.ArrayList mult=0..* type=Aggregation */
+   public ArrayList<Competance> competance;
    
    
    /** @pdGenerated default getter */
-   public Collection<Lien> getLien() {
+   public ArrayList<Lien> getLien() {
       if (lien == null)
-         lien = new HashSet<Lien>();
+         lien = new ArrayList<Lien>();
       return lien;
    }
    
    /** @pdGenerated default iterator getter */
    public Iterator getIteratorLien() {
       if (lien == null)
-         lien = new HashSet<Lien>();
+         lien = new ArrayList<Lien>();
       return lien.iterator();
    }
    
    /** @pdGenerated default setter
      * @param newLien */
-   public void setLien(Collection<Lien> newLien) {
+   public void setLien(ArrayList<Lien> newLien) {
       removeAllLien();
       for (Iterator iter = newLien.iterator(); iter.hasNext();)
          addLien((Lien)iter.next());
@@ -59,7 +59,7 @@ public class Profile {
       if (newLien == null)
          return;
       if (this.lien == null)
-         this.lien = new HashSet<Lien>();
+         this.lien = new ArrayList<Lien>();
       if (!this.lien.contains(newLien))
          this.lien.add(newLien);
    }
@@ -80,22 +80,22 @@ public class Profile {
          lien.clear();
    }
    /** @pdGenerated default getter */
-   public Collection<Cursus> getCursus() {
+   public ArrayList<Cursus> getCursus() {
       if (cursus == null)
-         cursus = new HashSet<Cursus>();
+         cursus = new ArrayList<Cursus>();
       return cursus;
    }
    
    /** @pdGenerated default iterator getter */
    public Iterator getIteratorCursus() {
       if (cursus == null)
-         cursus = new HashSet<Cursus>();
+         cursus = new ArrayList<Cursus>();
       return cursus.iterator();
    }
    
    /** @pdGenerated default setter
      * @param newCursus */
-   public void setCursus(Collection<Cursus> newCursus) {
+   public void setCursus(ArrayList<Cursus> newCursus) {
       removeAllCursus();
       for (Iterator iter = newCursus.iterator(); iter.hasNext();)
          addCursus((Cursus)iter.next());
@@ -107,7 +107,7 @@ public class Profile {
       if (newCursus == null)
          return;
       if (this.cursus == null)
-         this.cursus = new HashSet<Cursus>();
+         this.cursus = new ArrayList<Cursus>();
       if (!this.cursus.contains(newCursus))
          this.cursus.add(newCursus);
    }
@@ -128,22 +128,22 @@ public class Profile {
          cursus.clear();
    }
    /** @pdGenerated default getter */
-   public Collection<Competance> getCompetance() {
+   public ArrayList<Competance> getCompetance() {
       if (competance == null)
-         competance = new HashSet<Competance>();
+         competance = new ArrayList<Competance>();
       return competance;
    }
    
    /** @pdGenerated default iterator getter */
    public Iterator getIteratorCompetance() {
       if (competance == null)
-         competance = new HashSet<Competance>();
+         competance = new ArrayList<Competance>();
       return competance.iterator();
    }
    
    /** @pdGenerated default setter
      * @param newCompetance */
-   public void setCompetance(Collection<Competance> newCompetance) {
+   public void setCompetance(ArrayList<Competance> newCompetance) {
       removeAllCompetance();
       for (Iterator iter = newCompetance.iterator(); iter.hasNext();)
          addCompetance((Competance)iter.next());
@@ -155,7 +155,7 @@ public class Profile {
       if (newCompetance == null)
          return;
       if (this.competance == null)
-         this.competance = new HashSet<Competance>();
+         this.competance = new ArrayList<Competance>();
       if (!this.competance.contains(newCompetance))
          this.competance.add(newCompetance);
    }

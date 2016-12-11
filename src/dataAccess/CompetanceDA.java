@@ -113,10 +113,4 @@ public class CompetanceDA {
 
         return competance;
     }
-
-
-
-
-
-
 }
