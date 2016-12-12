@@ -1001,6 +1001,14 @@ a:focus {
   list-style: none;
   overflow-x: hidden;
 }
+.menu {
+  min-height: 200px;
+  max-height: 200px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-x: hidden;
+}
 .navbar-nav > .notifications-menu > .dropdown-menu > li .menu > li > a,
 .navbar-nav > .messages-menu > .dropdown-menu > li .menu > li > a,
 .navbar-nav > .tasks-menu > .dropdown-menu > li .menu > li > a {
@@ -3247,7 +3255,7 @@ table.text-center th {
 .login-box-body,
 .register-box-body {
   background: #fff;
-  padding: 20px;
+  padding: 10px;
   border-top: 0;
   color: #666;
 }

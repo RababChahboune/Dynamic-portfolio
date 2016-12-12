@@ -1,9 +1,14 @@
 <%--
   Author: Reda BENCHRAA
   Date: 11/12/2016
-  Time: 22:11
+  Time: 23:44
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
 <html>
 <head>
     <meta charset="utf-8">
@@ -31,36 +36,23 @@
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
-
     <!-- /.login-logo -->
     <div class="login-box-body">
         <div class="login-logo">
-            <img src="../lib/dist/img/logo.png" width="156" height="156">
+            <img src="../lib/dist/img/logo.png" width="128" height="125">
         </div>
-        <p class="login-box-msg">Dynamic Portfolio</p>
-
         <form action="loginController" method="post">
             <div class="form-group has-feedback">
-                <input type="text" class="form-control" placeholder="Nom d'utilisateur">
+                <input type="password" class="form-control" placeholder="Mot de passe">
+                <input type="text" value="lockScreen" name ="action" hidden>
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
             </div>
-            <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="Mot de passe">
-                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-            </div>
+
             <div class="row">
 
                 <!-- /.col -->
-                <div class="col-xs-6">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">Connexion</button>
-                </div>
-                <!-- /.col -->
-                <div class="col-xs-6">
-                    <div class="checkbox icheck">
-                        <label>
-                            <input type="checkbox"> Se souvenir de moi
-                        </label>
-                    </div>
+                <div class="col-xs-12">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">Ouvrir la session</button>
                 </div>
             </div>
         </form>
@@ -75,14 +67,8 @@
 <script src="../lib/bootstrap/js/bootstrap.min.js"></script>
 <!-- iCheck -->
 <script src="../lib/plugins/iCheck/icheck.min.js"></script>
-<script>
-    $(function () {
-        $('input').iCheck({
-            checkboxClass: 'icheckbox_square-blue',
-            radioClass: 'iradio_square-blue',
-            increaseArea: '10%' // optional
-        });
-    });
-</script>
+</body>
+</html>
+
 </body>
 </html>
