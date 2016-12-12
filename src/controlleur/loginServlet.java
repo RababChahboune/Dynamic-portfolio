@@ -21,17 +21,30 @@ public class loginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String action = request.getParameter("action");
         try {
             Administrateur admin = AdministrateurDA.getAdministrateur();
-            PrintWriter out = response.getWriter();
             response.setContentType("text/html");
-            if(admin.getUsername().equals(username) && admin.getPassword().equals(password)){
-                HttpSession session = request.getSession();
-                session.setAttribute("counter", username);
-                out.print("logged");
-                request.getRequestDispatcher("admin.jsp").forward(request,response);
-            }else{
-                out.print("wrong password");
+            PrintWriter out = response.getWriter();
+            if(action.equals("login")){
+                if(admin.getUsername().equals(username) && admin.getPassword().equals(password)){
+                    HttpSession session = request.getSession();
+                    session.setAttribute("counter", username);
+                    out.print("logged");
+                    request.getRequestDispatcher("admin.jsp").forward(request,response);
+                }else{
+                    out.print("wrong password");
+                }
+            }
+            else if(action.equals("lockScreen")){
+                if(admin.getPassword().equals(password)){
+                    HttpSession session = request.getSession();
+                    session.setAttribute("counter", username);
+                    out.print("logged");
+                    request.getRequestDispatcher("admin.jsp").forward(request,response);
+                }else{
+                    out.print("wrong password");
+                }
             }
             out.close();
         } catch (SQLException e) {
