@@ -1,9 +1,14 @@
+<%--
+  Author: Reda BENCHRAA
+  Date: 13/12/2016
+  Time: 01:01
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Tableau de bord</title>
+    <title>Information du portfolio</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -41,27 +46,51 @@
     <script src="../lib/dist/js/demo.js"></script>
 </head>
 <body class="hold-transition skin-purple sidebar-mini fixed">
-<jsp:include page="includes/headerAll.jsp" />
-<jsp:include page="includes/sideBarAll.jsp" />
+<jsp:include page="includes/headerAll.jsp"/>
+<jsp:include page="includes/sideBarAll.jsp"/>
 <div class="wrapper">
     <div class="content-wrapper">
         <section class="content-header">
             <div class="callout callout-info">
-                <h5>Tableau de bord</h5>
+                <h5>Thème</h5>
             </div>
         </section>
         <section class="content">
-            <jsp:include page="includes/headerHome.jsp" />
-            <div class="row">
-                <jsp:include page="includes/membresHome.jsp" />
-                <jsp:include page="includes/projetHome.jsp" />
-                <jsp:include page="includes/catégorieProjetHome.jsp" />
-                <jsp:include page="includes/domaineHome.jsp" />
-                <jsp:include page="includes/partenaireHome.jsp" />
+            <div class="example-modal">
+                <div class="modal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Changer le theme de l'application </h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="with-border border-right col-md-12">
+                                        <div class="form-group">
+                                            <select class="form-control select2" style="width: 100%;">
+                                                <option selected="selected">Flat</option>
+                                                <option >Metro</option>
+                                                <option >Material</option>
+                                                <option >Realistic</option>
+                                            </select>
+                                        </div>
+                                        <img class="img-responsive" src="../lib/dist/img/photo1.png" alt="Photo">
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-info pull-right">Sauvgarder</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
+
     </div>
-    <jsp:include page="includes/footerAll.jsp" />
+    <jsp:include page="includes/footerAll.jsp"/>
 </div>
 </body>
 </html>
+

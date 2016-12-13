@@ -8,6 +8,7 @@ import java.util.*;
 
 /** @pdOid c2271bda-f40f-4c83-a038-65ba920c0346 */
 public class Administrateur extends Utilisateur {
+   public Administrateur(){}
    /** @pdOid c80f72e1-54c7-426a-89cb-2525117434ba */
    private String username;
    /** @pdOid bcc6dff0-d000-45fc-800d-b892dead8521 */

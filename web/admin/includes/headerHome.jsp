@@ -1,4 +1,4 @@
-<%--
+<%@ page import="model.Administrateur" %><%--
   Author: Reda BENCHRAA
   Date: 12/12/2016
   Time: 18:09
@@ -10,7 +10,7 @@
         <!-- small box -->
         <div class="small-box bg-purple">
             <div class="inner">
-                <h3><%=request.getParameter("nbrProjets")%></h3>
+                <h3><%=request.getParameter("nbrProjet")%></h3>
                 <p>Projets</p>
             </div>
             <div class="icon">
@@ -50,7 +50,7 @@
         <!-- small box -->
         <div class="small-box bg-aqua">
             <div class="inner">
-                <h3><%=request.getParameter("nbrPartenaires")%></h3>
+                <h3><%=request.getParameter("nbrExperiences")%></h3>
                 <p>Partenaires</p>
             </div>
             <div class="icon">

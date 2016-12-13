@@ -5,8 +5,8 @@
 --%>
 <!-- Partner list in dashboard -->
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div class="col-md-6">
-    <div class="box box-danger">
+<div class="col-md-8">
+    <div class="box box-info">
         <div class="box-header with-border">
             <h3 class="box-title">Les partenaires</h3>
             <div class="box-tools pull-right">

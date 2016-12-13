@@ -20,7 +20,8 @@ public class Projet {
    private String imageProjet;
    /** @pdOid 1eb27f25-3867-4151-9e44-f3597f59effa */
    private boolean etoileProjet;
-
+   /** @pdRoleInfo migr=no name=Categorie_projet assc=association8 mult=1..1 type=Aggregation */
+   public Categorie_projet categorie_projet;
 
    @Override
    public String toString() {
@@ -35,8 +36,6 @@ public class Projet {
               '}';
    }
 
-   /** @pdRoleInfo migr=no name=Categorie_projet assc=association8 mult=1..1 type=Aggregation */
-   public Categorie_projet categorie_projet;
 
 
    public void setIdProjet(int idProjet) {

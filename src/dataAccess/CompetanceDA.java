@@ -19,12 +19,10 @@ import java.util.ArrayList;
 public class CompetanceDA {
 
     private final static String tableName = "competance";
-    private final static String tableName1 = "categorie_competance";
     public static ArrayList<Competance> getCompetanceList(Profile p)throws SQLException {
         dataAccess.setDbname("Portfolio");
         Connection con = dataAccess.getInstance().getConnection();
-        String sql = "SELECT * FROM " + tableName + " INNER JOIN "+tableName1+" ON "
-                +tableName+".idCompetanceCategorie="+tableName1+".idCompetanceCategorie where idProfile=?" ;
+        String sql = "SELECT * FROM " + tableName +" where idProfile=?" ;
         ResultSet result = dataAccess.select(con, sql,p.getIdProfile());
         ArrayList<Competance> list = new ArrayList<Competance>();
         while (result.next()) {
@@ -35,15 +33,9 @@ public class CompetanceDA {
     }
     private static Competance map(ResultSet resultSet) throws SQLException {
         Competance c = new Competance();
-        Categorie_competance cc = new Categorie_competance();
         c.setIdCompetance(resultSet.getInt("idCompetance"));
         c.setNomCompetance(resultSet.getString("nomCompetance"));
         c.setPourcentageCompetance(resultSet.getInt("pourcentageCompetance"));
-        cc.setIdCompetanceCategorie(resultSet.getInt("idCompetanceCategorie"));
-        cc.setNomCompetanceCategorie(resultSet.getString("nomCompetanceCategorie"));
-        cc.setDescriptionCompetanceCategorie(resultSet.getString("descriptionCompetanceCategorie"));
-        c.setCategorie_competance(cc);
-
         return c;
     }
 
@@ -52,12 +44,11 @@ public class CompetanceDA {
         Connection con = dataAccess.getInstance().getConnection();
 
         String sql = "INSERT INTO " + tableName +
-                " (idProfile, idCompetanceCategorie, nomCompetance,pourcentageCompetance) "+
+                " (idProfile, nomCompetance,pourcentageCompetance) "+
                 "VALUES (?, ? ,? , ?)";
 
         return dataAccess.executeSQL(con, sql,
                 profile.getIdProfile() ,
-                competance.getCategorie_competance().getIdCompetanceCategorie(),
                 competance.getNomCompetance(),
                 competance.getPourcentageCompetance());
     }
@@ -76,13 +67,12 @@ public class CompetanceDA {
         Connection con = dataAccess.getInstance().getConnection();
 
         String sql = "UPDATE "+ tableName +
-                " SET idProfile = ?,  idCompetanceCategorie= ?," +
+                " SET idProfile = ?,  " +
                 "nomCompetance = ? , pourcentageCompetance= ?" +
                 "   WHERE idCompetance = ?";
 
         return dataAccess.executeSQL(con, sql,
                 profile.getIdProfile(),
-                competance.getCategorie_competance().getIdCompetanceCategorie(),
                 competance.getNomCompetance(),
                 competance.getPourcentageCompetance(),
                 competance.getIdCompetance());
@@ -90,18 +80,12 @@ public class CompetanceDA {
 
     public static Competance findCompetance(int id) throws dataAccessException, SQLException {
         Competance competance = null;
-        // get database connection
         dataAccess.setDbname("Portfolio");
         Connection con = dataAccess.getInstance().getConnection();
-
-        String sql = "SELECT * FROM " + tableName+","+tableName1 + " WHERE idCompetance = ? and "+
-                tableName+".idCompetanceCategorie = "+tableName1+".idCompetanceCategorie";
+        String sql = "SELECT * FROM " + tableName+ " WHERE idCompetance = ?";
         ResultSet result = dataAccess.select(con, sql, id);
-
-        if (result.next()) {
+        if (result.next())
             competance = map(result);
-        }
-
         return competance;
     }
 }

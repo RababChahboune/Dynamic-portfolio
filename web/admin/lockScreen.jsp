@@ -39,7 +39,7 @@
     <!-- /.login-logo -->
     <div class="login-box-body">
         <div class="login-logo">
-            <img src="../lib/dist/img/logo.png" width="128" height="125">
+            <img src="../lib/dist/img/logo.png" width="164" height="164">
         </div>
         <form action="loginController" method="post">
             <div class="form-group has-feedback">

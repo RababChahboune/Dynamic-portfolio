@@ -291,12 +291,11 @@ a:focus {
   display: block;
   float: left;
   height: 50px;
-  font-size: 20px;
-  line-height: 50px;
+  font-size: 18px;
   text-align: center;
   width: 230px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  padding: 0 15px;
+  font-family: Arial;
+  padding: 0;
   font-weight: 300;
   overflow: hidden;
 }
@@ -3229,8 +3228,6 @@ table.text-center th {
   font-weight: 300;
 }
 .login-logo img{
-    box-shadow: 0px 0px 10px #a76a45;
-    border-radius: 5px;
 }
 .login-logo a,
 .register-logo a {
@@ -4941,4 +4938,18 @@ table.text-center th {
   .table-responsive > .table tr td {
     white-space: normal !important;
   }
+}
+.example-modal .modal {
+  position: relative;
+  top: auto;
+  bottom: auto;
+  right: auto;
+  left: auto;
+  display: block;
+  z-index: 1;
+  text-align: center;
+}
+
+.example-modal .modal {
+  background: transparent !important;
 }

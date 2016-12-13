@@ -30,11 +30,11 @@
                     <tr>
                         <td>Fancy</td>
                         <td>shit</td>
-                        <td><a href=""><span class="label label-warning">Non Etoilé</span></a></td>
+                        <td><a href=""><span class="label label-warning"><span class="fa fa-star"></span></span></a></td>
                         <td>3D</td>
                         <td>
-                            <a href=""><span class="label label-info">Modifier</span></a>
-                            <a href=""> <span class="label label-danger">Supprimer</span></a>
+                            <a href=""><span class="label label-info"><span class="fa fa-pencil"></span></span></a>
+                            <a href=""> <span class="label label-danger"><span class="fa fa-times"></span></span></a>
                         </td>
                     </tr>
                     </tbody>

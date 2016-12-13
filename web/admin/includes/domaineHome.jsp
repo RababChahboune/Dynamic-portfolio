@@ -5,7 +5,7 @@
 --%>
 <!-- Domaine list in dashboard -->
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div class="col-md-6">
+<div class="col-md-4">
     <!-- PRODUCT LIST -->
     <div class="box box-primary">
         <div class="box-header with-border">
@@ -18,13 +18,13 @@
         <div class="box-body">
             <ul class="products-list product-list-in-box menu">
                 <li class="item">
+                    <a href="#"><span class="label label-danger pull-right"><span class="fa fa-times"></span></span></a>
                     <div class="product-img">
                         <img src="../lib/dist/img/default-50x50.gif" alt="partenaire Image">
                     </div>
                     <div class="product-info">
                         <a href="javascript:void(0)" class="product-title">
                             Application mobile
-                            <span class="label label-danger pull-right">Supprimer</span>
                         </a>
                         <span class="product-description">Spécialisez en android</span>
                     </div>

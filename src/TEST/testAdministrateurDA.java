@@ -14,12 +14,12 @@ public class testAdministrateurDA {
 
         Administrateur a = AdministrateurDA.getAdministrateur();
 
-        System.out.println(a);
+        System.out.println(a.getProjet().size());
 
 
-        AdministrateurDA.updateAdministrateur("123456");
+       /* AdministrateurDA.updateAdministrateur("123456");
         a = AdministrateurDA.getAdministrateur();
-        System.out.println(a);
+        System.out.println(a);*/
 
     }
 }

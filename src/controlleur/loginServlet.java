@@ -17,12 +17,6 @@ import java.sql.SQLException;
  * Created by Reda BENCHRAA on 11/12/2016.
  */
 public class loginServlet extends HttpServlet {
-    @Override
-    public void init() throws ServletException {
-        System.out.println("TZZZZZZ");
-        super.init();
-    }
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");

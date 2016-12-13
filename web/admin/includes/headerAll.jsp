@@ -6,7 +6,7 @@
 <!-- Header File for all folders -->
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <header class="main-header">
-    <a href="home.jsp" class="logo"><img src="../lib/dist/img/logo.png" width="32" height="32"> Dynamic Portfolio</a>
+    <a href="home.jsp" class="logo"><img src="../lib/dist/img/logo0.png" width="45" height="45"> <h8>Dynamic Portfolio</h8></a>
     <nav class="navbar navbar-static-top">
         <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button"><span class="sr-only">Toggle navigation</span></a>
         <div class="navbar-custom-menu">

@@ -1,15 +1,21 @@
+<%--
+  Author: Reda BENCHRAA
+  Date: 13/12/2016
+  Time: 03:18
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Tableau de bord</title>
+    <title>Information du portfolio</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="../lib/dist/css/AdminLTE.css">
     <link rel="stylesheet" href="../lib/dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="../lib/plugins/iCheck/all.css">
     <link rel="stylesheet" href="../lib/plugins/iCheck/flat/blue.css">
     <link rel="stylesheet" href="../lib/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -41,27 +47,52 @@
     <script src="../lib/dist/js/demo.js"></script>
 </head>
 <body class="hold-transition skin-purple sidebar-mini fixed">
-<jsp:include page="includes/headerAll.jsp" />
-<jsp:include page="includes/sideBarAll.jsp" />
+<jsp:include page="includes/headerAll.jsp"/>
+<jsp:include page="includes/sideBarAll.jsp"/>
 <div class="wrapper">
     <div class="content-wrapper">
         <section class="content-header">
             <div class="callout callout-info">
-                <h5>Tableau de bord</h5>
+                <h5>Domaine</h5>
             </div>
         </section>
         <section class="content">
-            <jsp:include page="includes/headerHome.jsp" />
-            <div class="row">
-                <jsp:include page="includes/membresHome.jsp" />
-                <jsp:include page="includes/projetHome.jsp" />
-                <jsp:include page="includes/catégorieProjetHome.jsp" />
-                <jsp:include page="includes/domaineHome.jsp" />
-                <jsp:include page="includes/partenaireHome.jsp" />
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Ajoter un domaine</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="col-md-12">
+                        <form>
+                            <div class="form-group">
+                                <label for="nom">Nom</label>
+                                <input type="text" class="form-control" id="nom" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label for="Description">Description</label>
+                                <input type="text" class="form-control" id="Description" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputFile">Image</label>
+                                <input type="file" id="exampleInputFile">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="box-footer text-center">
+                    <a href="projet.jsp" class="btn btn-sm btn-default btn-flat pull-right">Ajoter le domaine</a>
+                </div>
             </div>
         </section>
     </div>
-    <jsp:include page="includes/footerAll.jsp" />
+    <jsp:include page="includes/footerAll.jsp"/>
 </div>
 </body>
 </html>
+
+

@@ -63,7 +63,7 @@ public class Profile {
       if (!this.lien.contains(newLien))
          this.lien.add(newLien);
    }
-   
+
    /** @pdGenerated default remove
      * @param oldLien */
    public void removeLien(Lien oldLien) {

@@ -4,8 +4,6 @@ package model; /****************************************************************
  * Purpose: Defines the Class Portfolio
  ***********************************************************************/
 
-import java.util.*;
-
 /** @pdOid a038e666-20fa-4684-972c-127f8419eecd */
 public class Portfolio {
    /** @pdOid e82fd971-59a5-43ce-8b2a-141057daaa19 */

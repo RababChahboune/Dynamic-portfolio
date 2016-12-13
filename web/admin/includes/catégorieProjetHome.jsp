@@ -30,8 +30,8 @@
                         <td>Fancy</td>
                         <td>shit</td>
                         <td>
-                            <a href=""><span class="label label-info">Modifier</span></a>
-                            <a href=""> <span class="label label-danger">Supprimer</span></a>
+                            <a href=""><span class="label label-info"> <span class="fa fa-pencil"></span></span></a>
+                            <a href=""> <span class="label label-danger"><span class="fa fa-times"></span></span></a>
                         </td>
                     </tr>
                     </tbody>
@@ -39,7 +39,7 @@
             </div>
         </div>
         <div class="box-footer clearfix">
-            <a href="catégorieProjet.jsp" class="btn btn-sm btn-default btn-flat pull-right">Ajouter une catégories</a>
+            <a href="categorieProjet.jsp" class="btn btn-sm btn-default btn-flat pull-right">Ajouter une catégories</a>
         </div>
     </div>
 </div>

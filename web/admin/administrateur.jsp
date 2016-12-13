@@ -1,9 +1,14 @@
+<%--
+  Author: Reda BENCHRAA
+  Date: 12/12/2016
+  Time: 23:30
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Tableau de bord</title>
+    <title>Information du portfolio</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -41,27 +46,56 @@
     <script src="../lib/dist/js/demo.js"></script>
 </head>
 <body class="hold-transition skin-purple sidebar-mini fixed">
-<jsp:include page="includes/headerAll.jsp" />
-<jsp:include page="includes/sideBarAll.jsp" />
+<jsp:include page="includes/headerAll.jsp"/>
+<jsp:include page="includes/sideBarAll.jsp"/>
 <div class="wrapper">
     <div class="content-wrapper">
         <section class="content-header">
-            <div class="callout callout-info">
-                <h5>Tableau de bord</h5>
+            <div class="callout callout-danger">
+                <h5>Administrateur</h5>
             </div>
         </section>
         <section class="content">
-            <jsp:include page="includes/headerHome.jsp" />
-            <div class="row">
-                <jsp:include page="includes/membresHome.jsp" />
-                <jsp:include page="includes/projetHome.jsp" />
-                <jsp:include page="includes/catégorieProjetHome.jsp" />
-                <jsp:include page="includes/domaineHome.jsp" />
-                <jsp:include page="includes/partenaireHome.jsp" />
+            <div class="example-modal">
+                <div class="modal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Modifier les information de l'administrateur </h4>
+                            </div>
+                            <div class="modal-body">
+                                <form role="form">
+                                    <div class="box-body">
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <input type="text" class="form-control" placeholder="Ancient nom d'utilisateur">
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <input type="password" class="form-control" placeholder="Ancient mot de passe">
+                                            </div>
+                                            </div><br>
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <input type="text" class="form-control" placeholder="Nouveau nom d'utilisateur">
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <input type="password" class="form-control" placeholder="Nouveau mot de passe">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="box-footer">
+                                        <button type="submit" class="btn btn-danger pull-right">Sauvgarder les changements</button>
+                                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Retour</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </div>
-    <jsp:include page="includes/footerAll.jsp" />
+    <jsp:include page="includes/footerAll.jsp"/>
 </div>
 </body>
 </html>
