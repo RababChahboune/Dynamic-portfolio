@@ -24,8 +24,8 @@ public class testProjetAndCatDA {
         cp2.setDescriptionProjetCategorie("All 3d Work");
         cp2.setImageProjetCategorie("4D.jpg");
 
-        Categorie_projetDA.insertCategorie_projet(cp);
-        Categorie_projetDA.insertCategorie_projet(cp2);
+        //Categorie_projetDA.insertCategorie_projet(cp);
+        //Categorie_projetDA.insertCategorie_projet(cp2);
 
         ArrayList<Categorie_projet> listCat = Categorie_projetDA.getCategorie_projetList();
         System.out.println("Liste des cat: ");
@@ -61,7 +61,7 @@ public class testProjetAndCatDA {
         p.setProjetProjet("THIS IS SMTH");
         p.setDescriptionProjet("z");
 
-        ProjetDA.insertProjet(p);
+        //ProjetDA.insertProjet(p);
 
         p.setCategorie_projet(f);
         p.setEtoileProjet(true);
@@ -70,7 +70,7 @@ public class testProjetAndCatDA {
         p.setProjetProjet("Tzzzz");
         p.setDescriptionProjet("Tzzzzzzz");
 
-        ProjetDA.insertProjet(p);
+        //ProjetDA.insertProjet(p);
 
 
         ArrayList<Projet> listProjet = ProjetDA.getProjetList();
@@ -92,5 +92,9 @@ public class testProjetAndCatDA {
                 System.out.println(fff);
             }
         }
+
+        Projet trial = ProjetDA.findProjet(8);
+        trial.setCategorie_projet(Categorie_projetDA.findCategorie_projet("idProjetCategorie",5));
+        ProjetDA.updateProjet(trial);
     }
 }

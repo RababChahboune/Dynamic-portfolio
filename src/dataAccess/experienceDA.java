@@ -43,12 +43,12 @@ public class experienceDA {
         String sql = "DELETE FROM " + tableName + " WHERE nomExperience = ?";
         return dataAccess.executeSQL(con, sql, p.getNomExperience());
     }
-    public static Experience findExperience(String nom) throws dataAccessException,SQLException {
+    public static Experience findExperience(int id) throws dataAccessException,SQLException {
         Experience p = null;
         dataAccess.setDbname("portfolio");
         Connection con = dataAccess.getInstance().getConnection();
-        String sql = "SELECT * FROM " + tableName + " WHERE nomExperience = ?";
-        ResultSet result = dataAccess.select(con, sql,nom);
+        String sql = "SELECT * FROM " + tableName + " WHERE idExperience = ?";
+        ResultSet result = dataAccess.select(con, sql,id);
         if (result.next()) {
             p = map(result);
         }
@@ -59,15 +59,16 @@ public class experienceDA {
         Connection con = dataAccess.getInstance().getConnection();
         String sql = "UPDATE "+ tableName
                 +" SET nomExperience = ? , logoExperience = ?"
-                +" where nomExperience = ?";
+                +" where idExperience = ?";
         return dataAccess.executeSQL(con, sql,
                 p.getNomExperience(),
                 p.getLogoExperience(),
-                p.getNomExperience()
+                p.getIdExperience()
         );
     }
     private static Experience map(ResultSet resultSet) throws SQLException {
         Experience pp = new Experience();
+        pp.setIdExperience(resultSet.getInt("idExperience"));
         pp.setNomExperience(resultSet.getString("nomExperience"));
         pp.setLogoExperience(resultSet.getString("logoExperience"));
         return pp;

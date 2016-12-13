@@ -3,5 +3,57 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
+    <servlet>
+        <servlet-name>loginServlet</servlet-name>
+        <servlet-class>controlleur.loginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>loginServlet</servlet-name>
+        <url-pattern>loginController</url-pattern>
+    </servlet-mapping>
 
+    <servlet>
+        <servlet-name>logoutServlet</servlet-name>
+        <servlet-class>controlleur.logoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>logoutServlet</servlet-name>
+        <url-pattern>logoutController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>catProjetServlet</servlet-name>
+        <servlet-class>controlleur.catProjectController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>catProjetServlet</servlet-name>
+        <url-pattern>catProjectController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ProjetServlet</servlet-name>
+        <servlet-class>controlleur.projectController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProjetServlet</servlet-name>
+        <url-pattern>projectController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DomaineServlet</servlet-name>
+        <servlet-class>controlleur.domaineController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DomaineServlet</servlet-name>
+        <url-pattern>domaineController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ExperienceServlet</servlet-name>
+        <servlet-class>controlleur.experienceController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ExperienceServlet</servlet-name>
+        <url-pattern>experienceController</url-pattern>
+    </servlet-mapping>
 </web-app>

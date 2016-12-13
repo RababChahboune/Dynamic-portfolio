@@ -17,9 +17,9 @@ public class testAdministrateurDA {
         System.out.println(a);
 
 
-        AdministrateurDA.updateAdministrateur("123456");
+        /*AdministrateurDA.updateAdministrateur("123456");
         a = AdministrateurDA.getAdministrateur();
-        System.out.println(a);
+        System.out.println(a);*/
 
     }
 }

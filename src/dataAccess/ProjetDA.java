@@ -66,7 +66,7 @@ public class ProjetDA {
         dataAccess.setDbname("portfolio");
         Connection con = dataAccess.getInstance().getConnection();
         String sql = "UPDATE "+ tableName
-                +" SET nomProjet = ? , descriptionProjet = ’,projetProjet = ’,imageProjet = ’,etoileProjet = ’, idProjetCategorie = ?"
+                +" SET nomProjet = ? , descriptionProjet = ?,projetProjet = ?,imageProjet = ?,etoileProjet = ?, idProjetCategorie = ?"
                 +" where idProjet = ?";
         return dataAccess.executeSQL(con, sql,
                 p.getNomProjet(),
