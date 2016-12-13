@@ -36,8 +36,6 @@ public class Projet {
               '}';
    }
 
-
-
    public void setIdProjet(int idProjet) {
       this.idProjet = idProjet;
    }

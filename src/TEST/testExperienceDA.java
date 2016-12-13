@@ -28,19 +28,19 @@ public class testExperienceDA {
         ArrayList<Experience> ll = experienceDA.getExperienceList();
         System.out.println(ll);
 
-        Experience l1 =  experienceDA.findExperience("hello");
+        Experience l1 =  experienceDA.findExperience(1);
         if(l1 != null){
             experienceDA.deleteExperience(l1);
         }
         else{
-            System.out.println("Link not found");
+            System.out.println("Experience not found");
         }
 
         ll = experienceDA.getExperienceList();
         System.out.println(ll);
 
-        l1 =  experienceDA.findExperience("hola");
-        l1.setNomExperience("Welcome");
+        l1 =  experienceDA.findExperience(3);
+        l1.setNomExperience("hola");
         experienceDA.updateExperience(l1);
         System.out.println(l1);
 
