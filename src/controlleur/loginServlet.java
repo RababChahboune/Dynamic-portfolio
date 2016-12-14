@@ -38,7 +38,7 @@ public class loginServlet extends HttpServlet {
             else if(action.equals("lockScreen")){
                 if(admin.getPassword().equals(password)){
                     HttpSession session = request.getSession();
-                    session.setAttribute("counter", username);
+                    session.setAttribute("lock", username);
                     out.print("logged");
                     request.getRequestDispatcher("admin.jsp").forward(request,response);
                 }else{

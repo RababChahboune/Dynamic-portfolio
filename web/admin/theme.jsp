@@ -1,9 +1,29 @@
-<%--
+<%@ page import="model.Categorie_projet" %>
+<%@ page import="model.Theme" %>
+<%@ page import="dataAccess.*" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="model.Profile" %>
+<%@ page import="model.Administrateur" %>
+<%@ page import="java.sql.SQLException" %><%--
   Author: Reda BENCHRAA
   Date: 13/12/2016
   Time: 01:01
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%!
+    Administrateur administrateur;
+    ArrayList<Theme> themes;
+    String selectedThemeImage;
+%>
+<%
+    try {
+        themes = themeDA.getThemeList();
+        administrateur = AdministrateurDA.getAdministrateur();
+        selectedThemeImage =themeDA.findTheme(administrateur.getPortfolio().getTheme().getNomTheme()).getPaletteTheme();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+%>
 <html>
 <head>
     <meta charset="utf-8">
@@ -44,6 +64,7 @@
     <script src="../lib/dist/js/app.min.js"></script>
     <script src="../lib/dist/js/pages/dashboard.js"></script>
     <script src="../lib/dist/js/demo.js"></script>
+    <script src="../lib/dist/js/admin/theme.js"></script>
 </head>
 <body class="hold-transition skin-purple sidebar-mini fixed">
 <jsp:include page="includes/headerAll.jsp"/>
@@ -68,13 +89,12 @@
                                     <div class="with-border border-right col-md-12">
                                         <div class="form-group">
                                             <select class="form-control select2" style="width: 100%;">
-                                                <option selected="selected">Flat</option>
-                                                <option >Metro</option>
-                                                <option >Material</option>
-                                                <option >Realistic</option>
+                                                <% for(Theme p :themes){ %>
+                                                <option <% if(p.getNomTheme().equals(administrateur.getPortfolio().getTheme().getNomTheme())) out.print("selected"); %>><%=p.getNomTheme()%></option>
+                                                <%}%>
                                             </select>
                                         </div>
-                                        <img class="img-responsive" src="../lib/dist/img/photo1.png" alt="Photo">
+                                        <img id="themeImg" class="img-responsive" src="../lib/dist/img/theme/<%=selectedThemeImage%>" alt="Photo">
                                     </div>
 
                                 </div>

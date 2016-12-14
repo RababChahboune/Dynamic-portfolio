@@ -19,21 +19,26 @@ import java.sql.SQLException;
 @WebServlet(name = "administrateurController")
 public class administrateurController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        String username = Check.checkInput(request.getParameter("username"));
-        String password = Check.checkInput(request.getParameter("password"));
+        String username = Check.checkInput(request.getParameter("oldUsername"));
+        String password = Check.checkInput(request.getParameter("oldPassword"));
+        String nusername = Check.checkInput(request.getParameter("newUsername"));
+        String npassword = Check.checkInput(request.getParameter("newPassword"));
+        PrintWriter out = response.getWriter();
         try {
             Administrateur admin;
             admin = AdministrateurDA.getAdministrateur();
-            admin.setUsername(username);
-            admin.setPassword(password);
-            AdministrateurDA.updateAdministrateur(admin);
+            if(admin.getUsername().equals(username) && admin.getPassword().equals(password)){
+                admin.setUsername(nusername);
+                admin.setPassword(npassword);
+                AdministrateurDA.updateAdministrateur(admin);
+                out.print("Changement avec success");
+            }else{
+                out.print("Echec, mot de passe ou nom d'utilisateur errone");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        request.getRequestDispatcher("home.jsp").forward(request,response);
     }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }

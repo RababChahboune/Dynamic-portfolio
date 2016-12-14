@@ -70,8 +70,8 @@ public class themeDA {
     }
     private static Theme map(ResultSet resultSet) throws SQLException {
         Theme pp = new Theme();
-        pp.setLienTheme(resultSet.getString("nomTheme"));
-        pp.setNomTheme(resultSet.getString("lienTheme"));
+        pp.setLienTheme(resultSet.getString("lienTheme"));
+        pp.setNomTheme(resultSet.getString("nomTheme"));
         pp.setPaletteTheme(resultSet.getString("paletteTheme"));
         return pp;
     }

@@ -44,6 +44,7 @@
     <script src="../lib/dist/js/app.min.js"></script>
     <script src="../lib/dist/js/pages/dashboard.js"></script>
     <script src="../lib/dist/js/demo.js"></script>
+    <script src="../lib/dist/js/admin/admin.js"></script>
 </head>
 <body class="hold-transition skin-purple sidebar-mini fixed">
 <jsp:include page="includes/headerAll.jsp"/>
@@ -64,28 +65,28 @@
                                 <h4 class="modal-title">Modifier les information de l'administrateur </h4>
                             </div>
                             <div class="modal-body">
-                                <form role="form">
+                                <form method="POST" action="../administrateurController" role="form">
                                     <div class="box-body">
                                         <div class="row">
                                             <div class="col-xs-6">
-                                                <input type="text" class="form-control" placeholder="Ancient nom d'utilisateur">
+                                                <input type="text" class="form-control" name="oldUsername"placeholder="Ancient nom d'utilisateur">
                                             </div>
                                             <div class="col-xs-6">
-                                                <input type="password" class="form-control" placeholder="Ancient mot de passe">
+                                                <input type="password" class="form-control" name="oldPassword"placeholder="Ancient mot de passe">
                                             </div>
                                             </div><br>
                                         <div class="row">
                                             <div class="col-xs-6">
-                                                <input type="text" class="form-control" placeholder="Nouveau nom d'utilisateur">
+                                                <input type="text" class="form-control" name="newUsername"placeholder="Nouveau nom d'utilisateur">
                                             </div>
                                             <div class="col-xs-6">
-                                                <input type="password" class="form-control" placeholder="Nouveau mot de passe">
+                                                <input type="password" class="form-control" name="newPassword"placeholder="Nouveau mot de passe">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="box-footer">
-                                        <button type="submit" class="btn btn-danger pull-right">Sauvgarder les changements</button>
-                                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Retour</button>
+                                        <button id="submit" type="submit" class="btn btn-danger pull-right">Sauvgarder les changements</button>
+                                        <button id="return" type="button" class="btn btn-default pull-left" data-dismiss="modal">Retour</button>
                                     </div>
                                 </form>
                             </div>

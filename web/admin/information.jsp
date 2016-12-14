@@ -44,6 +44,7 @@
     <script src="../lib/dist/js/app.min.js"></script>
     <script src="../lib/dist/js/pages/dashboard.js"></script>
     <script src="../lib/dist/js/demo.js"></script>
+    <script src="../lib/dist/js/admin/information.js"></script>
 </head>
 <body class="hold-transition skin-purple sidebar-mini fixed">
 <jsp:include page="includes/headerAll.jsp"/>
@@ -93,15 +94,20 @@
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="nom">Nom</label>
-                                    <input type="text" class="form-control" id="nom" placeholder="Entrer le nom du protfolio">
+                                    <input name="nom" type="text" class="form-control" id="nom" placeholder="Entrer le nom du protfolio">
                                 </div>
                                 <div class="form-group">
                                     <label for="Salutation">Salutation</label>
-                                    <input type="text" class="form-control" id="Salutation" placeholder="Entrer la salutation">
+                                    <input name="salutation" type="text" class="form-control" id="Salutation" placeholder="Entrer la salutation">
                                 </div>
                                 <div class="form-group">
                                     <label>A propos </label>
-                                    <textarea class="form-control" rows="3" placeholder="Entrer des information sur vous"></textarea>
+                                    <textarea name="apropos" class="form-control" rows="3" placeholder="Entrer des information sur vous"></textarea>
+
+                                </div>
+                                <div class="form-group">
+                                    <label>Logo</label>
+                                    <input name="logo" type="file" class="form-control">
                                 </div>
                             </div>
                             <div class="box-footer">

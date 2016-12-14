@@ -110,4 +110,13 @@
         <servlet-name>CursusServlet</servlet-name>
         <url-pattern>cursusController</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>themeServlet</servlet-name>
+        <servlet-class>controlleur.themeController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>themeServlet</servlet-name>
+        <url-pattern>themeController</url-pattern>
+    </servlet-mapping>
 </web-app>
