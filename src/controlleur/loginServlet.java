@@ -2,6 +2,7 @@ package controlleur;
 
 import dataAccess.AdministrateurDA;
 import model.Administrateur;
+import utility.Check;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,34 +19,30 @@ import java.sql.SQLException;
  */
 public class loginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
+        String username = Check.checkInput(request.getParameter("username"));
+        String password = Check.checkInput(request.getParameter("password"));
+        String rememberMe = Check.checkInput(request.getParameter("rememberMe"));
         String action = request.getParameter("action");
         try {
             Administrateur admin = AdministrateurDA.getAdministrateur();
-            response.setContentType("text/html");
-            PrintWriter out = response.getWriter();
             if(action.equals("login")){
                 if(admin.getUsername().equals(username) && admin.getPassword().equals(password)){
                     HttpSession session = request.getSession();
-                    session.setAttribute("counter", username);
-                    out.print("logged");
-                    request.getRequestDispatcher("admin.jsp").forward(request,response);
+                    session.setAttribute("username", username);
+                    response.sendRedirect("admin/home.jsp");
                 }else{
-                    out.print("wrong password");
+                    response.sendRedirect("admin/login.jsp");
                 }
             }
             else if(action.equals("lockScreen")){
                 if(admin.getPassword().equals(password)){
                     HttpSession session = request.getSession();
-                    session.setAttribute("counter", username);
-                    out.print("logged");
-                    request.getRequestDispatcher("admin.jsp").forward(request,response);
+                    session.setAttribute("username", username);
+                    response.sendRedirect("admin/home.jsp");
                 }else{
-                    out.print("wrong password");
+                    response.sendRedirect("admin/lockScreen.jsp");
                 }
             }
-            out.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

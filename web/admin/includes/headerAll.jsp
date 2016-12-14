@@ -35,7 +35,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="logoutController"><i class="fa fa-sign-out"></i></a>
+                    <a href="../logoutController"><i class="fa fa-sign-out"></i></a>
                 </li>
             </ul>
         </div>

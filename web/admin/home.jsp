@@ -41,6 +41,10 @@
     <script src="../lib/dist/js/demo.js"></script>
 </head>
 <body class="hold-transition skin-purple sidebar-mini fixed">
+<%
+    if (session.getAttribute("username") == null || session.getAttribute("username").equals("")){
+        response.sendRedirect("login.jsp");
+}%>
 <jsp:include page="includes/headerAll.jsp" />
 <jsp:include page="includes/sideBarAll.jsp" />
 <div class="wrapper">

@@ -110,4 +110,13 @@
         <servlet-name>CursusServlet</servlet-name>
         <url-pattern>cursusController</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>PortfolioServlet</servlet-name>
+        <servlet-class>controlleur.portfolioController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PortfolioServlet</servlet-name>
+        <url-pattern>portfolioController</url-pattern>
+    </servlet-mapping>
 </web-app>

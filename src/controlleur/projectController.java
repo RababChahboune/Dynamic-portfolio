@@ -28,7 +28,6 @@ public class projectController extends HttpServlet {
         String nomProjet = Check.checkInput(request.getParameter("nomProjet"));
         String descriptionProjet = Check.checkInput(request.getParameter("descriptionProjet"));
         String projetProjet = Check.checkInput(request.getParameter("projetProjet"));
-        String imageProjet = Check.checkInput(request.getParameter("imageProjet"));
         String etoileProjet = Check.checkInput(request.getParameter("etoileProjet"));
         int idProjetCategorie = Integer.parseInt(Check.checkInput(request.getParameter("idProjetCategorie")));
 
@@ -36,6 +35,7 @@ public class projectController extends HttpServlet {
         try {
             Categorie_projet categorie_projet = Categorie_projetDA.findCategorie_projet("idProjetCategorie",idProjetCategorie);
             if(action.equals("ajouterProjet")){
+                String imageProjet = Check.checkInput(request.getParameter("imageProjet"));
                 p = new Projet();
                 p.setNomProjet(nomProjet);
                 p.setDescriptionProjet(descriptionProjet);
@@ -47,7 +47,11 @@ public class projectController extends HttpServlet {
             }
             else if(action.equals("modifierProjet")){
                 int idProjet = Integer.parseInt(Check.checkInput(request.getParameter("idProjet")));
+                String imageProjet = request.getParameter("imageProjet");
                 p = ProjetDA.findProjet(idProjet);
+                if(imageProjet==null){
+                    imageProjet = p.getImageProjet();
+                }
                 p.setNomProjet(nomProjet);
                 p.setDescriptionProjet(descriptionProjet);
                 p.setProjetProjet(projetProjet);

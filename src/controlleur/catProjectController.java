@@ -22,27 +22,29 @@ public class catProjectController extends HttpServlet {
         String action = Check.checkInput(request.getParameter("action"));
         String nomProjetCategorie = Check.checkInput(request.getParameter("nomProjetCategorie"));
         String descriptionProjetCategorie = Check.checkInput(request.getParameter("descriptionProjetCategorie"));
-        String imageProjetCategorie = Check.checkInput(request.getParameter("imageProjetCategorie"));
         Categorie_projet cp;
         PrintWriter out = response.getWriter();
         if(action.equals("ajouterCategorieProjet")){
-            cp = new Categorie_projet();
-            cp.setNomProjetCategorie(nomProjetCategorie);
-            cp.setDescriptionProjetCategorie(descriptionProjetCategorie);
-            cp.setImageProjetCategorie(imageProjetCategorie);
-
             try {
+                String imageProjetCategorie = Check.checkInput(request.getParameter("imageProjetCategorie"));
+                cp = new Categorie_projet();
+                cp.setNomProjetCategorie(nomProjetCategorie);
+                cp.setDescriptionProjetCategorie(descriptionProjetCategorie);
+                cp.setImageProjetCategorie(imageProjetCategorie);
                 Categorie_projetDA.insertCategorie_projet(cp);
-
             } catch (SQLException e) {
                 e.printStackTrace();
             }
 
         }
         else if(action.equals("modifierCategorieProjet")){
-            int idProjetCategorie = Integer.parseInt(Check.checkInput(request.getParameter("idProjetCategorie")));
             try {
+                int idProjetCategorie = Integer.parseInt(Check.checkInput(request.getParameter("idProjetCategorie")));
+                String imageProjetCategorie = request.getParameter("imageProjetCategorie");
                 cp = Categorie_projetDA.findCategorie_projet("idProjetCategorie",idProjetCategorie);
+                if(imageProjetCategorie==null){
+                    imageProjetCategorie = cp.getImageProjetCategorie();
+                }
                 cp.setNomProjetCategorie(nomProjetCategorie);
                 cp.setDescriptionProjetCategorie(descriptionProjetCategorie);
                 cp.setImageProjetCategorie(imageProjetCategorie);
@@ -52,7 +54,6 @@ public class catProjectController extends HttpServlet {
             }
         }
         else if(action.equals("supprimerCategorieProjet")){
-
             try {
                 int idProjetCategorie = Integer.parseInt(Check.checkInput(request.getParameter("idProjetCategorie")));
                 cp = Categorie_projetDA.findCategorie_projet("idProjetCategorie",idProjetCategorie);
@@ -60,7 +61,6 @@ public class catProjectController extends HttpServlet {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
         }
         request.getRequestDispatcher("home.jsp").forward(request,response);
     }

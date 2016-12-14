@@ -15,13 +15,9 @@ import java.io.PrintWriter;
 @WebServlet(name = "logout")
 public class logoutServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html");
-        PrintWriter out=response.getWriter();
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        response.sendRedirect("admin/login.jsp");
         HttpSession session=request.getSession();
         session.invalidate();
-        out.print("You are successfully logged out!");
-        out.close();
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

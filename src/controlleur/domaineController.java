@@ -23,15 +23,14 @@ public class domaineController extends HttpServlet {
         String action = Check.checkInput(request.getParameter("action"));
         String nomDomaine = Check.checkInput(request.getParameter("nomDomaine"));
         String descriptionDomaine = Check.checkInput(request.getParameter("descriptionDomaine"));
-        String imageDomaine = Check.checkInput(request.getParameter("imageDomaine"));
         Domaine d;
         if(action.equals("ajouterDomaine")){
-            d = new Domaine();
-            d.setNomDomaine(nomDomaine);
-            d.setDescriptionDomaine(descriptionDomaine);
-            d.setImageDomaine(imageDomaine);
-
             try {
+                String imageDomaine = Check.checkInput(request.getParameter("imageDomaine"));
+                d = new Domaine();
+                d.setNomDomaine(nomDomaine);
+                d.setDescriptionDomaine(descriptionDomaine);
+                d.setImageDomaine(imageDomaine);
                 domaineDA.insertDomaine(d);
 
             } catch (SQLException e) {
@@ -40,9 +39,13 @@ public class domaineController extends HttpServlet {
 
         }
         else if(action.equals("modifierDomaine")){
-            int idDomaine = Integer.parseInt(Check.checkInput(request.getParameter("idDomaine")));
             try {
+                int idDomaine = Integer.parseInt(Check.checkInput(request.getParameter("idDomaine")));
+                String imageDomaine = request.getParameter("imageDomaine");
                 d = domaineDA.findDomaine(idDomaine);
+                if(imageDomaine==null){
+                    imageDomaine = d.getImageDomaine();
+                }
                 d.setNomDomaine(nomDomaine);
                 d.setDescriptionDomaine(descriptionDomaine);
                 d.setImageDomaine(imageDomaine);
@@ -52,7 +55,6 @@ public class domaineController extends HttpServlet {
             }
         }
         else if(action.equals("supprimerDomaine")){
-
             try {
                 int idDomaine = Integer.parseInt(Check.checkInput(request.getParameter("idDomaine")));
                 d = domaineDA.findDomaine(idDomaine);
@@ -60,7 +62,6 @@ public class domaineController extends HttpServlet {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
         }
         request.getRequestDispatcher("home.jsp").forward(request,response);
     }
