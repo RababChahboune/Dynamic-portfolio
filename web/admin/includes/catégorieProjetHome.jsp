@@ -1,10 +1,20 @@
-<%--
+<%@ page import="model.Categorie_projet" %>
+<%@ page import="model.Administrateur" %>
+<%@ page import="dataAccess.AdministrateurDA" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="dataAccess.Categorie_projetDA" %><%--
   Author: Reda BENCHRAA
   Date: 12/12/2016
   Time: 18:42
 --%>
 <!-- Project category list in dashboard -->
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%!
+    ArrayList<Categorie_projet> cat;
+%>
+<%
+    cat = Categorie_projetDA.getCategorie_projetList();
+%>
 <div class="col-md-4">
     <div class="box box-info">
         <div class="box-header with-border">
@@ -26,14 +36,16 @@
                     </tr>
                     </thead>
                     <tbody>
+                    <% for(Categorie_projet p : cat){%>
                     <tr>
-                        <td>Fancy</td>
-                        <td>shit</td>
+                        <td><%=p.getNomProjetCategorie()%></td>
+                        <td><%=p.getDescriptionProjetCategorie()%></td>
                         <td>
-                            <a href=""><span class="label label-info"> <span class="fa fa-pencil"></span></span></a>
-                            <a href=""> <span class="label label-danger"><span class="fa fa-times"></span></span></a>
+                            <a href="../categorieProjet.jsp?action=edit&id=<%=p.getIdProjetCategorie()%>"><span class="label label-info"> <span class="fa fa-pencil"></span></span></a>
+                            <a href="../categorieProjet.jsp?action=delete&id=<%=p.getIdProjetCategorie()%>"> <span class="label label-danger"><span class="fa fa-times"></span></span></a>
                         </td>
                     </tr>
+                    <%}%>
                     </tbody>
                 </table>
             </div>

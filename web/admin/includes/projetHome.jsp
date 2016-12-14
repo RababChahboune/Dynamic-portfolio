@@ -1,10 +1,21 @@
-<%--
+<%@ page import="model.Projet" %>
+<%@ page import="model.Administrateur" %>
+<%@ page import="dataAccess.AdministrateurDA" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="dataAccess.ProjetDA" %><%--
   Author: Reda BENCHRAA
   Date: 12/12/2016
   Time: 18:41
 --%>
 <!-- Project list in dashboard -->
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%!
+    Administrateur administrateur;
+%>
+<%
+    administrateur = AdministrateurDA.getAdministrateur();
+    System.out.printf(administrateur.getProjet().size()+"");
+%>
 <div class="col-md-8">
     <div class="box box-info">
         <div class="box-header with-border">
@@ -27,16 +38,19 @@
                     </tr>
                     </thead>
                     <tbody>
+                    <% for(Projet p: administrateur.getProjet()){ %>
+
                     <tr>
-                        <td>Fancy</td>
-                        <td>shit</td>
-                        <td><a href=""><span class="label label-warning"><span class="fa fa-star"></span></span></a></td>
-                        <td>3D</td>
+                        <td><%=p.getNomProjet()%></td>
+                        <td><%=p.getDescriptionProjet()%></td>
+                        <td><a href=""><span class="label label-<% if(p.isEtoileProjet()) out.print("warning");else out.print("default");%>"><span class="fa fa-star"></span></span></a></td>
+                        <td><%=p.getCategorie_projet().getNomProjetCategorie()%></td>
                         <td>
-                            <a href=""><span class="label label-info"><span class="fa fa-pencil"></span></span></a>
-                            <a href=""> <span class="label label-danger"><span class="fa fa-times"></span></span></a>
+                            <a href="projet.jsp?action=edit&id<%=p.getIdProjet()%>"><span class="label label-info"><span class="fa fa-pencil"></span></span></a>
+                            <a href="projet.jsp?action=delete&id<%=p.getIdProjet()%>"> <span class="label label-danger"><span class="fa fa-times"></span></span></a>
                         </td>
                     </tr>
+                    <%}%>
                     </tbody>
                 </table>
             </div>
