@@ -21,8 +21,8 @@ public class testLienDA {
         Profile p = new Profile();
         p.setIdProfile(1);
 
-        lienDA.insertLien(l,p);
-        lienDA.insertLien(l,p);
+       // lienDA.insertLien(l,p);
+       // lienDA.insertLien(l,p);
 
 
         ArrayList<Lien> ll = lienDA.getLienList(p);
@@ -39,8 +39,8 @@ public class testLienDA {
         ll = lienDA.getLienList(p);
         System.out.println(ll);
 
-        l1 =  lienDA.findLien(1);
-        l1.setImageLien("facebook.jpeg");
+        l1 =  lienDA.findLien(7);
+        l1.setUrlLien("facebook.com/dynamicPortfolio");
         lienDA.updateLien(l1,p);
         System.out.println(l1);
 

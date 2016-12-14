@@ -2,6 +2,7 @@ package controlleur;
 
 import dataAccess.domaineDA;
 import model.Domaine;
+import utility.Check;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,10 +20,10 @@ import java.sql.SQLException;
 public class domaineController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String action = request.getParameter("action");
-        String nomDomaine = request.getParameter("nomDomaine");
-        String descriptionDomaine = request.getParameter("descriptionDomaine");
-        String imageDomaine = request.getParameter("imageDomaine");
+        String action = Check.checkInput(request.getParameter("action"));
+        String nomDomaine = Check.checkInput(request.getParameter("nomDomaine"));
+        String descriptionDomaine = Check.checkInput(request.getParameter("descriptionDomaine"));
+        String imageDomaine = Check.checkInput(request.getParameter("imageDomaine"));
         Domaine d;
         if(action.equals("ajouterDomaine")){
             d = new Domaine();
@@ -39,7 +40,7 @@ public class domaineController extends HttpServlet {
 
         }
         else if(action.equals("modifierDomaine")){
-            int idDomaine = Integer.parseInt(request.getParameter("idDomaine"));
+            int idDomaine = Integer.parseInt(Check.checkInput(request.getParameter("idDomaine")));
             try {
                 d = domaineDA.findDomaine(idDomaine);
                 d.setNomDomaine(nomDomaine);
@@ -53,7 +54,7 @@ public class domaineController extends HttpServlet {
         else if(action.equals("supprimerDomaine")){
 
             try {
-                int idDomaine = Integer.parseInt(request.getParameter("idDomaine"));
+                int idDomaine = Integer.parseInt(Check.checkInput(request.getParameter("idDomaine")));
                 d = domaineDA.findDomaine(idDomaine);
                 domaineDA.deleteDomaine(d);
             } catch (SQLException e) {
@@ -61,8 +62,6 @@ public class domaineController extends HttpServlet {
             }
 
         }
-                
-
         request.getRequestDispatcher("home.jsp").forward(request,response);
     }
 

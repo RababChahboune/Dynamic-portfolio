@@ -2,6 +2,7 @@ package controlleur;
 
 import dataAccess.experienceDA;
 import model.Experience;
+import utility.Check;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,9 +19,9 @@ import java.sql.SQLException;
 @WebServlet(name = "experienceController")
 public class experienceController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = request.getParameter("action");
-        String nomExperience = request.getParameter("nomExperience");
-        String logoExperience = request.getParameter("logoExperience");
+        String action = Check.checkInput(request.getParameter("action"));
+        String nomExperience = Check.checkInput(request.getParameter("nomExperience"));
+        String logoExperience = Check.checkInput(request.getParameter("logoExperience"));
         Experience d;
         if(action.equals("ajouterExperience")){
             d = new Experience();
@@ -37,7 +38,7 @@ public class experienceController extends HttpServlet {
         }
         else if(action.equals("modifierExperience")){
            try {
-               int idExperience = Integer.parseInt(request.getParameter("idExperience"));
+               int idExperience = Integer.parseInt(Check.checkInput(request.getParameter("idExperience")));
                 d = experienceDA.findExperience(idExperience);
                 d.setNomExperience(nomExperience);
                 d.setLogoExperience(logoExperience);
@@ -49,7 +50,7 @@ public class experienceController extends HttpServlet {
         else if(action.equals("supprimerExperience")){
 
             try {
-                int idExperience = Integer.parseInt(request.getParameter("idExperience"));
+                int idExperience = Integer.parseInt(Check.checkInput(request.getParameter("idExperience")));
                 d = experienceDA.findExperience(idExperience);
                 experienceDA.deleteExperience(d);
             } catch (SQLException e) {
@@ -57,8 +58,7 @@ public class experienceController extends HttpServlet {
             }
 
         }
-
-        //request.getRequestDispatcher("home.jsp").forward(request,response);
+        request.getRequestDispatcher("home.jsp").forward(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

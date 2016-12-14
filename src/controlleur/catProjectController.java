@@ -2,6 +2,7 @@ package controlleur;
 
 import dataAccess.Categorie_projetDA;
 import model.Categorie_projet;
+import utility.Check;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,10 +19,10 @@ import java.sql.SQLException;
 @WebServlet(name = "catProjectController")
 public class catProjectController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = request.getParameter("action");
-        String nomProjetCategorie = request.getParameter("nomProjetCategorie");
-        String descriptionProjetCategorie = request.getParameter("descriptionProjetCategorie");
-        String imageProjetCategorie = request.getParameter("imageProjetCategorie");
+        String action = Check.checkInput(request.getParameter("action"));
+        String nomProjetCategorie = Check.checkInput(request.getParameter("nomProjetCategorie"));
+        String descriptionProjetCategorie = Check.checkInput(request.getParameter("descriptionProjetCategorie"));
+        String imageProjetCategorie = Check.checkInput(request.getParameter("imageProjetCategorie"));
         Categorie_projet cp;
         PrintWriter out = response.getWriter();
         if(action.equals("ajouterCategorieProjet")){
@@ -39,7 +40,7 @@ public class catProjectController extends HttpServlet {
 
         }
         else if(action.equals("modifierCategorieProjet")){
-            int idProjetCategorie = Integer.parseInt(request.getParameter("idProjetCategorie"));
+            int idProjetCategorie = Integer.parseInt(Check.checkInput(request.getParameter("idProjetCategorie")));
             try {
                 cp = Categorie_projetDA.findCategorie_projet("idProjetCategorie",idProjetCategorie);
                 cp.setNomProjetCategorie(nomProjetCategorie);
@@ -53,7 +54,7 @@ public class catProjectController extends HttpServlet {
         else if(action.equals("supprimerCategorieProjet")){
 
             try {
-                int idProjetCategorie = Integer.parseInt(request.getParameter("idProjetCategorie"));
+                int idProjetCategorie = Integer.parseInt(Check.checkInput(request.getParameter("idProjetCategorie")));
                 cp = Categorie_projetDA.findCategorie_projet("idProjetCategorie",idProjetCategorie);
                 Categorie_projetDA.deleteCategorie_projet(cp);
             } catch (SQLException e) {
@@ -62,8 +63,6 @@ public class catProjectController extends HttpServlet {
 
         }
         request.getRequestDispatcher("home.jsp").forward(request,response);
-
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

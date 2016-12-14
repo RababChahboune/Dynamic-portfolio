@@ -26,11 +26,13 @@ public class AdministrateurDA {
         else
             return null;
     }
-    public static int updateAdministrateur(String password) throws SQLException {
+    public static int updateAdministrateur(Administrateur admin) throws SQLException {
         dataAccess.setDbname("Portfolio");
         Connection con = dataAccess.getInstance().getConnection();
-        String sql = "UPDATE "+ tableName + " SET password = ? where 1=1 ";
-        return dataAccess.executeSQL(con, sql,password);
+        String sql = "UPDATE "+ tableName + " SET password = ?,username = ? where 1=1 ";
+        return dataAccess.executeSQL(con, sql,
+                admin.getPassword(),
+                admin.getUsername());
     }
 
     private static Administrateur map(ResultSet resultSet) throws SQLException {

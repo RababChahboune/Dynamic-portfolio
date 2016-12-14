@@ -56,4 +56,58 @@
         <servlet-name>ExperienceServlet</servlet-name>
         <url-pattern>experienceController</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CourrierServlet</servlet-name>
+        <servlet-class>controlleur.courrierController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CourrierServlet</servlet-name>
+        <url-pattern>courrierController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AdmninistrateurServlet</servlet-name>
+        <servlet-class>controlleur.administrateurController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdmninistrateurServlet</servlet-name>
+        <url-pattern>administrateurController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ProfileServlet</servlet-name>
+        <servlet-class>controlleur.profileController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProfileServlet</servlet-name>
+        <url-pattern>profileController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LienServlet</servlet-name>
+        <servlet-class>controlleur.lienController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LienServlet</servlet-name>
+        <url-pattern>lienController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CompetanceServlet</servlet-name>
+        <servlet-class>controlleur.competanceController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CompetanceServlet</servlet-name>
+        <url-pattern>competanceController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CursusServlet</servlet-name>
+        <servlet-class>controlleur.cursusController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CursusServlet</servlet-name>
+        <url-pattern>cursusController</url-pattern>
+    </servlet-mapping>
 </web-app>

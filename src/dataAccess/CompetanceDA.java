@@ -45,7 +45,7 @@ public class CompetanceDA {
 
         String sql = "INSERT INTO " + tableName +
                 " (idProfile, nomCompetance,pourcentageCompetance) "+
-                "VALUES (?, ? ,? , ?)";
+                "VALUES (?, ? ,?)";
 
         return dataAccess.executeSQL(con, sql,
                 profile.getIdProfile() ,
