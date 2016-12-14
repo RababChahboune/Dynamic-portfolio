@@ -41,10 +41,10 @@
         <div class="login-logo">
             <img src="../lib/dist/img/logo.png" width="164" height="164">
         </div>
-        <form action="loginController" method="post">
+        <form action="../loginController" method="post">
             <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="Mot de passe">
                 <input type="text" value="lockScreen" name ="action" hidden>
+                <input type="password" class="form-control" placeholder="Mot de passe" name="password">
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
             </div>
 

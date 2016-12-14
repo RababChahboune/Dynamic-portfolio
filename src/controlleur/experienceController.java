@@ -21,13 +21,12 @@ public class experienceController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = Check.checkInput(request.getParameter("action"));
         String nomExperience = Check.checkInput(request.getParameter("nomExperience"));
-        String logoExperience = Check.checkInput(request.getParameter("logoExperience"));
         Experience d;
         if(action.equals("ajouterExperience")){
+            String logoExperience = Check.checkInput(request.getParameter("logoExperience"));
             d = new Experience();
             d.setNomExperience(nomExperience);
             d.setLogoExperience(logoExperience);
-
             try {
                 experienceDA.insertExperience(d);
 
@@ -39,7 +38,11 @@ public class experienceController extends HttpServlet {
         else if(action.equals("modifierExperience")){
            try {
                int idExperience = Integer.parseInt(Check.checkInput(request.getParameter("idExperience")));
-                d = experienceDA.findExperience(idExperience);
+               String logoExperience = request.getParameter("logoExperience");
+               d = experienceDA.findExperience(idExperience);
+               if(logoExperience==null){
+                   logoExperience = d.getLogoExperience();
+               }
                 d.setNomExperience(nomExperience);
                 d.setLogoExperience(logoExperience);
                 experienceDA.updateExperience(d);

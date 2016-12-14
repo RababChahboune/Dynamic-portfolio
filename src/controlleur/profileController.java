@@ -24,13 +24,14 @@ public class profileController extends HttpServlet {
         String prenomProfile = Check.checkInput(request.getParameter("prenomProfile"));
         String emailProfile = Check.checkInput(request.getParameter("emailProfile"));
         String telephoneProfile = Check.checkInput(request.getParameter("telephoneProfile"));
-        String imageProfile= Check.checkInput(request.getParameter("imageProfile"));
         String biographieProfile= Check.checkInput(request.getParameter("biographieProfile"));
 
         Profile p ;
         if(action.equals("ajouterProfile")){
             try {
                 p = new Profile();
+                //sitting the picture for the 1st time
+                String imageProfile= Check.checkInput(request.getParameter("imageProfile"));
                 p.setNomProfile(nomProfile);
                 p.setPrenomProfile(prenomProfile);
                 p.setEmailProfile(emailProfile);
@@ -41,7 +42,28 @@ public class profileController extends HttpServlet {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        }else if(action.equals("supprimerProfile")){
+        }
+        else if(action.equals("modifierProfile")){
+            try {
+                int idProfile = Integer.parseInt(request.getParameter("idProfile"));
+                String imageProfile= request.getParameter("imageProfile");
+                p = ProfileDA.findProfile(idProfile);
+                if(imageProfile==null){
+                    imageProfile = p.getImageProfile();
+                }
+                p.setNomProfile(nomProfile);
+                p.setPrenomProfile(prenomProfile);
+                p.setEmailProfile(emailProfile);
+                p.setTelephoneProfile(telephoneProfile);
+                p.setImageProfile(imageProfile);
+                p.setBiographieProfile(biographieProfile);
+                ProfileDA.updateProfile(p);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+        else if(action.equals("supprimerProfile")){
             try {
                 int idProfile = Integer.parseInt(request.getParameter("idProfile"));
                 p = ProfileDA.findProfile(idProfile);

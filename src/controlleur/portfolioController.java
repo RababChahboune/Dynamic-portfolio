@@ -64,13 +64,13 @@ public class portfolioController extends HttpServlet {
         String nomPortfolio = Check.checkInput(request.getParameter("nomPortfolio"));
         String aProposPortfolio = Check.checkInput(request.getParameter("aProposPortfolio"));
         String salutationPortfolio = Check.checkInput(request.getParameter("salutationPortfolio"));
-        String logoPortfolio = Check.checkInput(request.getParameter("logoPortfolio"));
         String theme = Check.checkInput(request.getParameter("theme"));
         Portfolio d;
         try {
             Theme t = themeDA.findTheme(theme);
             if(action.equals("ajouterPortfolio")){
                 d = new Portfolio();
+                String logoPortfolio = Check.checkInput(request.getParameter("logoPortfolio"));
                 d.setNomPortfolio(nomPortfolio);
                 d.setSalutationPortfolio(salutationPortfolio);
                 d.setaProposPortfolio(aProposPortfolio);
@@ -79,13 +79,15 @@ public class portfolioController extends HttpServlet {
                 portfolioDA.insertPortfolio(d);
             }
             else if(action.equals("modifierPortfolio")){
-                int idPortfolio = Integer.parseInt(Check.checkInput(request.getParameter("idPortfolio")));
+                String logoPortfolio = request.getParameter("logoPortfolio");
                 d = portfolioDA.getPortfolio();
-                d.setNomPortfolio(nomPortfolio);
-                d.setSalutationPortfolio(salutationPortfolio);
-                d.setaProposPortfolio(aProposPortfolio);
-                d.setLogoPortfolio(logoPortfolio);
+                if(logoPortfolio==null){
+                    logoPortfolio = d.getLogoPortfolio();
+                }
                 d.setTheme(t);
+                d.setNomPortfolio(nomPortfolio);
+                d.setaProposPortfolio(aProposPortfolio);
+                d.setSalutationPortfolio(salutationPortfolio);
                 portfolioDA.updatePortfolio(d);
 
             }

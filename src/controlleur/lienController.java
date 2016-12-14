@@ -23,13 +23,13 @@ public class lienController extends HttpServlet {
         String action = Check.checkInput(request.getParameter("action"));
         String nomLien = Check.checkInput(request.getParameter("nomLien"));
         String urlLien = Check.checkInput(request.getParameter("urlLien"));
-        String imageLien = Check.checkInput(request.getParameter("imageLien"));
         int idProfile = Integer.parseInt(Check.checkInput(request.getParameter("idProfile")));
 
         Lien l;
         try {
             Profile p = ProfileDA.findProfile(idProfile);
             if(action.equals("ajouterLien")){
+                String imageLien = Check.checkInput(request.getParameter("imageLien"));
                 l = new Lien();
                 l.setNomLien(nomLien);
                 l.setUrlLien(urlLien);
@@ -39,7 +39,11 @@ public class lienController extends HttpServlet {
             }
             else if(action.equals("modifierLien")){
                 int idLien = Integer.parseInt(Check.checkInput(request.getParameter("idLien")));
+                String imageLien = request.getParameter("imageLien");
                 l = lienDA.findLien(idLien);
+                if(imageLien==null){
+                    imageLien = l.getImageLien();
+                }
                 l.setNomLien(nomLien);
                 l.setUrlLien(urlLien);
                 l.setImageLien(imageLien);

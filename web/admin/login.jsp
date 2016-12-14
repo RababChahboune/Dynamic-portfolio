@@ -39,13 +39,14 @@
         </div>
         <p class="login-box-msg">Dynamic Portfolio</p>
 
-        <form action="loginController" method="post">
+        <form action="../loginController" method="post">
+            <input name="action" value="login" hidden>
             <div class="form-group has-feedback">
-                <input type="text" class="form-control" placeholder="Nom d'utilisateur">
+                <input type="text" class="form-control" placeholder="Nom d'utilisateur" name="username">
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="Mot de passe">
+                <input type="password" class="form-control" placeholder="Mot de passe" name="password">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="row">
@@ -58,7 +59,7 @@
                 <div class="col-xs-6">
                     <div class="checkbox icheck">
                         <label>
-                            <input type="checkbox"> Se souvenir de moi
+                            <input type="checkbox" name="rememberMe"> Se souvenir de moi
                         </label>
                     </div>
                 </div>
