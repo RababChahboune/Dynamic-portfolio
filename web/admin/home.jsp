@@ -1,4 +1,7 @@
+<%@ page import="model.Administrateur" %>
+<%@ page import="dataAccess.AdministrateurDA" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:include page="includes/verificationAll.jsp"/>
 <html>
 <head>
     <meta charset="utf-8">
@@ -41,10 +44,6 @@
     <script src="../lib/dist/js/demo.js"></script>
 </head>
 <body class="hold-transition skin-purple sidebar-mini fixed">
-<%
-    if (session.getAttribute("username") == null || session.getAttribute("username").equals("")){
-        response.sendRedirect("login.jsp");
-}%>
 <jsp:include page="includes/headerAll.jsp" />
 <jsp:include page="includes/sideBarAll.jsp" />
 <div class="wrapper">

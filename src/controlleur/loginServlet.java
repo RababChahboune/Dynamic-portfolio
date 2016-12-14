@@ -6,10 +6,7 @@ import utility.Check;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -27,6 +24,11 @@ public class loginServlet extends HttpServlet {
             Administrateur admin = AdministrateurDA.getAdministrateur();
             if(action.equals("login")){
                 if(admin.getUsername().equals(username) && admin.getPassword().equals(password)){
+                    if(!rememberMe.equals("0")) {
+                        Cookie c = new Cookie("username", username);
+                        c.setMaxAge(24*60*60);
+                        response.addCookie(c);  // response is an instance of type HttpServletReponse
+                    }
                     HttpSession session = request.getSession();
                     session.setAttribute("username", username);
                     response.sendRedirect("admin/home.jsp");

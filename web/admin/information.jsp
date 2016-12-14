@@ -4,6 +4,7 @@
   Time: 21:51
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:include page="includes/verificationAll.jsp"/>
 <html>
 <head>
     <meta charset="utf-8">
