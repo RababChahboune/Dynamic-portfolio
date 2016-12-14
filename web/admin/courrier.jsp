@@ -1,9 +1,18 @@
+<%@ page import="model.Courrier" %>
+<%@ page import="dataAccess.courrierDA" %>
+<%@ page import="java.util.ArrayList" %>
 <%--
   Author: Reda BENCHRAA
   Date: 12/12/2016
   Time: 22:58
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%!
+    ArrayList<Courrier> list;
+%>
+<%
+    list= courrierDA.getCourrierList();
+%>
 <html>
 <head>
     <meta charset="utf-8">
@@ -44,6 +53,7 @@
     <script src="../lib/dist/js/app.min.js"></script>
     <script src="../lib/dist/js/pages/dashboard.js"></script>
     <script src="../lib/dist/js/demo.js"></script>
+    <script src="../lib/dist/js/admin/courrier.js"></script>
 </head>
 <body class="hold-transition skin-purple sidebar-mini fixed">
 <jsp:include page="includes/headerAll.jsp"/>
@@ -73,11 +83,13 @@
                             <div class="table-responsive mailbox-messages">
                                 <table class="table table-hover table-striped">
                                     <tbody>
+                                    <% for(Courrier cr : list){%>
                                     <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td class="mailbox-name"><a href="#">Rabab Chahboune</a></td>
-                                        <td class="mailbox-date">Il y a 5 min</td>
+                                        <td><input type="checkbox" id="<%=cr.getIdCourrier()%>"></td>
+                                        <td class="mailbox-name" id="<%=cr.getIdCourrier()%>"><a href="#"><%=cr.getNomComplet()%></a></td>
+                                        <td class="mailbox-date"><%=cr.getDateEnvoieCourrier()%></td>
                                     </tr>
+                                    <%}%>
                                     </tbody>
                                 </table>
                             </div>
@@ -95,25 +107,16 @@
                         </div>
                         <div class="box-body no-padding">
                             <div class="mailbox-read-info">
-                                <h3>Sujet</h3>
-                                <h5>From: email<span class="mailbox-read-time pull-right">15 Feb. 2016 11:03 PM</span></h5>
+                                <h3>Sujet : <span id="sujetCourrier"></span></h3>
+                                <h5>De : <span id="nomCompletCourrier"></span> - <span id="emailCourrier"></span><span class="mailbox-read-time pull-right" id="dateCourrier"></span></h5>
                             </div>
-                            <div class="mailbox-read-message">
-                                The message</br>
-                                The message</br>
-                                The message</br>
-                                The message</br>
-                                The message</br>
-                                The message</br>
-                                The message</br>
-                                The message</br>
-                                The message</br>
-                                The message</br>
+                            <div class="mailbox-read-message" id="messageCourrier">
+
                             </div>
                         </div>
                         <div class="box-footer">
-                            <button type="button" class="btn btn-default"><i class="fa fa-trash-o"></i> Delete</button>
-                            <button type="button" class="btn btn-default"><i class="fa fa-print"></i> Print</button>
+                            <button id="deleteButton" type="button" class="btn btn-default"><i class="fa fa-trash-o"></i> Delete</button>
+                            <button id="printButton"type="button" class="btn btn-default"><i class="fa fa-print"></i> Print</button>
                         </div>
                     </div>
                 </div>

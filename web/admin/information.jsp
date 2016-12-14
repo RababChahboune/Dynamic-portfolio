@@ -1,9 +1,26 @@
-<%--
+<%@ page import="model.Portfolio" %>
+<%@ page import="dataAccess.portfolioDA" %>
+<%@ page import="model.Domaine" %>
+<%@ page import="dataAccess.domaineDA" %>
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="java.util.ArrayList" %><%--
   Author: Reda BENCHRAA
   Date: 12/12/2016
   Time: 21:51
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%!
+    ArrayList<Domaine> d;
+    Portfolio p;
+%>
+<%
+    try {
+        p = portfolioDA.getPortfolio();
+        d = domaineDA.getDomaineList();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+%>
 <html>
 <head>
     <meta charset="utf-8">
@@ -45,6 +62,7 @@
     <script src="../lib/dist/js/pages/dashboard.js"></script>
     <script src="../lib/dist/js/demo.js"></script>
     <script src="../lib/dist/js/admin/information.js"></script>
+    <script src="../lib/dist/js/jqeury.form.js"></script>
 </head>
 <body class="hold-transition skin-purple sidebar-mini fixed">
 <jsp:include page="includes/headerAll.jsp"/>
@@ -62,8 +80,8 @@
                     <div class="box box-warning">
                         <div class="box-body box-profile">
                             <img class="profile-user-img img-responsive img-"
-                                 src="../lib/dist/img/logo.png" alt="User profile picture">
-                            <h3 class="profile-username text-center">RR LAB</h3>
+                                 src="../lib/dist/img/portfolio/<%=p.getLogoPortfolio()%>" alt="User profile picture">
+                            <h3 class="profile-username text-center"><%=p.getNomPortfolio()%></h3>
                         </div>
                     </div>
                     <div class="box box-warning">
@@ -72,15 +90,16 @@
                         </div>
                         <div class="box-body">
                             <strong><i class="fa fa-book margin-r-5"></i> Salutation</strong>
-                            <p class="text-muted">BEYOND IMAGINATION</p>
+                            <p class="text-muted"><%=p.getSalutationPortfolio()%></p>
                             <hr>
                             <strong><i class="fa fa-file-text-o margin-r-5"></i> A propos</strong>
-                            <p class="text-muted">We're the best</p>
+                            <p class="text-muted"><%=p.getaProposPortfolio()%></p>
                             <hr>
                             <strong><i class="fa fa-pencil margin-r-5"></i> Domaines</strong>
                             <p>
-                                <span class="label label-danger">3D</span>
-                                <span class="label label-primary">3D</span>
+                                <%for(Domaine domaine : d){%>
+                                <span class="label label-danger"><%=domaine.getNomDomaine()%></span>
+                                <%}%>
                             </p>
                         </div>
                     </div>
@@ -90,24 +109,24 @@
                         <div class="box-header with-border">
                             <h3 class="box-title">Modifier les informations</h3>
                         </div>
-                        <form role="form">
+                        <form method="POST" action="../portfolioController"  enctype="multipart/form-data">
                             <div class="box-body">
                                 <div class="form-group">
-                                    <label for="nom">Nom</label>
-                                    <input name="nom" type="text" class="form-control" id="nom" placeholder="Entrer le nom du protfolio">
+                                    <label>Nom</label>
+                                    <input name="nomPortfolio" type="text" class="form-control" placeholder="Entrer le nom du protfolio" value="<%=p.getNomPortfolio()%>">
                                 </div>
                                 <div class="form-group">
-                                    <label for="Salutation">Salutation</label>
-                                    <input name="salutation" type="text" class="form-control" id="Salutation" placeholder="Entrer la salutation">
+                                    <label>Salutation</label>
+                                    <input name="salutationPortfolio" type="text" class="form-control" placeholder="Entrer la salutation" value="<%=p.getSalutationPortfolio()%>">
                                 </div>
                                 <div class="form-group">
                                     <label>A propos </label>
-                                    <textarea name="apropos" class="form-control" rows="3" placeholder="Entrer des information sur vous"></textarea>
+                                    <textarea name="aProposPortfolio" class="form-control" rows="3" placeholder="Entrer des information sur vous"><%=p.getaProposPortfolio()%></textarea>
 
                                 </div>
                                 <div class="form-group">
                                     <label>Logo</label>
-                                    <input name="logo" type="file" class="form-control">
+                                    <input type="file" name="logoPortfolio" />
                                 </div>
                             </div>
                             <div class="box-footer">
