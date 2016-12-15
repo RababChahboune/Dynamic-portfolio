@@ -1,10 +1,30 @@
-<%--
+<%@ page import="model.Domaine" %>
+<%@ page import="dataAccess.domaineDA" %>
+<%@ page import="java.sql.SQLException" %><%--
   Author: Reda BENCHRAA
   Date: 13/12/2016
   Time: 03:18
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="includes/verificationAll.jsp"/>
+<%!
+    Domaine domaine;
+%>
+<%
+    if(request.getParameter("action") != null){
+        if(request.getParameter("action").equals("modifierDomaine")){
+            try {
+                domaine = domaineDA.findDomaine(Integer.parseInt(request.getParameter("id")));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }else{
+            domaine = new Domaine("","","");
+        }
+    }else{
+        response.sendRedirect("domaine.jsp?action=ajouterDomaine");
+    }
+%>
 <html>
 <head>
     <meta charset="utf-8">
@@ -69,24 +89,30 @@
                 </div>
                 <div class="box-body">
                     <div class="col-md-12">
-                        <form>
+                        <form method="POST">
+                            <input type="text" name="idDomaine" value="<%=domaine.getIdDomaine()%>" hidden >
+                            <input type="text" name="action" value="<%=request.getParameter("action")%>" hidden >
                             <div class="form-group">
-                                <label for="nom">Nom</label>
-                                <input type="text" class="form-control" id="nom" placeholder="">
+                                <label >Nom</label>
+                                <input type="text" class="form-control" name="nomDomaine" value="<%=domaine.getNomDomaine()%>" placeholder="">
                             </div>
                             <div class="form-group">
-                                <label for="Description">Description</label>
-                                <input type="text" class="form-control" id="Description" placeholder="">
+                                <label>Description</label>
+                                <input type="text" class="form-control" name="descriptionDomaine" value="<%=domaine.getDescriptionDomaine()%>" placeholder="">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputFile">Image</label>
-                                <input type="file" id="exampleInputFile">
+                                <label>Image</label>
+                                <input name="imageDomaine" type="file">
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="box-footer text-center">
-                    <a href="projet.jsp" class="btn btn-sm btn-default btn-flat pull-right">Ajoter le domaine</a>
+                    <% if(request.getParameter("action").equals("ajouterDomaine")){ %>
+                    <button class="btn btn-sm btn-default btn-flat pull-right">Ajouter</button>
+                    <%}else{%>
+                    <button class="btn btn-sm btn-info btn-flat pull-right">Modifier</button>
+                    <%}%>
                 </div>
             </div>
         </section>

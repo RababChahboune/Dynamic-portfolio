@@ -2,6 +2,8 @@ package controlleur;
 
 import dataAccess.courrierDA;
 import model.Courrier;
+import org.json.JSONException;
+import org.json.JSONObject;
 import utility.Check;
 
 import javax.servlet.ServletException;
@@ -56,6 +58,23 @@ public class courrierController extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        response.setContentType("application/json");
+        PrintWriter out = response.getWriter();
+            if(!request.getParameter("idCourrier").equals("")){
+                JSONObject json = new JSONObject();
+                try {
+                Courrier c = courrierDA.findCourrier(Integer.parseInt(request.getParameter("idCourrier")));
+                    json.put("emailCourrier",c.getEmailCourrier());
+                    json.put("nomCompletCourrier",c.getNomComplet());
+                    json.put("dateCourrier",c.getDateEnvoieCourrier());
+                    json.put("messageCourrier",c.getMessageCourrier());
+                    json.put("sujetCourrier",c.getSujetCourrier());
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                out.print(json);
+        }
     }
 }
