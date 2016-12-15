@@ -1,9 +1,11 @@
 package controlleur;
 
+import com.geekonjava.fileupload.FileUploading;
 import dataAccess.Categorie_projetDA;
 import model.Categorie_projet;
 import utility.Check;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Rabab Chahboune on 12/12/2016.
@@ -19,17 +23,24 @@ import java.sql.SQLException;
 @WebServlet(name = "catProjectController")
 public class catProjectController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = Check.checkInput(request.getParameter("action"));
-        String nomProjetCategorie = Check.checkInput(request.getParameter("nomProjetCategorie"));
-        String descriptionProjetCategorie = Check.checkInput(request.getParameter("descriptionProjetCategorie"));
+        ServletContext context = this.getServletContext();
+        String imagepath = this.getServletContext().getRealPath("/") + "/lib/dist/img/categorieProjet/";
+        ArrayList<String> imagename = new ArrayList<String>();
+        imagename.add("imageProjetCategorie");
+        ArrayList<String> dataname = new ArrayList<String>();
+        dataname.add("nomProjetCategorie");
+        dataname.add("idProjetCategorie");
+        dataname.add("descriptionProjetCategorie");
+        dataname.add("action");
+        HashMap map = FileUploading.UploadFile(imagepath, dataname, imagename, request);
         Categorie_projet cp;
         PrintWriter out = response.getWriter();
-        if(action.equals("ajouterCategorieProjet")){
+        if(map.get("action").toString().equals("ajouterCategorieProjet")){
             try {
-                String imageProjetCategorie = Check.checkInput(request.getParameter("imageProjetCategorie"));
+                String imageProjetCategorie = Check.checkInput(map.get("imageProjetCategorie").toString());
                 cp = new Categorie_projet();
-                cp.setNomProjetCategorie(nomProjetCategorie);
-                cp.setDescriptionProjetCategorie(descriptionProjetCategorie);
+                cp.setNomProjetCategorie(map.get("nomProjetCategorie").toString());
+                cp.setDescriptionProjetCategorie(map.get("descriptionProjetCategorie").toString());
                 cp.setImageProjetCategorie(imageProjetCategorie);
                 Categorie_projetDA.insertCategorie_projet(cp);
             } catch (SQLException e) {
@@ -37,32 +48,33 @@ public class catProjectController extends HttpServlet {
             }
 
         }
-        else if(action.equals("modifierCategorieProjet")){
+        else if(map.get("action").toString().equals("modifierCategorieProjet")){
             try {
-                int idProjetCategorie = Integer.parseInt(Check.checkInput(request.getParameter("idProjetCategorie")));
-                String imageProjetCategorie = request.getParameter("imageProjetCategorie");
+                int idProjetCategorie = Integer.parseInt(Check.checkInput(map.get("idProjetCategorie").toString()));
                 cp = Categorie_projetDA.findCategorie_projet("idProjetCategorie",idProjetCategorie);
-                if(imageProjetCategorie==null){
-                    imageProjetCategorie = cp.getImageProjetCategorie();
+                if( !map.get("imageProjetCategorie").toString().equals("") ){
+                    cp.setImageProjetCategorie(map.get("imageProjetCategorie").toString());
                 }
-                cp.setNomProjetCategorie(nomProjetCategorie);
-                cp.setDescriptionProjetCategorie(descriptionProjetCategorie);
-                cp.setImageProjetCategorie(imageProjetCategorie);
+                else {
+                    out.print("Erreur lors de l'upload de l'image");
+                }
+                cp.setNomProjetCategorie(map.get("nomProjetCategorie").toString());
+                cp.setDescriptionProjetCategorie(map.get("descriptionProjetCategorie").toString());
                 Categorie_projetDA.updateCategorie_projet(cp);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
-        else if(action.equals("supprimerCategorieProjet")){
+        else if(map.get("action").toString().equals("supprimerCategorieProjet")){
             try {
-                int idProjetCategorie = Integer.parseInt(Check.checkInput(request.getParameter("idProjetCategorie")));
+                int idProjetCategorie = Integer.parseInt(Check.checkInput(map.get("idProjetCategorie").toString()));
                 cp = Categorie_projetDA.findCategorie_projet("idProjetCategorie",idProjetCategorie);
                 Categorie_projetDA.deleteCategorie_projet(cp);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
-        request.getRequestDispatcher("home.jsp").forward(request,response);
+        //request.getRequestDispatcher("home.jsp").forward(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

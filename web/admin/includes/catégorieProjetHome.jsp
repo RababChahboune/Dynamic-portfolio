@@ -41,8 +41,8 @@
                         <td><%=p.getNomProjetCategorie()%></td>
                         <td><%=p.getDescriptionProjetCategorie()%></td>
                         <td>
-                            <a href="../categorieProjet.jsp?action=edit&id=<%=p.getIdProjetCategorie()%>"><span class="label label-info"> <span class="fa fa-pencil"></span></span></a>
-                            <a href="../categorieProjet.jsp?action=delete&id=<%=p.getIdProjetCategorie()%>"> <span class="label label-danger"><span class="fa fa-times"></span></span></a>
+                            <a href="categorieProjet.jsp?action=modifierCategorieProjet&id=<%=p.getIdProjetCategorie()%>"><span class="label label-info"> <span class="fa fa-pencil"></span></span></a>
+                            <a href="categorieProjet.jsp?action=supprimerCategorieProjet&id=<%=p.getIdProjetCategorie()%>"> <span class="label label-danger"><span class="fa fa-times"></span></span></a>
                         </td>
                     </tr>
                     <%}%>
@@ -51,7 +51,7 @@
             </div>
         </div>
         <div class="box-footer clearfix">
-            <a href="categorieProjet.jsp" class="btn btn-sm btn-default btn-flat pull-right">Ajouter une catégories</a>
+            <a href="categorieProjet.jsp?action=ajouterCategorieProjet" class="btn btn-sm btn-default btn-flat pull-right">Ajouter une catégories</a>
         </div>
     </div>
 </div>

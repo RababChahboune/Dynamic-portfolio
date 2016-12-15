@@ -6,7 +6,6 @@
   Time: 03:18
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:include page="includes/verificationAll.jsp"/>
 <%!
     Domaine domaine;
 %>
@@ -88,6 +87,7 @@
                                 class="fa fa-minus"></i>
                         </button>
                     </div>
+                </div>
                 </div>
                 <div class="box-body">
                     <div class="col-md-12">

@@ -1,10 +1,32 @@
-<%--
+<%@ page import="model.Categorie_projet" %>
+<%@ page import="dataAccess.Categorie_projetDA" %>
+<%@ page import="java.sql.SQLException" %><%--
   Author: Reda BENCHRAA
   Date: 13/12/2016
   Time: 03:12
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:include page="includes/verificationAll.jsp"/>
+<%!
+    Categorie_projet cp;
+%>
+<%
+    if(request.getParameter("action") != null){
+        if(request.getParameter("action").equals("modifierCategorieProjet")){
+            try {
+                cp = Categorie_projetDA.findCategorie_projet("idProjetCategorie",Integer.parseInt(request.getParameter("id")));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }else if(request.getParameter("action").equals("ajouterCategorieProjet")){
+            cp = new Categorie_projet("","","");
+        }
+        else if(request.getParameter("action").equals("supprimerCategorieProjet")){
+            System.out.printf("I am "+request.getParameter("id"));
+        }
+    }else{
+        response.sendRedirect("categorieProjet.jsp?action=ajouterCategorieProjet");
+    }
+%>
 <html>
 <head>
     <meta charset="utf-8">
@@ -46,6 +68,8 @@
     <script src="../lib/dist/js/app.min.js"></script>
     <script src="../lib/dist/js/pages/dashboard.js"></script>
     <script src="../lib/dist/js/demo.js"></script>
+    <script src="../lib/dist/js/jqeury.form.js"></script>
+    <script src="../lib/dist/js/admin/catProjet.js"></script>
 </head>
 <body class="hold-transition skin-purple sidebar-mini fixed">
 <jsp:include page="includes/headerAll.jsp"/>
@@ -69,25 +93,32 @@
                 </div>
                 <div class="box-body">
                     <div class="col-md-12">
-                        <form>
+                        <form method="POST" action="../catProjectController"  enctype="multipart/form-data">
+                            <input type="text" name="idProjetCategorie" value="<%=cp.getIdProjetCategorie()%>" hidden>
+                            <input type="text" name="action" value="<%=request.getParameter("action")%>" hidden >
                             <div class="form-group">
                                 <label for="nom">Nom</label>
-                                <input type="text" class="form-control" id="nom" placeholder="">
+                                <input type="text" class="form-control" id="nom" placeholder="" name="nomProjetCategorie" value="<%=cp.getNomProjetCategorie()%>">
                             </div>
                             <div class="form-group">
                                 <label for="Description">Description</label>
-                                <input type="text" class="form-control" id="Description" placeholder="">
+                                <input type="text" class="form-control" id="Description" placeholder="" name="descriptionProjetCategorie" value="<%=cp.getDescriptionProjetCategorie()%>">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputFile">Image</label>
-                                <input type="file" id="exampleInputFile">
+                                <input type="file" id="exampleInputFile" name="imageProjetCategorie">
+                            </div>
+                            <div class="form-group">
+                                <% if(request.getParameter("action").equals("ajouterCategorieProjet")){ %>
+                                <button type="submit" class="btn btn-sm btn-info btn-flat pull-right">Ajouter</button>
+                                <%}else{%>
+                                <button type="submit" class="btn btn-sm btn-info btn-flat pull-right">Modifier</button>
+                                <%}%>
                             </div>
                         </form>
                     </div>
                 </div>
-                <div class="box-footer text-center">
-                    <a href="projet.jsp" class="btn btn-sm btn-default btn-flat pull-right">Ajoter la catégorie</a>
-                </div>
+
             </div>
         </section>
     </div>

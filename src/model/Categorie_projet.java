@@ -18,6 +18,16 @@ public class Categorie_projet {
    /** @pdOid 1cc6b7ff-45b9-49ba-828f-d90bc2131ebd */
    private String imageProjetCategorie;
 
+   public Categorie_projet(){
+
+   }
+   public Categorie_projet(String nomProjetCategorie, String descriptionProjetCategorie, String imageProjetCategorie) {
+      idProjetCategorie=0;
+      this.nomProjetCategorie = nomProjetCategorie;
+      this.descriptionProjetCategorie = descriptionProjetCategorie;
+      this.imageProjetCategorie = imageProjetCategorie;
+   }
+   
    @Override
    public String toString() {
       return "Categorie_projet{" +
@@ -28,6 +38,7 @@ public class Categorie_projet {
               '}';
    }
 
+   
    public int getIdProjetCategorie() {
       return idProjetCategorie;
    }
