@@ -9,8 +9,10 @@
 <jsp:include page="includes/verificationAll.jsp"/>
 <%!
     Domaine domaine;
+    String idDomaine;
 %>
 <%
+    domaine = new Domaine("","","");
     if(request.getParameter("action") != null){
         if(request.getParameter("action").equals("modifierDomaine")){
             try {
@@ -18,11 +20,9 @@
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        }else{
-            domaine = new Domaine("","","");
         }
     }else{
-        response.sendRedirect("domaine.jsp?action=ajouterDomaine");
+        request.getRequestDispatcher("Domaine.jsp?action=ajouterDomaine").forward(request,response);
     }
 %>
 <html>
@@ -84,11 +84,10 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Ajoter un domaine</h3>
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
-                                class="fa fa-minus"></i>
-                        </button>
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     </div>
                 </div>
+            </div>
                 <div class="box-body">
                     <div class="col-md-12">
                         <form  method="POST" action="../domaineController"  enctype="multipart/form-data">
