@@ -22,17 +22,10 @@ import java.util.HashMap;
  */
 @WebServlet(name = "portfolioController")
 public class portfolioController extends HttpServlet {
-    private static final String DATA_DIRECTORY = "C:/uploads";
-    private static final int MAX_MEMORY_SIZE = 1024 * 1024 * 200;
-    private static final int MAX_REQUEST_SIZE = 1024 * 1024 * 200;
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ServletContext context = this.getServletContext();
         PrintWriter out = response.getWriter();
-        Portfolio d = new Portfolio();
-        String nomPortfolio = Check.checkInput(request.getParameter("nomPortfolio"));
-        String aProposPortfolio = Check.checkInput(request.getParameter("aProposPortfolio"));
-        String salutationPortfolio = Check.checkInput(request.getParameter("salutationPortfolio"));
+        Portfolio d;
         String imagepath = this.getServletContext().getRealPath("/") + "/lib/dist/img/portfolio/";
         System.out.println(imagepath);
         ArrayList<String> imagename = new ArrayList<String>();
@@ -42,6 +35,7 @@ public class portfolioController extends HttpServlet {
         dataname.add("aProposPortfolio");
         dataname.add("salutationPortfolio");
         HashMap map = FileUploading.UploadFile(imagepath, dataname, imagename, request);
+        System.out.println("image "+ map.get("logoPortfolio").toString());
         try {
             d = portfolioDA.getPortfolio();
             if (!map.get("logoPortfolio").equals("")) {

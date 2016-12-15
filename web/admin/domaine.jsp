@@ -65,6 +65,8 @@
     <script src="../lib/dist/js/app.min.js"></script>
     <script src="../lib/dist/js/pages/dashboard.js"></script>
     <script src="../lib/dist/js/demo.js"></script>
+    <script src="../lib/dist/js/jqeury.form.js"></script>
+    <script src="../lib/dist/js/admin/domaine.js"></script>
 </head>
 <body class="hold-transition skin-purple sidebar-mini fixed">
 <jsp:include page="includes/headerAll.jsp"/>
@@ -88,7 +90,7 @@
                 </div>
                 <div class="box-body">
                     <div class="col-md-12">
-                        <form method="POST">
+                        <form  method="POST" action="../domaineController"  enctype="multipart/form-data">
                             <input type="text" name="idDomaine" value="<%=domaine.getIdDomaine()%>" hidden >
                             <input type="text" name="action" value="<%=request.getParameter("action")%>" hidden >
                             <div class="form-group">
@@ -101,19 +103,18 @@
                             </div>
                             <div class="form-group">
                                 <label>Image</label>
-                                <input name="imageDomaine" type="file">
+                                <input type="file" name="imageDomaine" />
+                            </div>
+                            <div class="form-group">
+                                <% if(request.getParameter("action").equals("ajouterDomaine")){ %>
+                                <button type="submit" class="btn btn-sm btn-default btn-flat pull-right">Ajouter</button>
+                                <%}else{%>
+                                <button type="submit" class="btn btn-sm btn-info btn-flat pull-right">Modifier</button>
+                                <%}%>
                             </div>
                         </form>
                     </div>
                 </div>
-                <div class="box-footer text-center">
-                    <% if(request.getParameter("action").equals("ajouterDomaine")){ %>
-                    <button class="btn btn-sm btn-default btn-flat pull-right">Ajouter</button>
-                    <%}else{%>
-                    <button class="btn btn-sm btn-info btn-flat pull-right">Modifier</button>
-                    <%}%>
-                </div>
-            </div>
         </section>
     </div>
     <jsp:include page="includes/footerAll.jsp"/>

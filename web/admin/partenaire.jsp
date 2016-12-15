@@ -1,9 +1,31 @@
-<%--
+<%@ page import="model.Experience" %>
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="dataAccess.experienceDA" %><%--
   Author: Reda BENCHRAA
   Date: 13/12/2016
   Time: 03:19
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%!
+    Experience partenaire;
+%>
+<%
+    if(request.getParameter("action") != null){
+        if(request.getParameter("action").equals("modifierExperience")){
+            try {
+                partenaire = experienceDA.findExperience(Integer.parseInt(request.getParameter("id")));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }else if(request.getParameter("action").equals("ajouterExperience")){
+            partenaire = new Experience("","");
+        }else if(request.getParameter("action").equals("supprimerExperience")){
+            response.sendRedirect("par.jsp?action=supprimerExperience");
+        }
+    }else{
+        response.sendRedirect("partenaire.jsp?action=ajouterExperience");
+    }
+%>
 <html>
 <head>
     <meta charset="utf-8">
@@ -45,6 +67,8 @@
     <script src="../lib/dist/js/app.min.js"></script>
     <script src="../lib/dist/js/pages/dashboard.js"></script>
     <script src="../lib/dist/js/demo.js"></script>
+    <script src="../lib/dist/js/jqeury.form.js"></script>
+    <script src="../lib/dist/js/admin/partenaire.js"></script>
 </head>
 <body class="hold-transition skin-purple sidebar-mini fixed">
 <jsp:include page="includes/headerAll.jsp"/>
@@ -68,20 +92,26 @@
                 </div>
                 <div class="box-body">
                     <div class="col-md-12">
-                        <form>
+                        <form  method="POST" action="../experienceController"  enctype="multipart/form-data">
+                            <input type="text" name="idExperience" value="<%=partenaire.getIdExperience()%>" hidden >
+                            <input type="text" name="action" value="<%=request.getParameter("action")%>" hidden >
                             <div class="form-group">
-                                <label for="nom">Nom</label>
-                                <input type="text" class="form-control" id="nom" placeholder="">
+                                <label>Nom</label>
+                                <input type="text" class="form-control" name="nomExperience" value="<%=partenaire.getNomExperience()%>" placeholder="">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputFile">Image</label>
-                                <input type="file" id="exampleInputFile">
+                                <label>Image</label>
+                                <input type="file" name="logoExperience">
+                            </div>
+                            <div class="form-group">
+                                <% if(request.getParameter("action").equals("ajouterExperience")){ %>
+                                <button type="submit" class="btn btn-sm btn-default btn-flat pull-right">Ajouter</button>
+                                <%}else{%>
+                                <button type="submit" class="btn btn-sm btn-info btn-flat pull-right">Modifier</button>
+                                <%}%>
                             </div>
                         </form>
                     </div>
-                </div>
-                <div class="box-footer text-center">
-                    <a href="projet.jsp" class="btn btn-sm btn-default btn-flat pull-right">Ajoter le partenaire</a>
                 </div>
             </div>
         </section>

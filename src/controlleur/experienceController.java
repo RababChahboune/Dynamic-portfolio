@@ -1,9 +1,12 @@
 package controlleur;
 
+import com.geekonjava.fileupload.FileUploading;
 import dataAccess.experienceDA;
+import model.Experience;
 import model.Experience;
 import utility.Check;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Rabab Chahboune on 12/12/2016.
@@ -19,38 +24,46 @@ import java.sql.SQLException;
 @WebServlet(name = "experienceController")
 public class experienceController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = Check.checkInput(request.getParameter("action"));
-        String nomExperience = Check.checkInput(request.getParameter("nomExperience"));
+        ServletContext context = this.getServletContext();
+        PrintWriter out = response.getWriter();
         Experience d;
-        if(action.equals("ajouterExperience")){
-            String logoExperience = Check.checkInput(request.getParameter("logoExperience"));
-            d = new Experience();
-            d.setNomExperience(nomExperience);
+        String imagepath = this.getServletContext().getRealPath("/") + "/lib/dist/img/partenaire/";
+        ArrayList<String> imagename = new ArrayList<String>();
+        imagename.add("logoExperience");
+        ArrayList<String> dataname = new ArrayList<String>();
+        dataname.add("nomExperience");
+        dataname.add("idExperience");
+        dataname.add("action");
+        HashMap map = FileUploading.UploadFile(imagepath, dataname, imagename, request);
+        if(map.get("action").toString().equals("ajouterExperience")){
+            String logoExperience = Check.checkInput(map.get("logoExperience").toString());
+            d = new Experience("","");
+            d.setNomExperience(map.get("nomExperience").toString());
             d.setLogoExperience(logoExperience);
             try {
                 experienceDA.insertExperience(d);
-
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
         }
-        else if(action.equals("modifierExperience")){
+        else if(map.get("action").toString().equals("modifierExperience")){
            try {
-               int idExperience = Integer.parseInt(Check.checkInput(request.getParameter("idExperience")));
-               String logoExperience = request.getParameter("logoExperience");
+               int idExperience = Integer.parseInt(map.get("idExperience").toString());
+               String logoExperience;
                d = experienceDA.findExperience(idExperience);
-               if(logoExperience==null){
+               if(map.get("logoExperience").toString().equals("")){
                    logoExperience = d.getLogoExperience();
+               }else{
+                   logoExperience = map.get("logoExperience").toString();
                }
-                d.setNomExperience(nomExperience);
+                d.setNomExperience(map.get("nomExperience").toString());
                 d.setLogoExperience(logoExperience);
                 experienceDA.updateExperience(d);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
-        else if(action.equals("supprimerExperience")){
+        else if(map.get("action").toString().equals("supprimerExperience")){
 
             try {
                 int idExperience = Integer.parseInt(Check.checkInput(request.getParameter("idExperience")));
@@ -61,7 +74,7 @@ public class experienceController extends HttpServlet {
             }
 
         }
-        request.getRequestDispatcher("home.jsp").forward(request,response);
+        //request.getRequestDispatcher("home.jsp").forward(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

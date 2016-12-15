@@ -13,6 +13,14 @@ public class Experience {
    /** @pdOid 77bf5897-9a06-4560-bb4b-9f429bac3a67 */
    private String logoExperience;
    private int idExperience;
+   public Experience(){
+
+   }
+   public Experience(String nomExperience, String logoExperience) {
+      idExperience = 0;
+      this.nomExperience = nomExperience;
+      this.logoExperience = logoExperience;
+   }
 
    public String getNomExperience() {
       return nomExperience;
