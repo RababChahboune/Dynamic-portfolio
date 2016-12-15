@@ -7,6 +7,7 @@
   Time: 22:58
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:include page="includes/verificationAll.jsp"/>
 <%!
     ArrayList<Courrier> list;
 %>

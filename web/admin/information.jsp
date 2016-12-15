@@ -9,6 +9,7 @@
   Time: 21:51
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:include page="includes/verificationAll.jsp"/>
 <%!
     ArrayList<Domaine> d;
     Portfolio p;
@@ -21,6 +22,7 @@
         e.printStackTrace();
     }
 %>
+>>>>>>> 48ada0d59f7b0eb6d01bcb29f809ca5f09f656fd
 <html>
 <head>
     <meta charset="utf-8">
