@@ -29,8 +29,23 @@ public class Profile {
    public ArrayList<Cursus> cursus;
    /** @pdRoleInfo migr=no name=Competance assc=association13 coll=java.util.ArrayList impl=java.util.ArrayList mult=0..* type=Aggregation */
    public ArrayList<Competance> competance;
-   
-   
+
+   public Profile(int idProfile) {
+      this.idProfile = idProfile;
+      nomProfile = "";
+      prenomProfile = "";
+      emailProfile = "";
+      telephoneProfile = "";
+      imageProfile = "";
+      biographieProfile = "";
+      lien = new ArrayList<>();
+      competance = new ArrayList<>();
+      cursus = new ArrayList<>();
+   }
+   public Profile(){
+
+   }
+
    /** @pdGenerated default getter */
    public ArrayList<Lien> getLien() {
       if (lien == null)

@@ -21,7 +21,7 @@ import java.sql.SQLException;
 @WebServlet(name = "competanceController")
 public class competanceController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = Check.checkInput(request.getParameter("action"));
+        String action = Check.checkInput(request.getParameter("actionCompetance"));
         String nomCompetance = Check.checkInput(request.getParameter("nomCompetance"));
         int pourcentageCompetance = Integer.parseInt(Check.checkInput(request.getParameter("pourcentageCompetance")));
         int idProfile = Integer.parseInt(Check.checkInput(request.getParameter("idProfile")));
@@ -29,6 +29,7 @@ public class competanceController extends HttpServlet {
         try {
             Profile p = ProfileDA.findProfile(idProfile);
             if(action.equals("ajouterCompetance")){
+                System.out.println("Ajouter competance");
                 c = new Competance();
                 c.setNomCompetance(nomCompetance);
                 c.setPourcentageCompetance(pourcentageCompetance);
@@ -49,7 +50,6 @@ public class competanceController extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        request.getRequestDispatcher("home.jsp").forward(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

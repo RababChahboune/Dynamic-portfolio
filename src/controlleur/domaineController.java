@@ -68,9 +68,7 @@ public class domaineController extends HttpServlet {
         if(request.getParameter("action").equals("supprimerDomaine")){
             try {
                 int idDomaine = Integer.parseInt(Check.checkInput(request.getParameter("id")));
-                System.out.println("WSEL LHNA");
                 Domaine d = domaineDA.findDomaine(idDomaine);
-                if(d == null) System.out.println("NULL");
                 domaineDA.deleteDomaine(d);
                 response.sendRedirect("admin/home.jsp");
             } catch (SQLException e) {

@@ -21,7 +21,7 @@ import java.sql.SQLException;
 @WebServlet(name = "cursusController")
 public class cursusController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = Check.checkInput(request.getParameter("action"));
+        String action = Check.checkInput(request.getParameter("actionCursus"));
         String nomCursus = Check.checkInput(request.getParameter("nomCursus"));
         String anneeDebutCursus = Check.checkInput(request.getParameter("anneeDebutCursus"));
         String anneeFinCursus = Check.checkInput(request.getParameter("anneeFinCursus"));
@@ -58,7 +58,6 @@ public class cursusController extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        request.getRequestDispatcher("home.jsp").forward(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
