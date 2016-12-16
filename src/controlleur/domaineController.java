@@ -3,23 +3,18 @@ package controlleur;
 import com.geekonjava.fileupload.FileUploading;
 import dataAccess.domaineDA;
 import model.Domaine;
-import model.Portfolio;
 import utility.Check;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 
 /**
@@ -68,18 +63,19 @@ public class domaineController extends HttpServlet {
                 e.printStackTrace();
             }
         }
-        else if(map.get("action").toString().equals("supprimerDomaine")){
+    }
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if(request.getParameter("action").equals("supprimerDomaine")){
             try {
-                int idDomaine = Integer.parseInt(Check.checkInput(request.getParameter("idDomaine")));
-                d = domaineDA.findDomaine(idDomaine);
+                int idDomaine = Integer.parseInt(Check.checkInput(request.getParameter("id")));
+                System.out.println("WSEL LHNA");
+                Domaine d = domaineDA.findDomaine(idDomaine);
+                if(d == null) System.out.println("NULL");
                 domaineDA.deleteDomaine(d);
+                response.sendRedirect("admin/home.jsp");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 }

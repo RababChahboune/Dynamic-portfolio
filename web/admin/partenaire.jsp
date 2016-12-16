@@ -10,6 +10,7 @@
     Experience partenaire;
 %>
 <%
+    partenaire = new Experience("","");
     if(request.getParameter("action") != null){
         if(request.getParameter("action").equals("modifierExperience")){
             try {
@@ -17,13 +18,9 @@
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        }else if(request.getParameter("action").equals("ajouterExperience")){
-            partenaire = new Experience("","");
-        }else if(request.getParameter("action").equals("supprimerExperience")){
-            response.sendRedirect("par.jsp?action=supprimerExperience");
         }
     }else{
-        response.sendRedirect("partenaire.jsp?action=ajouterExperience");
+        request.getRequestDispatcher("partenaire.jsp?action=ajouterDomaine").forward(request,response);
     }
 %>
 <html>

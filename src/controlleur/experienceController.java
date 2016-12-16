@@ -2,6 +2,7 @@ package controlleur;
 
 import com.geekonjava.fileupload.FileUploading;
 import dataAccess.experienceDA;
+import model.Domaine;
 import model.Experience;
 import model.Experience;
 import utility.Check;
@@ -63,21 +64,18 @@ public class experienceController extends HttpServlet {
                 e.printStackTrace();
             }
         }
-        else if(map.get("action").toString().equals("supprimerExperience")){
-
-            try {
-                int idExperience = Integer.parseInt(Check.checkInput(request.getParameter("idExperience")));
-                d = experienceDA.findExperience(idExperience);
-                experienceDA.deleteExperience(d);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
-        }
-        //request.getRequestDispatcher("home.jsp").forward(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        if(request.getParameter("action").equals("supprimerExperience")){
+            try {
+                int idExperience = Integer.parseInt(Check.checkInput(request.getParameter("id")));
+                Experience d = experienceDA.findExperience(idExperience);
+                experienceDA.deleteExperience(d);
+                response.sendRedirect("admin/home.jsp");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

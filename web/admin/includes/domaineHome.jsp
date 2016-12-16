@@ -27,7 +27,7 @@
             <ul class="products-list product-list-in-box menu">
                 <% for(Domaine d: administrateur.getDomaine()){ %>
                 <li class="item">
-                    <a href="domaine.jsp?action=deleteDomaine&id=<%=d.getIdDomaine()%>"><span class="label label-danger pull-right"><span class="fa fa-times"></span></span></a>
+                    <a href="/DynamicPortfolio/domaineController?action=supprimerDomaine&id=<%=d.getIdDomaine()%>"><span class="label label-danger pull-right"><span class="fa fa-times"></span></span></a>
                     <a href="domaine.jsp?action=modifierDomaine&id=<%=d.getIdDomaine()%>"><span class="label label-info pull-right"><span class="fa fa-pencil"></span></span></a>
                     <div class="product-img">
                         <img src="../lib/dist/img/domaine/<% if(!d.getImageDomaine().equals("0")) out.print(d.getImageDomaine()); else out.print("default.png");%>" alt="domaine Image">

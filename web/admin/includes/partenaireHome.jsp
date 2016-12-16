@@ -25,7 +25,7 @@
             <ul class="users-list clearfix menu">
                 <% for(Experience experience : administrateur.getExperience()){ %>
                 <li>
-                    <a href="partenaire.jsp?action=supprimerExperience&id=<%=experience.getIdExperience()%>"><span class="label label-danger pull-right"><span class="fa fa-times"></span></span></a>
+                    <a href="/DynamicPortfolio/experienceController?action=supprimerExperience&id=<%=experience.getIdExperience()%>"><span class="label label-danger pull-right"><span class="fa fa-times"></span></span></a>
                     <a href="partenaire.jsp?action=modifierExperience&id=<%=experience.getIdExperience()%>"><span class="label label-info pull-right"><span class="fa fa-pencil"></span></span></a>
                     <img src="../lib/dist/img/partenaire/<% if(!experience.getLogoExperience().equals("0")) out.print(experience.getLogoExperience()); else out.print("default.png");%>" width=150 alt="partenaire Image">
                     <a class="users-list-name" href="#"><%=experience.getNomExperience()%></a>
@@ -34,7 +34,7 @@
             </ul>
         </div>
         <div class="box-footer text-center">
-            <a href="partenaire.jsp?action=ajouterPartenaire" class="btn btn-sm btn-default btn-flat pull-right">Ajoter un partenaire</a>
+            <a href="partenaire.jsp?action=ajouterExperience" class="btn btn-sm btn-default btn-flat pull-right">Ajoter un partenaire</a>
         </div>
     </div>
 </div>

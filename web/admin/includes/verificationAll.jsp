@@ -13,18 +13,20 @@
 %>
 <%
     foundCookie = false;
+    a = AdministrateurDA.getAdministrateur();
     if(cookies!=null){
-        for(Cookie c : cookies){
+        for(Cookie c : cookies){{
             if(c.getName().equals("username"))
                 if(c.getValue().equals(a.getUsername()))
                     foundCookie = true;
+            System.out.println("Cookie :" + c.getName()+ " " + c.getValue());
+        }
         }
     }
     if(!foundCookie){
         if(session.getAttribute("username") == null || session.getAttribute("username").equals("")){
             System.out.println("login redirect");
-            //response.sendRedirect("login.jsp");
-            request.getRequestDispatcher("login.jsp").forward(request,response);
+            response.sendRedirect("/admin/login.jsp");
         }else{
             System.out.println("session found");
         }
