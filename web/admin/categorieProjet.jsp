@@ -10,6 +10,7 @@
     Categorie_projet cp;
 %>
 <%
+    cp = new Categorie_projet("","","");
     if(request.getParameter("action") != null){
         if(request.getParameter("action").equals("modifierCategorieProjet")){
             try {
@@ -17,14 +18,9 @@
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        }else if(request.getParameter("action").equals("ajouterCategorieProjet")){
-            cp = new Categorie_projet("","","");
-        }
-        else if(request.getParameter("action").equals("supprimerCategorieProjet")){
-            System.out.printf("I am "+request.getParameter("id"));
         }
     }else{
-        response.sendRedirect("categorieProjet.jsp?action=ajouterCategorieProjet");
+        request.getRequestDispatcher("Domaine.jsp?action=ajouterDomaine").forward(request,response);
     }
 %>
 <html>
@@ -84,7 +80,11 @@
         <section class="content">
             <div class="box box-primary">
                 <div class="box-header with-border">
+                    <% if(request.getParameter("action").equals("ajouterCategorieProjet")){ %>
                     <h3 class="box-title">Ajoter une catégorie projet</h3>
+                    <%}else{%>
+                    <h3 class="box-title">Modifier une catégorie projet</h3>
+                    <%}%>
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
                                 class="fa fa-minus"></i>

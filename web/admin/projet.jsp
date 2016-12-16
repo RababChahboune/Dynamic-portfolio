@@ -1,9 +1,38 @@
-<%--
+<%@ page import="model.Projet" %>
+<%@ page import="dataAccess.ProjetDA" %>
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="model.Categorie_projet" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="dataAccess.Categorie_projetDA" %><%--
   Author: Reda BENCHRAA
   Date: 13/12/2016
   Time: 02:33
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%!
+    Projet p;
+
+    ArrayList<Categorie_projet> cps;
+%>
+<%
+    p = new Projet("","","","",false,null);
+    try {
+        cps = Categorie_projetDA.getCategorie_projetList();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    if(request.getParameter("action") != null){
+        if(request.getParameter("action").equals("modifierProjet")){
+            try {
+                p = ProjetDA.findProjet(Integer.parseInt(request.getParameter("id")));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }else{
+        request.getRequestDispatcher("projet.jsp?action=ajouterProjet").forward(request,response);
+    }
+%>
 <html>
 <head>
     <meta charset="utf-8">
@@ -45,6 +74,8 @@
     <script src="../lib/dist/js/app.min.js"></script>
     <script src="../lib/dist/js/pages/dashboard.js"></script>
     <script src="../lib/dist/js/demo.js"></script>
+    <script src="../lib/dist/js/jqeury.form.js"></script>
+    <script src="../lib/dist/js/admin/projet.js"></script>
 </head>
 <body class="hold-transition skin-purple sidebar-mini fixed">
 <jsp:include page="includes/headerAll.jsp"/>
@@ -59,7 +90,11 @@
         <section class="content">
             <div class="box box-primary">
                 <div class="box-header with-border">
+                    <% if(request.getParameter("action").equals("ajouterProjet")){ %>
                     <h3 class="box-title">Ajoter un projet</h3>
+                    <%}else{%>
+                    <h3 class="box-title">Modifier un projet</h3>
+                    <%}%>
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
                                 class="fa fa-minus"></i>
@@ -68,14 +103,16 @@
                 </div>
                 <div class="box-body">
                     <div class="col-md-12">
-                        <form>
+                        <form method="POST" action="../projectController" enctype="multipart/form-data">
+                            <input type="text" name="idProjet" value="<%=p.getIdProjet()%>" hidden>
+                            <input type="text" name="action" value="<%=request.getParameter("action")%>" hidden >
                             <div class="form-group">
                                 <label for="nom">Nom</label>
-                                <input type="text" class="form-control" id="nom" placeholder="">
+                                <input type="text" class="form-control" id="nom" placeholder="" name ="nomProjet" value="<%=p.getNomProjet()%>">
                             </div>
                             <div class="form-group">
                                 <label for="intro">Introduction sur le projet</label>
-                                <input type="text" class="form-control" id="intro" placeholder="">
+                                <input type="text" class="form-control" id="intro" placeholder="" name="projetProjet" value="<%=p.getProjetProjet()%>">
                             </div>
                             <div class="box">
                                 <div class="box-header">
@@ -83,31 +120,38 @@
                                 </div>
                                 <div class="box-body pad">
                                     <textarea class="textarea" placeholder="Place some text here"
-                                              style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                                              style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" name="descriptionProjet" ><%=p.getDescriptionProjet()%></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="exampleInputFile">Image</label>
-                                <input type="file" id="exampleInputFile">
+                                <input type="file" id="exampleInputFile" name="imageProjet">
                             </div>
                             <label>
 
-                                <input type="checkbox" class="icheckbox_minimal-pink">     Etoilé
+                                <input type="checkbox" class="icheckbox_minimal-pink" name="etoileProjet" <%if(p.isEtoileProjet()){out.println("checked");}%>>     Etoilé
                             </label>
                             <div class="form-group">
                                 <label>Catégorie</label>
-                                <select class="form-control select2" style="width: 100%;">
-                                    <option selected="selected">3D</option>
-                                    <option>UX</option>
-                                    <option>WEB</option>
+                                <select class="form-control select2" style="width: 100%;" name="idProjetCategorie">
+                                    <%for (Categorie_projet cp : cps){%>
+                                        <%if(cp.getIdProjetCategorie()==p.categorie_projet.getIdProjetCategorie()){%>
+                                    <option value="<%=cp.getIdProjetCategorie()%>" selected><%=cp.getNomProjetCategorie()%></option>
+                                        <%}else{%>
+                                        <option value="<%=cp.getIdProjetCategorie()%>"><%=cp.getNomProjetCategorie()%></option>
+                                    <%}}%>
                                 </select>
+                            </div>
+                            <div class="form-group">
+                                <% if(request.getParameter("action").equals("ajouterProjet")){ %>
+                                <button type="submit" class="btn btn-sm btn-info btn-flat pull-right">Ajouter</button>
+                                <%}else{%>
+                                <button type="submit" class="btn btn-sm btn-info btn-flat pull-right">Modifier</button>
+                                <%}%>
                             </div>
                         </form>
                     </div>
-                </div>
-                <div class="box-footer text-center">
-                    <a href="projet.jsp" class="btn btn-sm btn-default btn-flat pull-right">Ajoter le projet</a>
                 </div>
             </div>
         </section>

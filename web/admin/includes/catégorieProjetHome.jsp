@@ -42,7 +42,7 @@
                         <td><%=p.getDescriptionProjetCategorie()%></td>
                         <td>
                             <a href="categorieProjet.jsp?action=modifierCategorieProjet&id=<%=p.getIdProjetCategorie()%>"><span class="label label-info"> <span class="fa fa-pencil"></span></span></a>
-                            <a href="categorieProjet.jsp?action=supprimerCategorieProjet&id=<%=p.getIdProjetCategorie()%>"> <span class="label label-danger"><span class="fa fa-times"></span></span></a>
+                            <a href="/DynamicPortfolio/catProjectController?action=supprimerCategorieProjet&id=<%=p.getIdProjetCategorie()%>"> <span class="label label-danger"><span class="fa fa-times"></span></span></a>
                         </td>
                     </tr>
                     <%}%>

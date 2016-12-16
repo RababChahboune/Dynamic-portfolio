@@ -65,19 +65,20 @@ public class catProjectController extends HttpServlet {
                 e.printStackTrace();
             }
         }
-        else if(map.get("action").toString().equals("supprimerCategorieProjet")){
-            try {
-                int idProjetCategorie = Integer.parseInt(Check.checkInput(map.get("idProjetCategorie").toString()));
-                cp = Categorie_projetDA.findCategorie_projet("idProjetCategorie",idProjetCategorie);
-                Categorie_projetDA.deleteCategorie_projet(cp);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
+
         //request.getRequestDispatcher("home.jsp").forward(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+            if(request.getParameter("action").equals("supprimerCategorieProjet")){
+            try {
+                int idProjetCategorie = Integer.parseInt(Check.checkInput(request.getParameter("id")));
+                Categorie_projet cp = Categorie_projetDA.findCategorie_projet("idProjetCategorie",idProjetCategorie);
+                Categorie_projetDA.deleteCategorie_projet(cp);
+                response.sendRedirect("admin/home.jsp");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

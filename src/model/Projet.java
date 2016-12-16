@@ -23,6 +23,19 @@ public class Projet {
    /** @pdRoleInfo migr=no name=Categorie_projet assc=association8 mult=1..1 type=Aggregation */
    public Categorie_projet categorie_projet;
 
+   public Projet(){
+
+   }
+   public Projet(String nomProjet,String discriptionProjet,String projetProjet,String imageProjet,boolean etoileProjet,Categorie_projet categorie_projet){
+      idProjet = 0;
+      this.nomProjet = nomProjet;
+      this.descriptionProjet = discriptionProjet;
+      this.projetProjet = projetProjet;
+      this.imageProjet = imageProjet;
+      this.etoileProjet = etoileProjet;
+      this.categorie_projet = categorie_projet;
+   }
+
    @Override
    public String toString() {
       return "Projet{" +

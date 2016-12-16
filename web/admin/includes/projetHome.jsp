@@ -46,8 +46,8 @@
                         <td><a href=""><span class="label label-<% if(p.isEtoileProjet()) out.print("warning");else out.print("default");%>"><span class="fa fa-star"></span></span></a></td>
                         <td><%=p.getCategorie_projet().getNomProjetCategorie()%></td>
                         <td>
-                            <a href="projet.jsp?action=edit&id<%=p.getIdProjet()%>"><span class="label label-info"><span class="fa fa-pencil"></span></span></a>
-                            <a href="projet.jsp?action=delete&id<%=p.getIdProjet()%>"> <span class="label label-danger"><span class="fa fa-times"></span></span></a>
+                            <a href="projet.jsp?action=modifierProjet&id=<%=p.getIdProjet()%>"><span class="label label-info"><span class="fa fa-pencil"></span></span></a>
+                            <a href="/DynamicPortfolio/projectController?action=supprimerProjet&id=<%=p.getIdProjet()%>"> <span class="label label-danger"><span class="fa fa-times"></span></span></a>
                         </td>
                     </tr>
                     <%}%>
@@ -56,7 +56,7 @@
             </div>
         </div>
         <div class="box-footer clearfix">
-            <a href="projet.jsp" class="btn btn-sm btn-default btn-flat pull-right">Ajoter un projet</a>
+            <a href="projet.jsp?action=ajouterProjet" class="btn btn-sm btn-default btn-flat pull-right">Ajoter un projet</a>
         </div>
     </div>
 </div>
