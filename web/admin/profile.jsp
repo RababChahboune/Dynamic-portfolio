@@ -1,9 +1,26 @@
+<%@ page import="model.Profile" %>
+<%@ page import="dataAccess.ProfileDA" %>
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="model.Cursus" %>
+<%@ page import="model.Competance" %>
+<%@ page import="model.Lien" %>
 <%--
   Author: Reda BENCHRAA
   Date: 13/12/2016
   Time: 20:16
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%!
+    Profile profile;
+%>
+<%
+    try {
+        profile = ProfileDA.findProfile(Integer.parseInt(request.getParameter("id")));
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    if(profile == null) profile = new Profile(0);
+%>
 <html>
 <head>
     <meta charset="utf-8">
@@ -45,6 +62,8 @@
     <script src="../lib/dist/js/app.min.js"></script>
     <script src="../lib/dist/js/pages/dashboard.js"></script>
     <script src="../lib/dist/js/demo.js"></script>
+    <script src="../lib/dist/js/jqeury.form.js"></script>
+    <script src="../lib/dist/js/admin/profile.js"></script>
 </head>
 <body class="hold-transition skin-purple sidebar-mini fixed">
 <jsp:include page="includes/headerAll.jsp"/>
@@ -62,9 +81,9 @@
                     <div class="box box-info">
                         <div class="box-body box-profile">
                             <img class="profile-user-img img-responsive img-circle"
-                                 src="../lib/dist/img/user4-128x128.jpg" alt="User profile picture">
-                            <h3 class="profile-username text-center">Nom Prenom</h3>
-                            <h3 class="profile-username text-center">email</h3>
+                                 src="../lib/dist/img/profile/<%=profile.getImageProfile()%>" alt="User profile picture">
+                            <h3 class="profile-username text-center"><%=profile.getNomProfile()%> <%=profile.getPrenomProfile()%></h3>
+                            <h3 class="profile-username text-center"><%=profile.getEmailProfile()%></h3>
                         </div>
                     </div>
                     <div class="box box-info">
@@ -73,31 +92,29 @@
                         </div>
                         <div class="box-body">
                             <strong><i class="fa fa-book margin-r-5"></i> Cursus</strong>
-                            <p class="text-muted">
-                                Cursus 1
-                            </p>
-                            <p class="text-muted">
-                                Cursus 2
-                            </p>
+                            <% for(Cursus c : profile.getCursus()){%>
+                                <p class="text-muted">
+                                    <%=c.getNomCursus()%>
+                                </p>
+                            <%}%>
                             <hr>
                             <strong><i class="fa fa-pencil margin-r-5"></i> Compétance</strong>
                             <p>
-                                <span class="label label-danger">Compétance 1</span>
-                                <span class="label label-warning">Compétance 2</span>
+                                <%for(Competance c:profile.getCompetance()){%>
+                                <span class="label label-danger"><%=c.getNomCompetance()%></span>
+                                <%}%>
                             </p>
                             <hr>
                             <strong><i class="fa fa-map-marker margin-r-5"></i> Lien</strong>
                             <p>
-                                <a href="link"><span class="label label-danger"><img width="25px"
-                                                                                     src="../lib/dist/img/logo0.png"/>facebook</span></a>
-                                <a href="link"><span class="label label-danger"><img width="25px"
-                                                                                     src="../lib/dist/img/logo0.png"/>facebook</span></a>
-                                <a href="link"><span class="label label-danger"><img width="25px"
-                                                                                     src="../lib/dist/img/logo0.png"/>facebook</span></a>
+                                <%for(Lien l : profile.getLien()){%>
+                                <a href="<%=l.getUrlLien()%>"><span class="label label-danger">
+                                    <img width="25px" src="../lib/dist/img/lien/<%=l.getImageLien()%>"/><%=l.getNomLien()%></span></a>
+                                <%}%>
                             </p>
                             <hr>
                             <strong><i class="fa fa-file-text-o margin-r-5"></i> Biographie</strong>
-                            <p>Biography content</p>
+                            <p><%=profile.getBiographieProfile()%></p>
                         </div>
                     </div>
                 </div>
@@ -111,59 +128,53 @@
                         </ul>
                         <div class="tab-content">
                             <div class="active tab-pane" id="information">
-                                <form class="form-horizontal">
-                                    <div class="form-group">
-                                        <label for="inputNominformation" class="col-sm-2 control-label">Nom</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputNominformation"
-                                                   placeholder="Nom">
+                                <div class="row">
+                                    <form class="formInformation" method="POST" action="../profileController"  enctype="multipart/form-data">
+                                        <input hidden name="idProfile" value="<%=request.getParameter("id")%>">
+                                        <input hidden name="action" value="modifierProfile">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Nom</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" name="nomProfile" value="<%=profile.getNomProfile()%>" placeholder="Nom">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputPrenominformation"
-                                               class="col-sm-2 control-label">Prenom</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputPrenominformation"
-                                                   placeholder="Prenom">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Prenom</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" name="prenomProfile" value="<%=profile.getPrenomProfile()%>" placeholder="Nom">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputemailinformation" class="col-sm-2 control-label">Email</label>
-                                        <div class="col-sm-10">
-                                            <input type="email" class="form-control" id="inputemailinformation"
-                                                   placeholder="Email">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Email</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" name="emailProfile" value="<%=profile.getEmailProfile()%>" placeholder="Nom">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputTelethoneinformation"
-                                               class="col-sm-2 control-label">Telephone</label>
-
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputTelethoneinformation"
-                                                   placeholder="Numéro du telephone">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Telephone</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" name="telephoneProfile" value="<%=profile.getTelephoneProfile()%>" placeholder="Nom">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputBiographieinformation" class="col-sm-2 control-label">Biographie</label>
-                                        <div class="col-sm-10">
-                                    <textarea  id="inputBiographieinformation" class="form-control" rows="3">
-                                    </textarea>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Biographie</label>
+                                            <div class="col-sm-10">
+                                                <textarea  name="biographieProfile" class="form-control" rows="3"><%=profile.getBiographieProfile()%></textarea>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputImageinformation" class="col-sm-2 control-label">Image de
-                                            profile</label>
-                                        <div class="col-sm-10">
-                                            <input type="file" id="inputImageinformation">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Image de profile</label>
+                                            <div class="col-sm-10">
+                                                <input type="file" name="imageProfile">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-offset-2 col-sm-10">
-                                            <button type="submit" class="btn btn-info">Enregistrer les modifications
-                                            </button>
+                                        <div class="form-group">
+                                            <div class="col-sm-offset-2 col-sm-10">
+                                                <button name="submitInformation" type="submit" class="btn btn-info">Enregistrer les modifications</button>
+                                            </div>
                                         </div>
-                                    </div>
-                                </form>
+                                    </form>
+                                </div>
                             </div>
                             <div class="tab-pane" id="cursus">
                                 <div class="row">
@@ -174,6 +185,7 @@
                                                     <table class="table no-margin">
                                                         <thead>
                                                         <tr>
+                                                            <th hidden>idCursus</th>
                                                             <th>Nom</th>
                                                             <th>Début</th>
                                                             <th>Fin</th>
@@ -183,19 +195,20 @@
                                                         </tr>
                                                         </thead>
                                                         <tbody>
+                                                        <%for(Cursus c : profile.getCursus()){%>
                                                         <tr>
-                                                            <td>Software engenering</td>
-                                                            <td>2015</td>
-                                                            <td>Présent</td>
-                                                            <td>Ensias</td>
-                                                            <td>JAVA,C++</td>
+                                                            <td hidden><%=c.getId_cursus()%></td>
+                                                            <td><%=c.getNomCursus()%></td>
+                                                            <td><%=c.getAnnee_debutCursus()%></td>
+                                                            <td><%=c.getAnnee_finCursus()%></td>
+                                                            <td><%=c.getEtablissementCursus()%></td>
+                                                            <td><%=c.getRemarqueCursus()%></td>
                                                             <td>
-                                                                <a href=""><span class="label label-info"><span
-                                                                        class="fa fa-pencil"></span></span></a>
-                                                                <a href=""> <span class="label label-danger"><span
-                                                                        class="fa fa-times"></span></span></a>
+                                                                <a href="#" class="modifierCursus" ><span class="label label-info"><span class="fa fa-pencil"></span></span></a>
+                                                                <a href="#" class="supprimerCursus" > <span class="label label-danger"><span class="fa fa-times"></span></span></a>
                                                             </td>
                                                         </tr>
+                                                        <%}%>
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -204,58 +217,42 @@
                                     </div>
                                     <div class="col-xs-4">
                                         <div class="box box-info">
-
                                             <div class="box-body">
-                                                <form class="form-horizontal">
+                                                <form class="formCursus" class="form-horizontal" action="../cursusController" method="POST">
+                                                    <input hidden name="actionCursus" value="ajouterCursus">
+                                                    <input hidden name="idProfile" value=<%=request.getParameter("id")%>>
+                                                    <input hidden name="idCursus" value="0">
                                                     <div class="form-group">
-                                                        <label for="inputNomCursus"
-                                                               class="col-sm-2 control-label"></label>
                                                         <div class="col-sm-10">
-                                                            <input type="email" class="form-control" id="inputNomCursus"
-                                                                   placeholder="Nom">
+                                                            <input type="text" class="form-control" name="nomCursus" placeholder="Nom">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="inputDateDcursus"
-                                                               class="col-sm-2 control-label"></label>
                                                         <div class="col-sm-10">
-                                                            <input type="email" class="form-control"
-                                                                   id="inputDateDcursus" placeholder="JJ/MM/AAAA">
+                                                            <input type="text" class="form-control" name="anneeDebutCursus" placeholder="Année de début">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="inputDateFcursus"
-                                                               class="col-sm-2 control-label"></label>
                                                         <div class="col-sm-10">
-                                                            <input type="email" class="form-control"
-                                                                   id="inputDateFcursus" placeholder="JJ/MM/AAAA">
+                                                            <input type="text" class="form-control" name="anneeFinCursus" placeholder="Année de fin">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="inputEtablissementcursus"
-                                                               class="col-sm-2 control-label"></label>
                                                         <div class="col-sm-10">
-                                                            <input type="text" class="form-control"
-                                                                   id="inputEtablissementcursus"
-                                                                   placeholder="Etablissemet">
+                                                            <input type="text" class="form-control" name="etablissementCursus" placeholder="Etablissemet">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="inputRemarquecursus"
-                                                               class="col-sm-2 control-label"></label>
                                                         <div class="col-sm-10">
-                                                            <input type="text" class="form-control"
-                                                                   id="inputRemarquecursus" placeholder=Remarque>
+                                                            <input type="text" class="form-control" name="remarqueCursus" placeholder=Remarque>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-offset-2 col-sm-10">
-                                                            <button type="submit" class="btn btn-info">Enregistrer
-                                                            </button>
+                                                            <button name="submitCursus" type="submit" class="btn btn-info">Enregistrer</button>
                                                         </div>
                                                     </div>
                                                 </form>
-
                                             </div>
                                         </div>
                                     </div>
@@ -270,31 +267,30 @@
                                                     <table class="table no-margin">
                                                         <thead>
                                                         <tr>
+                                                            <th hidden>idContétance</th>
                                                             <th>Nom</th>
                                                             <th>Pourcentage</th>
                                                             <th>Options</th>
                                                         </tr>
                                                         </thead>
                                                         <tbody>
+                                                        <%for(Competance c :profile.getCompetance()){%>
                                                         <tr>
-                                                            <td>Css3</td>
+                                                            <td hidden><%=c.getIdCompetance()%></td>
+                                                            <td><%=c.getNomCompetance()%></td>
                                                             <td>
                                                                 <div class="progress">
-                                                                    <div class="progress-bar progress-bar-info progress-bar-striped"
-                                                                         role="progressbar" aria-valuenow="40"
-                                                                         aria-valuemin="0" aria-valuemax="100"
-                                                                         style="width: 40%">
-                                                                        <span class="sr-only">40% Complete (warning)</span>
+                                                                    <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="<%=c.getPourcentageCompetance()%>" aria-valuemin="0" aria-valuemax="100" style="width: <%=c.getPourcentageCompetance()%>%">
+                                                                        <span class="sr-only"><%=c.getPourcentageCompetance()%>% Complete</span>
                                                                     </div>
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                                <a href=""><span class="label label-info"><span
-                                                                        class="fa fa-pencil"></span></span></a>
-                                                                <a href=""> <span class="label label-danger"><span
-                                                                        class="fa fa-times"></span></span></a>
+                                                                <a class="modifierCompetance" href="#"><span class="label label-info"><span class="fa fa-pencil"></span></span></a>
+                                                                <a class="supprimerCompetance" href="#"> <span class="label label-danger"><span class="fa fa-times"></span></span></a>
                                                             </td>
                                                         </tr>
+                                                        <%}%>
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -302,24 +298,26 @@
                                         </div>
                                     </div>
                                     <div class="col-xs-6">
-                                        <form class="form-horizontal">
+                                        <form class="formCursus" class="form-horizontal" action="../competanceController" method="POST">
+                                            <div style="display: none;" class="form-group">
+                                                <input hidden name="actionCompetance" value="ajouterCompetance">
+                                                <input hidden name="idProfile" value=<%=request.getParameter("id")%>>
+                                                <input hidden name="idCompetance" value="0">
+                                            </div>
                                             <div class="form-group">
-                                                <label for="inputNomcompétance"
-                                                       class="col-sm-2 control-label">Nom</label>
+                                                <label class="col-sm-2 control-label">Nom</label>
                                                 <div class="col-sm-10">
-                                                    <input type="email" class="form-control" id="inputNomcompétance"
-                                                           placeholder="Nom">
+                                                    <input type="text" class="form-control" name="nomCompetance" placeholder="Nom">
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="inputPourcentagecompétance" class="col-sm-2 control-label">Pourcentage</label>
+                                                <label class="col-sm-2 control-label">Pourcentage</label>
                                                 <div class="col-sm-10">
-                                                    <input type="range" min="0" max="100" class="form-control"
-                                                           id="inputPourcentagecompétance" placeholder="">
+                                                    <input type="range" min="0" max="100" class="form-control" name="pourcentageCompetance" placeholder="">
                                                 </div>
                                             </div>
                                             <div class="col-sm-offset-2 col-sm-10">
-                                                <button type="submit" class="btn btn-info">Enregistrer</button>
+                                                <button name="submitCompetance" type="submit" class="btn btn-info">Enregistrer</button>
                                             </div>
                                         </form>
                                     </div>
@@ -334,23 +332,28 @@
                                                     <table class="table no-margin">
                                                         <thead>
                                                         <tr>
+                                                            <th hidden>id</th>
                                                             <th>Nom</th>
                                                             <th>Photo</th>
                                                         </tr>
                                                         </thead>
                                                         <tbody>
+                                                        <%for(Lien l : profile.getLien()){%>
                                                         <tr>
+                                                            <td hidden><%=l.getIdLien()%></td>
                                                             <td>
-                                                                <a target="_blank" href="https  ://github.com/redb3n">Github</a>
+                                                                <span hidden><%=l.getUrlLien()%></span>
+                                                                <a target="_blank" href="<%=l.getUrlLien()%>" ><%=l.getNomLien()%></a>
                                                             </td>
                                                             <td>
-                                                                <img src="../lib/dist/img/logo.png" width="25px">
+                                                                <img src="../lib/dist/img/lien/<%=l.getImageLien()%>"  width="25px">
                                                             </td>
                                                             <td>
-                                                                <a href=""><span class="label label-info"><span class="fa fa-pencil"></span></span></a>
-                                                                <a href=""> <span class="label label-danger"><span class="fa fa-times"></span></span></a>
+                                                                <a class="modifierLien" href=""><span class="label label-info"><span class="fa fa-pencil"></span></span></a>
+                                                                <a class="supprimerLien" href=""> <span class="label label-danger"><span class="fa fa-times"></span></span></a>
                                                             </td>
                                                         </tr>
+                                                        <%}%>
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -358,27 +361,32 @@
                                         </div>
                                     </div>
                                     <div class="col-xs-6">
-                                        <form class="form-horizontal">
+                                        <form class="formlien" class="form-horizontal" action="../lienController" method="POST" enctype="multipart/form-data">
+                                            <div style="display: none;" class="form-group">
+                                                <input hidden name="actionLien" value="ajouterLien">
+                                                <input hidden name="idProfile" value="<%=request.getParameter("id")%>">
+                                                <input hidden name="idLien" value="0">
+                                            </div>
                                             <div class="form-group">
-                                                <label for="inputNomlien" class="col-sm-2 control-label">Nom</label>
+                                                <label class="col-sm-2 control-label">Nom</label>
                                                 <div class="col-sm-10">
-                                                    <input type="email" class="form-control" id="inputNomlien" placeholder="Nom">
+                                                    <input type="text" class="form-control" name="nomLien" placeholder="Nom">
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="inputUrllien" class="col-sm-2 control-label">Url</label>
+                                                <label class="col-sm-2 control-label">Url</label>
                                                 <div class="col-sm-10">
-                                                    <input type="email" class="form-control" id="inputUrllien" placeholder="Nom">
+                                                    <input type="text" class="form-control" name="urlLien" placeholder="Url">
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="inputImagelien" class="col-sm-2 control-label">Image</label>
+                                                <label class="col-sm-2 control-label">Image</label>
                                                 <div class="col-sm-10">
-                                                    <input type="file" class="form-control" id="inputImagelien" placeholder="">
+                                                    <input type="file" class="form-control" name="imageLien" placeholder="">
                                                 </div>
                                             </div>
                                             <div class="col-sm-offset-2 col-sm-10">
-                                                <button type="submit" class="btn btn-info">Enregistrer</button>
+                                                <button id="submitLink" type="submit" class="btn btn-info">Enregistrer</button>
                                             </div>
                                         </form>
                                     </div>
@@ -386,11 +394,8 @@
                             </div>
                         </div>
                     </div>
-                    <!-- /.tab-content -->
                 </div>
-                <!-- /.nav-tabs-custom -->
             </div>
-            <!-- /.col -->
         </section>
 
     </div>

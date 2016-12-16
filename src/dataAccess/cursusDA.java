@@ -45,7 +45,7 @@ public class cursusDA {
     public static int deleteCursus(Cursus p) throws SQLException {
         dataAccess.setDbname("portfolio");
         Connection con = dataAccess.getInstance().getConnection();
-        String sql = "DELETE FROM " + tableName + " WHERE id_cursus = ?";
+            String sql = "DELETE FROM " + tableName + " WHERE id_cursus = ?";
         return dataAccess.executeSQL(con, sql, p.getId_cursus());
     }
     public static Cursus findCursus(int id) throws dataAccessException,SQLException {
