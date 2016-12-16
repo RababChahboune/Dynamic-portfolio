@@ -280,14 +280,14 @@
                                                             <td><%=c.getNomCompetance()%></td>
                                                             <td>
                                                                 <div class="progress">
-                                                                    <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="<%=c.getPourcentageCompetance()%>" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                                                    <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="<%=c.getPourcentageCompetance()%>" aria-valuemin="0" aria-valuemax="100" style="width: <%=c.getPourcentageCompetance()%>%">
                                                                         <span class="sr-only"><%=c.getPourcentageCompetance()%>% Complete</span>
                                                                     </div>
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                                <a class="modifierCompetance" href=""><span class="label label-info"><span class="fa fa-pencil"></span></span></a>
-                                                                <a class="supprimerCompetance" href=""> <span class="label label-danger"><span class="fa fa-times"></span></span></a>
+                                                                <a class="modifierCompetance" href="#"><span class="label label-info"><span class="fa fa-pencil"></span></span></a>
+                                                                <a class="supprimerCompetance" href="#"> <span class="label label-danger"><span class="fa fa-times"></span></span></a>
                                                             </td>
                                                         </tr>
                                                         <%}%>
@@ -313,7 +313,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">Pourcentage</label>
                                                 <div class="col-sm-10">
-                                                    <input type="range" min="0" max="100" class="form-control" name="pourcentageCompétance" placeholder="">
+                                                    <input type="range" min="0" max="100" class="form-control" name="pourcentageCompetance" placeholder="">
                                                 </div>
                                             </div>
                                             <div class="col-sm-offset-2 col-sm-10">
@@ -332,6 +332,7 @@
                                                     <table class="table no-margin">
                                                         <thead>
                                                         <tr>
+                                                            <th hidden>id</th>
                                                             <th>Nom</th>
                                                             <th>Photo</th>
                                                         </tr>
@@ -339,15 +340,17 @@
                                                         <tbody>
                                                         <%for(Lien l : profile.getLien()){%>
                                                         <tr>
+                                                            <td hidden><%=l.getIdLien()%></td>
                                                             <td>
-                                                                <a target="_blank" href="<%=l.getUrlLien()%>"><%=l.getNomLien()%></a>
+                                                                <span hidden><%=l.getUrlLien()%></span>
+                                                                <a target="_blank" href="<%=l.getUrlLien()%>" ><%=l.getNomLien()%></a>
                                                             </td>
                                                             <td>
-                                                                <img src="../lib/dist/img/lien/<%=l.getImageLien()%>" width="25px">
+                                                                <img src="../lib/dist/img/lien/<%=l.getImageLien()%>"  width="25px">
                                                             </td>
                                                             <td>
-                                                                <a id="modifierLien" href=""><span class="label label-info"><span class="fa fa-pencil"></span></span></a>
-                                                                <a id="supprimerLien" href=""> <span class="label label-danger"><span class="fa fa-times"></span></span></a>
+                                                                <a class="modifierLien" href=""><span class="label label-info"><span class="fa fa-pencil"></span></span></a>
+                                                                <a class="supprimerLien" href=""> <span class="label label-danger"><span class="fa fa-times"></span></span></a>
                                                             </td>
                                                         </tr>
                                                         <%}%>
@@ -358,7 +361,12 @@
                                         </div>
                                     </div>
                                     <div class="col-xs-6">
-                                        <form class="form-horizontal">
+                                        <form class="formlien" class="form-horizontal" action="../lienController" method="POST" enctype="multipart/form-data">
+                                            <div style="display: none;" class="form-group">
+                                                <input hidden name="actionLien" value="ajouterLien">
+                                                <input hidden name="idProfile" value="<%=request.getParameter("id")%>">
+                                                <input hidden name="idLien" value="0">
+                                            </div>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">Nom</label>
                                                 <div class="col-sm-10">
@@ -368,13 +376,13 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">Url</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="urlLien" placeholder="Nom">
+                                                    <input type="text" class="form-control" name="urlLien" placeholder="Url">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label">Image</label>
                                                 <div class="col-sm-10">
-                                                    <input type="file" class="form-control" id="imageLien" placeholder="">
+                                                    <input type="file" class="form-control" name="imageLien" placeholder="">
                                                 </div>
                                             </div>
                                             <div class="col-sm-offset-2 col-sm-10">

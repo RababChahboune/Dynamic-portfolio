@@ -52,6 +52,7 @@ public class cursusController extends HttpServlet {
             }
             else if(action.equals("supprimerCursus")){
                 int idCursus = Integer.parseInt(Check.checkInput(request.getParameter("idCursus")));
+                System.out.println(idCursus);
                 c = cursusDA.findCursus(idCursus);
                 cursusDA.deleteCursus(c);
             }

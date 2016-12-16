@@ -85,11 +85,11 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>LienServlet</servlet-name>
+        <servlet-name>lienServlet</servlet-name>
         <servlet-class>controlleur.lienController</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>LienServlet</servlet-name>
+        <servlet-name>lienServlet</servlet-name>
         <url-pattern>lienController</url-pattern>
     </servlet-mapping>
 

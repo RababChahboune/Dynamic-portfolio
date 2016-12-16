@@ -26,7 +26,6 @@ public class profileController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ServletContext context = this.getServletContext();
         PrintWriter out = response.getWriter();
-        Domaine d;
         String imagepath = this.getServletContext().getRealPath("/") + "/lib/dist/img/profile/";
         ArrayList<String> imagename = new ArrayList<String>();
         imagename.add("imageProfile");

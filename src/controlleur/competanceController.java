@@ -23,6 +23,7 @@ public class competanceController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = Check.checkInput(request.getParameter("actionCompetance"));
         String nomCompetance = Check.checkInput(request.getParameter("nomCompetance"));
+        System.out.println("P% : " + request.getParameter("pourcentageCompetance"));
         int pourcentageCompetance = Integer.parseInt(Check.checkInput(request.getParameter("pourcentageCompetance")));
         int idProfile = Integer.parseInt(Check.checkInput(request.getParameter("idProfile")));
         Competance c;
