@@ -43,6 +43,7 @@ public class projectController extends HttpServlet {
         try {
             Categorie_projet categorie_projet = Categorie_projetDA.findCategorie_projet("idProjetCategorie",map.get("idProjetCategorie").toString());
             if(map.get("action").equals("ajouterProjet")){
+
                 String imageProjet = Check.checkInput(map.get("imageProjet").toString());
                 p = new Projet();
                 p.setNomProjet(map.get("nomProjet").toString());
@@ -51,7 +52,7 @@ public class projectController extends HttpServlet {
                 p.setImageProjet(imageProjet);
                 p.setCategorie_projet(categorie_projet);
                 p.setEtoileProjet(Boolean.parseBoolean(map.get("etoileProjet").toString()));
-                System.out.println("_____"+map.get("etoileProjet").toString());
+                System.out.println(map.get("etoileProjet").toString());
                 ProjetDA.insertProjet(p);
             }
             else if(map.get("action").equals("modifierProjet")){

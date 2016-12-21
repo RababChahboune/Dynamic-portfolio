@@ -20,7 +20,7 @@
             }
         }
     }else{
-        request.getRequestDispatcher("Domaine.jsp?action=ajouterDomaine").forward(request,response);
+        request.getRequestDispatcher("categorieProjet.jsp?action=ajouterCategorieProjet").forward(request,response);
     }
 %>
 <html>

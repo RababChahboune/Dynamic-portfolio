@@ -23,6 +23,7 @@
     }
     if(request.getParameter("action") != null){
         if(request.getParameter("action").equals("modifierProjet")){
+
             try {
                 p = ProjetDA.findProjet(Integer.parseInt(request.getParameter("id")));
             } catch (SQLException e) {
@@ -135,12 +136,18 @@
                             <div class="form-group">
                                 <label>Catégorie</label>
                                 <select class="form-control select2" style="width: 100%;" name="idProjetCategorie">
-                                    <%for (Categorie_projet cp : cps){%>
-                                        <%if(cp.getIdProjetCategorie()==p.categorie_projet.getIdProjetCategorie()){%>
-                                    <option value="<%=cp.getIdProjetCategorie()%>" selected><%=cp.getNomProjetCategorie()%></option>
-                                        <%}else{%>
-                                        <option value="<%=cp.getIdProjetCategorie()%>"><%=cp.getNomProjetCategorie()%></option>
-                                    <%}}%>
+                                    <%for (Categorie_projet cp : cps){
+                                        if(p.categorie_projet!=null) {
+                                            if(cp.getIdProjetCategorie()==p.categorie_projet.getIdProjetCategorie()){%>
+                                                <option value="<%=cp.getIdProjetCategorie()%>" selected><%=cp.getNomProjetCategorie()%></option>
+                                            <%}else{%>
+                                                <option value="<%=cp.getIdProjetCategorie()%>"><%=cp.getNomProjetCategorie()%></option>
+                                    <%}
+                                        }
+                                        else{%>
+                                                <option value="<%=cp.getIdProjetCategorie()%>"><%=cp.getNomProjetCategorie()%></option>
+                                        <%}
+                                    }%>
                                 </select>
                             </div>
                             <div class="form-group">
