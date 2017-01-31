@@ -1,6 +1,7 @@
 package controlleur;
 
 import dataAccess.courrierDA;
+import dataAccess.portfolioDA;
 import model.Courrier;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,6 +38,7 @@ public class courrierController extends HttpServlet {
                 c.setMessageCourrier(messageCourrier);
                 c.setNomComplet(nomComplet);
                 courrierDA.insertCourrier(c);
+                response.sendRedirect(portfolioDA.getPortfolio().getTheme().getNomTheme());
             } catch (SQLException e) {
                 e.printStackTrace();
             }
