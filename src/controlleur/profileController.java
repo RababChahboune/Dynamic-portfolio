@@ -52,7 +52,7 @@ public class profileController extends HttpServlet {
                 p.setImageProfile(imageProfile);
                 p.setBiographieProfile(Check.checkInput(map.get("biographieProfile").toString()));
                 ProfileDA.insertProfile(p);
-                request.getRequestDispatcher("admin/home.jsp").forward(request,response);
+                response.sendRedirect("admin/home.jsp");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -85,6 +85,7 @@ public class profileController extends HttpServlet {
                 int idProfile = Integer.parseInt(request.getParameter("idProfile"));
                 Profile p = ProfileDA.findProfile(idProfile);
                 ProfileDA.deleteProfile(p);
+                response.sendRedirect("admin/home.jsp");
             } catch (SQLException e) {
                 e.printStackTrace();
             }

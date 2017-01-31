@@ -1,6 +1,7 @@
 package controlleur;
 
 import dataAccess.courrierDA;
+import dataAccess.portfolioDA;
 import model.Courrier;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,13 +38,15 @@ public class courrierController extends HttpServlet {
                 c.setMessageCourrier(messageCourrier);
                 c.setNomComplet(nomComplet);
                 courrierDA.insertCourrier(c);
+                response.sendRedirect(portfolioDA.getPortfolio().getTheme().getNomTheme()+"/");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
         else if(action.equals("supprimerCourrier")){
             try {
-                String[] idsCourrier = request.getParameterValues("idCourrier");
+                System.out.println(request.getParameter("idCourrier"));
+                String[] idsCourrier = request.getParameter("idCourrier").split(",");
                 for (String id : idsCourrier){
                     int idCourrier = Integer.parseInt(id);
                     c = courrierDA.findCourrier(idCourrier);
@@ -54,7 +57,6 @@ public class courrierController extends HttpServlet {
                 e.printStackTrace();
             }
         }
-        request.getRequestDispatcher("home.jsp").forward(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -64,6 +66,7 @@ public class courrierController extends HttpServlet {
                 JSONObject json = new JSONObject();
                 try {
                 Courrier c = courrierDA.findCourrier(Integer.parseInt(request.getParameter("idCourrier")));
+                    json.put("idCourrier",c.getIdCourrier());
                     json.put("emailCourrier",c.getEmailCourrier());
                     json.put("nomCompletCourrier",c.getNomComplet());
                     json.put("dateCourrier",c.getDateEnvoieCourrier());
