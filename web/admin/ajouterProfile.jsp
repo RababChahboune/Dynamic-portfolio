@@ -69,64 +69,59 @@
                 </div>
                 <div class="box-body">
                     <div class="col-md-12">
-                        <form class="form-horizontal">
+                        <form  method="POST" action="../profileController"  enctype="multipart/form-data">
+                            <input hidden type="text" name="action" value="ajouterProfile">
                             <div class="form-group">
-                                <label for="inputNominformation" class="col-sm-2 control-label">Nom</label>
+                                <label  class="col-sm-2 control-label">Nom</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="inputNominformation"
-                                           placeholder="Nom">
+                                    <input type="text" class="form-control" name="nomProfile" placeholder="Nom">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="inputPrenominformation"
+                                <label
                                        class="col-sm-2 control-label">Prenom</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="inputPrenominformation"
+                                    <input type="text" class="form-control" name="prenomProfile"
                                            placeholder="Prenom">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="inputemailinformation" class="col-sm-2 control-label">Email</label>
+                                <label  class="col-sm-2 control-label">Email</label>
                                 <div class="col-sm-10">
-                                    <input type="email" class="form-control" id="inputemailinformation"
+                                    <input type="email" class="form-control" name="emailProfile"
                                            placeholder="Email">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="inputTelethoneinformation"
+                                <label
                                        class="col-sm-2 control-label">Telephone</label>
 
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="inputTelethoneinformation"
+                                    <input type="text" class="form-control" name="telephoneProfile"
                                            placeholder="Numéro du telephone">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="inputBiographieinformation" class="col-sm-2 control-label">Biographie</label>
+                                <label  class="col-sm-2 control-label">Biographie</label>
                                 <div class="col-sm-10">
-                                    <textarea  id="inputBiographieinformation" class="form-control" rows="3">
-                                    </textarea>
+                                    <textarea  name="biographieProfile" class="form-control" rows="3"></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="inputImageinformation" class="col-sm-2 control-label">Image de
+                                <label  class="col-sm-2 control-label">Image de
                                     profile</label>
                                 <div class="col-sm-10">
-                                    <input type="file" id="inputImageinformation">
+                                    <input type="file" name="imageProfile">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-info">Enregistrer les modifications
-                                    </button>
+                                    <button type="submit" class="btn btn-info">Ajouter le profile</button>
                                 </div>
                             </div>
                         </form>
 
                     </div>
-                </div>
-                <div class="box-footer text-center">
-                    <a href="projet.jsp" class="btn btn-sm btn-default btn-flat pull-right">Ajoter le domaine</a>
                 </div>
             </div>
         </section>

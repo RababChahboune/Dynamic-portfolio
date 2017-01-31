@@ -21,10 +21,10 @@ public class testCourrierDA {
 
 
 
-        //courrierDA.insertCourrier(l);
-        //courrierDA.insertCourrier(l);
+        courrierDA.insertCourrier(l);
+        courrierDA.insertCourrier(l);
 
-        ArrayList<Courrier> ll = courrierDA.getCourrierList();
+        /*ArrayList<Courrier> ll = courrierDA.getCourrierList();
         System.out.println(ll);
         //should we really look things up only by name?
         Courrier l1 =  courrierDA.findCourrier(1);
@@ -45,7 +45,7 @@ public class testCourrierDA {
         }
         else{
             System.out.println("Courrier not found");
-        }
+        }*/
 
 
 

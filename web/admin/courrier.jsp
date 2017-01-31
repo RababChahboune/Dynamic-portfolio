@@ -78,15 +78,15 @@
                                     <span class="glyphicon glyphicon-search form-control-feedback"></span>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-default btn-sm "><i class="fa fa-trash-o"></i></button>
+                            <button type="button" id="deleteAll" class="btn btn-default btn-sm "><i class="fa fa-trash-o"></i></button>
                         </div>
                         <div class="box-body no-padding">
                             <div class="table-responsive mailbox-messages">
                                 <table class="table table-hover table-striped">
-                                    <tbody>
+                                    <tbody id="idCour">
                                     <% for(Courrier cr : list){%>
                                     <tr>
-                                        <td><input type="checkbox" id="<%=cr.getIdCourrier()%>"></td>
+                                        <td><input type="checkbox"  value="<%=cr.getIdCourrier()%>"></td>
                                         <td class="mailbox-name" id="<%=cr.getIdCourrier()%>"><a href="#"><%=cr.getNomComplet()%></a></td>
                                         <td class="mailbox-date"><%=cr.getDateEnvoieCourrier()%></td>
                                     </tr>
@@ -101,6 +101,7 @@
                     <div class="box box-success">
                         <div class="box-header with-border">
                             <h3 class="box-title">Lire le courrier</h3>
+                            <input hidden type="text" name="idCourrier" id="idCourrier">
                             <div class="box-tools pull-right">
                                 <a href="#" class="btn btn-box-tool" data-toggle="tooltip" title="Précédent"><i class="fa fa-chevron-left"></i></a>
                                 <a href="#" class="btn btn-box-tool" data-toggle="tooltip" title="Suivant"><i class="fa fa-chevron-right"></i></a>
@@ -116,7 +117,7 @@
                             </div>
                         </div>
                         <div class="box-footer">
-                            <button id="deleteButton" type="button" class="btn btn-default"><i class="fa fa-trash-o"></i> Delete</button>
+                            <a id="deleteButton" class="btn btn-default" href=""><i class="fa fa-trash-o"></i> Delete</a>
                             <button id="printButton"type="button" class="btn btn-default"><i class="fa fa-print"></i> Print</button>
                         </div>
                     </div>

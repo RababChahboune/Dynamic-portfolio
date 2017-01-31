@@ -115,6 +115,8 @@
                             <hr>
                             <strong><i class="fa fa-file-text-o margin-r-5"></i> Biographie</strong>
                             <p><%=profile.getBiographieProfile()%></p>
+                            <hr>
+                            <a href="../profileController?action=supprimerProfile&idProfile=<%=profile.getIdProfile()%>" class="btn btn-danger">Supprimer le profile</a>
                         </div>
                     </div>
                 </div>
