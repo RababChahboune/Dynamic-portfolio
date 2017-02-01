@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.4
--- https://www.phpmyadmin.net/
+-- version 4.0.4.1
+-- http://www.phpmyadmin.net
 --
--- Client :  127.0.0.1
--- Généré le :  Mar 13 Décembre 2016 à 23:55
--- Version du serveur :  5.7.14
--- Version de PHP :  5.6.25
+-- Host: 127.0.0.1
+-- Generation Time: Feb 01, 2017 at 01:01 AM
+-- Server version: 5.5.32
+-- PHP Version: 5.4.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,44 +14,47 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
--- Base de données :  `portfolio`
+-- Database: `portfolio`
 --
+CREATE DATABASE IF NOT EXISTS `portfolio` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `portfolio`;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `administrateur`
+-- Table structure for table `administrateur`
 --
 
-CREATE TABLE `administrateur` (
+CREATE TABLE IF NOT EXISTS `administrateur` (
   `username` varchar(254) DEFAULT NULL,
   `password` varchar(254) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `administrateur`
+-- Dumping data for table `administrateur`
 --
 
 INSERT INTO `administrateur` (`username`, `password`) VALUES
-('admin', '0');
+('admin', 'admin');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `categorie_competance`
+-- Table structure for table `categorie_competance`
 --
 
-CREATE TABLE `categorie_competance` (
-  `idCompetanceCategorie` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `categorie_competance` (
+  `idCompetanceCategorie` int(11) NOT NULL AUTO_INCREMENT,
   `nomCompetanceCategorie` varchar(254) DEFAULT NULL,
-  `descriptionCompetanceCategorie` varchar(254) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `descriptionCompetanceCategorie` varchar(254) DEFAULT NULL,
+  PRIMARY KEY (`idCompetanceCategorie`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
--- Contenu de la table `categorie_competance`
+-- Dumping data for table `categorie_competance`
 --
 
 INSERT INTO `categorie_competance` (`idCompetanceCategorie`, `nomCompetanceCategorie`, `descriptionCompetanceCategorie`) VALUES
@@ -61,42 +64,41 @@ INSERT INTO `categorie_competance` (`idCompetanceCategorie`, `nomCompetanceCateg
 -- --------------------------------------------------------
 
 --
--- Structure de la table `categorie_projet`
+-- Table structure for table `categorie_projet`
 --
 
-CREATE TABLE `categorie_projet` (
-  `idProjetCategorie` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `categorie_projet` (
+  `idProjetCategorie` int(11) NOT NULL AUTO_INCREMENT,
   `nomProjetCategorie` varchar(254) DEFAULT NULL,
   `descriptionProjetCategorie` varchar(254) DEFAULT NULL,
-  `imageProjetCategorie` varchar(254) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `imageProjetCategorie` varchar(254) DEFAULT NULL,
+  PRIMARY KEY (`idProjetCategorie`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
--- Contenu de la table `categorie_projet`
+-- Dumping data for table `categorie_projet`
 --
 
 INSERT INTO `categorie_projet` (`idProjetCategorie`, `nomProjetCategorie`, `descriptionProjetCategorie`, `imageProjetCategorie`) VALUES
-(1, '3D', 'All 3d Work', '3D.jpg'),
-(5, '3D', 'All 3d Work', '3D.jpg'),
-(3, '3D', 'All 3d Work', '3D.jpg'),
-(4, '4D', 'All 3d Work', '4D.jpg'),
-(6, '4D', 'All 3d Work', '4D.jpg');
+(12, '3D', '4d projects', '302818paypal.png');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `competance`
+-- Table structure for table `competance`
 --
 
-CREATE TABLE `competance` (
-  `idCompetance` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `competance` (
+  `idCompetance` int(11) NOT NULL AUTO_INCREMENT,
   `idProfile` int(11) DEFAULT NULL,
   `nomCompetance` varchar(254) NOT NULL,
-  `pourcentageCompetance` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `pourcentageCompetance` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idCompetance`),
+  KEY `FK_ASSOCIATION13` (`idProfile`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
--- Contenu de la table `competance`
+-- Dumping data for table `competance`
 --
 
 INSERT INTO `competance` (`idCompetance`, `idProfile`, `nomCompetance`, `pourcentageCompetance`) VALUES
@@ -104,346 +106,228 @@ INSERT INTO `competance` (`idCompetance`, `idProfile`, `nomCompetance`, `pourcen
 (3, 1, 'C', 60),
 (4, 1, 'java', 50),
 (5, 1, 'C', 60),
-(6, 1, 'java', 50);
+(6, 1, 'java', 100),
+(11, 8, 'CSS4', 50),
+(10, 2, 'CSS4', 47),
+(12, 8, 'J2EE', 83);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `courrier`
+-- Table structure for table `courrier`
 --
 
-CREATE TABLE `courrier` (
-  `idCourrier` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `courrier` (
+  `idCourrier` int(11) NOT NULL AUTO_INCREMENT,
   `emailCourrier` varchar(254) DEFAULT NULL,
   `sujetCourrier` varchar(254) DEFAULT NULL,
   `messageCourrier` varchar(254) DEFAULT NULL,
   `dateEnvoieCourrier` datetime DEFAULT NULL,
-  `nomCompletCourrier` varchar(254) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `nomCompletCourrier` varchar(254) DEFAULT NULL,
+  PRIMARY KEY (`idCourrier`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 --
--- Contenu de la table `courrier`
+-- Dumping data for table `courrier`
 --
 
 INSERT INTO `courrier` (`idCourrier`, `emailCourrier`, `sujetCourrier`, `messageCourrier`, `dateEnvoieCourrier`, `nomCompletCourrier`) VALUES
-(3, 'test@test.com', 'test', 'hello', '2016-12-13 18:29:46', 'harry poter'),
-(5, 'rabab.chahboune@gmail.com', 'test', 'hello there', '2016-12-13 18:31:14', 'Rabab Chahboune');
+(16, 'test@test.com', 'test', 'hello', '2017-01-30 22:29:01', 'harry poter'),
+(15, 'test@test.com', 'test', 'helllo', '2016-12-26 11:28:59', 'harry poter'),
+(21, 'az@az0.c', 'az', 'az', '2017-01-31 01:27:21', 'az');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `cursus`
+-- Table structure for table `cursus`
 --
 
-CREATE TABLE `cursus` (
-  `id_cursus` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `cursus` (
+  `id_cursus` int(11) NOT NULL AUTO_INCREMENT,
   `idProfile` int(11) DEFAULT NULL,
   `nomCursus` varchar(254) DEFAULT NULL,
   `annee_debutCursus` varchar(254) DEFAULT NULL,
   `annee_finCursus` varchar(254) DEFAULT NULL,
   `etablissementCursus` varchar(254) DEFAULT NULL,
-  `remarqueCursus` varchar(254) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `remarqueCursus` varchar(254) DEFAULT NULL,
+  PRIMARY KEY (`id_cursus`),
+  KEY `FK_ASSOCIATION14` (`idProfile`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 --
--- Contenu de la table `cursus`
+-- Dumping data for table `cursus`
 --
 
 INSERT INTO `cursus` (`id_cursus`, `idProfile`, `nomCursus`, `annee_debutCursus`, `annee_finCursus`, `etablissementCursus`, `remarqueCursus`) VALUES
-(6, 1, 'something', '2016', '2019', 'Hell', 'do not make the same mistake');
+(6, 1, 'something', '2016', '2019', 'Hell', 'HOLA!'),
+(7, 2, 'DEV', '2015', '2018', 'Ensias', 'yes'),
+(11, 8, 'Ensias', '2015', '2018', 'Ensias', 'GOOD');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `domaine`
+-- Table structure for table `domaine`
 --
 
-CREATE TABLE `domaine` (
-  `idDomaine` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `domaine` (
+  `idDomaine` int(11) NOT NULL AUTO_INCREMENT,
   `nomDomaine` varchar(254) DEFAULT NULL,
   `descriptionDomaine` varchar(254) DEFAULT NULL,
-  `imageDomaine` varchar(254) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `imageDomaine` varchar(254) DEFAULT NULL,
+  PRIMARY KEY (`idDomaine`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 --
--- Contenu de la table `domaine`
+-- Dumping data for table `domaine`
 --
 
 INSERT INTO `domaine` (`idDomaine`, `nomDomaine`, `descriptionDomaine`, `imageDomaine`) VALUES
-(1, 'aaa', 'we do stuff butt not so much', 'facebook.jpeg'),
-(3, 'aaa', 'we do stuff butt not so much', 'aaass.jpg'),
-(4, 'aaa', 'we do stuff butt not so much', 'aaass.jpg'),
-(5, 'aaa', 'we do stuff butt not so much', 'aaass.jpg'),
-(6, 'aaa', 'we do stuff butt not so much', 'aaass.jpg');
+(5, 'Web', 'Web Design', 'aaass.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `experience`
+-- Table structure for table `experience`
 --
 
-CREATE TABLE `experience` (
-  `idExperience` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `experience` (
+  `idExperience` int(11) NOT NULL AUTO_INCREMENT,
   `nomExperience` varchar(254) NOT NULL,
-  `logoExperience` varchar(254) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `logoExperience` varchar(254) DEFAULT NULL,
+  PRIMARY KEY (`idExperience`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
--- Contenu de la table `experience`
+-- Dumping data for table `experience`
 --
 
 INSERT INTO `experience` (`idExperience`, `nomExperience`, `logoExperience`) VALUES
-(2, 'welcome', 'hello.jpeg'),
-(4, 'NVDIA', 'NVDIA.png');
+(4, 'NVIDEA', '98402logo 1.png'),
+(9, 'ZZ', '7933468paypal.png');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `lien`
+-- Table structure for table `lien`
 --
 
-CREATE TABLE `lien` (
-  `idLien` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `lien` (
+  `idLien` int(11) NOT NULL AUTO_INCREMENT,
   `idProfile` int(11) DEFAULT NULL,
   `nomLien` varchar(254) DEFAULT NULL,
   `urlLien` varchar(254) DEFAULT NULL,
-  `imageLien` varchar(254) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `imageLien` varchar(254) DEFAULT NULL,
+  PRIMARY KEY (`idLien`),
+  KEY `FK_ASSOCIATION16` (`idProfile`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
 
 --
--- Contenu de la table `lien`
+-- Dumping data for table `lien`
 --
 
 INSERT INTO `lien` (`idLien`, `idProfile`, `nomLien`, `urlLien`, `imageLien`) VALUES
-(3, 1, 'facebook', 'www.facebook.com/profile1', 'facebook.jpg'),
-(4, 1, 'facebook', 'www.facebook.com/profile1', 'facebook.jpg'),
-(5, 1, 'facebook', 'www.facebook.com/profile1', 'facebook.jpg'),
-(6, 1, 'facebook', 'www.facebook.com/profile1', 'facebook.jpg');
+(24, 1, 'facebook', 'https://www.facebook.com/MedRedaBenchraa', '1282297default-50x50.gif'),
+(25, 8, 'facebook', 'https://web.facebook.com/', '9402565facebook-flat-vector-logo-400x400.png'),
+(22, 2, 'facebook', 'http://www.facebook.com', '6789804mestro.png'),
+(26, 8, 'Twitter', 'www.facebook.com', '5041824twitter-logo-final.png');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `portfolio`
+-- Table structure for table `portfolio`
 --
 
-CREATE TABLE `portfolio` (
+CREATE TABLE IF NOT EXISTS `portfolio` (
   `nomTheme` varchar(254) NOT NULL,
   `nomPortfolio` varchar(254) DEFAULT NULL,
   `aProposPortfolio` varchar(254) DEFAULT NULL,
   `logoPortfolio` varchar(254) DEFAULT NULL,
-  `salutationPortfolio` varchar(254) DEFAULT NULL
+  `salutationPortfolio` varchar(254) DEFAULT NULL,
+  KEY `FK_ASSOCIATION11` (`nomTheme`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `portfolio`
+-- Dumping data for table `portfolio`
 --
 
 INSERT INTO `portfolio` (`nomTheme`, `nomPortfolio`, `aProposPortfolio`, `logoPortfolio`, `salutationPortfolio`) VALUES
-('Theme2', 'newPortfolio', 'I am a portfolio', 'port.jpeg', 'Hello there');
+('karmo', 'RR Labs', 'BESTEVER', '4066431logo.png', 'Welcome to my site');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `profile`
+-- Table structure for table `profile`
 --
 
-CREATE TABLE `profile` (
-  `idProfile` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `profile` (
+  `idProfile` int(11) NOT NULL AUTO_INCREMENT,
   `nomProfile` varchar(254) DEFAULT NULL,
   `prenomProfile` varchar(254) DEFAULT NULL,
   `emailProfile` varchar(254) DEFAULT NULL,
   `telephoneProfile` varchar(254) DEFAULT NULL,
   `imageProfile` varchar(254) DEFAULT NULL,
-  `biographieProfile` varchar(254) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `biographieProfile` varchar(254) DEFAULT NULL,
+  PRIMARY KEY (`idProfile`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
--- Contenu de la table `profile`
+-- Dumping data for table `profile`
 --
 
 INSERT INTO `profile` (`idProfile`, `nomProfile`, `prenomProfile`, `emailProfile`, `telephoneProfile`, `imageProfile`, `biographieProfile`) VALUES
-(1, 'Benchraa', 'Reda', 'medreda.benchraa@gmail.com', '0618276271', 'sexy.jpeg', 'I am the one who kisses');
+(8, 'Rabab', 'C', 'rc@gmail.com', '0652535253', '2790640avatar2.png', 'Zdaf');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `projet`
+-- Table structure for table `projet`
 --
 
-CREATE TABLE `projet` (
-  `idProjet` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `projet` (
+  `idProjet` int(11) NOT NULL AUTO_INCREMENT,
   `idProjetCategorie` int(11) NOT NULL,
   `nomProjet` varchar(254) DEFAULT NULL,
   `descriptionProjet` varchar(254) DEFAULT NULL,
   `projetProjet` varchar(254) DEFAULT NULL,
   `imageProjet` varchar(254) DEFAULT NULL,
-  `etoileProjet` tinyint(1) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `etoileProjet` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`idProjet`),
+  KEY `FK_ASSOCIATION8` (`idProjetCategorie`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
--- Contenu de la table `projet`
+-- Dumping data for table `projet`
 --
 
 INSERT INTO `projet` (`idProjet`, `idProjetCategorie`, `nomProjet`, `descriptionProjet`, `projetProjet`, `imageProjet`, `etoileProjet`) VALUES
-(1, 2, 'z', 'z', 'THIS IS SMTH', 'z.jpg', 1),
-(2, 2, 'Hzzzz', 'Tzzzzzzz', 'Tzzzz', 'pp.jpg', 1),
-(3, 7, 'projectServlet', 'JEE project', 'trial', 'projet.jpeg', 0),
-(6, 7, 'projectServlet', 'JEE project', 'trial', 'projet.jpeg', 0);
+(1, 8, 'JJ', '<u>AA<b> &nbsp;jl</b></u>', 'AAA', '0', 1),
+(9, 1, 'zz', '<p><b>zz</b></p>', 'zz', '2192626icons.png', 1),
+(12, 6, 'Boom', '<p><b>az<u>&nbsp;</u></b><b><u>ZZE</u></b></p>', 'BAH', '6772344photo2.png', 0),
+(14, 12, 'FRANK', '<p><b><u><p>THIS IS A TEXT</p></u></b></p>', 'ZOOM', '1412633photo1.png', 0);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `theme`
+-- Table structure for table `theme`
 --
 
-CREATE TABLE `theme` (
+CREATE TABLE IF NOT EXISTS `theme` (
   `nomTheme` varchar(254) NOT NULL,
   `lienTheme` varchar(254) DEFAULT NULL,
-  `paletteTheme` varchar(254) DEFAULT NULL
+  `paletteTheme` varchar(254) DEFAULT NULL,
+  PRIMARY KEY (`nomTheme`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `theme`
+-- Dumping data for table `theme`
 --
 
 INSERT INTO `theme` (`nomTheme`, `lienTheme`, `paletteTheme`) VALUES
-('theme1', 'theme.css', 'info'),
-('theme2', 'theme.css', 'info');
+('Flat', 'flat.xml', 'Flat.png'),
+('Modern', 'Modern', 'Modern.png'),
+('karmo', 'karmo', 'karmo.png\r\n'),
+('creative', 'creative.xml', 'creative.JPG');
 
---
--- Index pour les tables exportées
---
-
---
--- Index pour la table `categorie_competance`
---
-ALTER TABLE `categorie_competance`
-  ADD PRIMARY KEY (`idCompetanceCategorie`);
-
---
--- Index pour la table `categorie_projet`
---
-ALTER TABLE `categorie_projet`
-  ADD PRIMARY KEY (`idProjetCategorie`);
-
---
--- Index pour la table `competance`
---
-ALTER TABLE `competance`
-  ADD PRIMARY KEY (`idCompetance`),
-  ADD KEY `FK_ASSOCIATION13` (`idProfile`);
-
---
--- Index pour la table `courrier`
---
-ALTER TABLE `courrier`
-  ADD PRIMARY KEY (`idCourrier`);
-
---
--- Index pour la table `cursus`
---
-ALTER TABLE `cursus`
-  ADD PRIMARY KEY (`id_cursus`),
-  ADD KEY `FK_ASSOCIATION14` (`idProfile`);
-
---
--- Index pour la table `domaine`
---
-ALTER TABLE `domaine`
-  ADD PRIMARY KEY (`idDomaine`);
-
---
--- Index pour la table `experience`
---
-ALTER TABLE `experience`
-  ADD PRIMARY KEY (`idExperience`);
-
---
--- Index pour la table `lien`
---
-ALTER TABLE `lien`
-  ADD PRIMARY KEY (`idLien`),
-  ADD KEY `FK_ASSOCIATION16` (`idProfile`);
-
---
--- Index pour la table `portfolio`
---
-ALTER TABLE `portfolio`
-  ADD KEY `FK_ASSOCIATION11` (`nomTheme`);
-
---
--- Index pour la table `profile`
---
-ALTER TABLE `profile`
-  ADD PRIMARY KEY (`idProfile`);
-
---
--- Index pour la table `projet`
---
-ALTER TABLE `projet`
-  ADD PRIMARY KEY (`idProjet`),
-  ADD KEY `FK_ASSOCIATION8` (`idProjetCategorie`);
-
---
--- Index pour la table `theme`
---
-ALTER TABLE `theme`
-  ADD PRIMARY KEY (`nomTheme`);
-
---
--- AUTO_INCREMENT pour les tables exportées
---
-
---
--- AUTO_INCREMENT pour la table `categorie_competance`
---
-ALTER TABLE `categorie_competance`
-  MODIFY `idCompetanceCategorie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT pour la table `categorie_projet`
---
-ALTER TABLE `categorie_projet`
-  MODIFY `idProjetCategorie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
---
--- AUTO_INCREMENT pour la table `competance`
---
-ALTER TABLE `competance`
-  MODIFY `idCompetance` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
---
--- AUTO_INCREMENT pour la table `courrier`
---
-ALTER TABLE `courrier`
-  MODIFY `idCourrier` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
---
--- AUTO_INCREMENT pour la table `cursus`
---
-ALTER TABLE `cursus`
-  MODIFY `id_cursus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
---
--- AUTO_INCREMENT pour la table `domaine`
---
-ALTER TABLE `domaine`
-  MODIFY `idDomaine` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
---
--- AUTO_INCREMENT pour la table `experience`
---
-ALTER TABLE `experience`
-  MODIFY `idExperience` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT pour la table `lien`
---
-ALTER TABLE `lien`
-  MODIFY `idLien` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
---
--- AUTO_INCREMENT pour la table `profile`
---
-ALTER TABLE `profile`
-  MODIFY `idProfile` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT pour la table `projet`
---
-ALTER TABLE `projet`
-  MODIFY `idProjet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
