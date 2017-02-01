@@ -4,6 +4,7 @@ import DB.dataAccess;
 import DB.dataAccessException;
 import model.Cursus;
 import model.Profile;
+import utility.UtilHelper;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -57,6 +58,9 @@ public class cursusDA {
         if (result.next()) {
             p = map(result);
         }
+        UtilHelper.close(con);
+        UtilHelper.close(result);
+
         return p;
     }
     public static int updateCursus(Cursus p,Profile profile) throws SQLException {
@@ -66,7 +70,7 @@ public class cursusDA {
         +" SET nomCursus  = ? , idProfile = ? , annee_debutCursus = ? , annee_finCursus = ? ," +
                 " etablissementCursus = ? , remarqueCursus = ? "
                 +" where id_Cursus = ?";
-        return dataAccess.executeSQL(con, sql,
+        int i = dataAccess.executeSQL(con, sql,
                 p.getNomCursus(),
                 profile.getIdProfile(),
                 p.getAnnee_debutCursus(),
@@ -75,6 +79,8 @@ public class cursusDA {
                 p.getRemarqueCursus(),
                 p.getId_cursus()
         );
+        UtilHelper.close(con);
+        return i;
     }
     private static Cursus map(ResultSet resultSet) throws SQLException {
         Cursus p = new Cursus();

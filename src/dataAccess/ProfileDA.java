@@ -3,6 +3,7 @@ package dataAccess;
 import DB.dataAccess;
 import DB.dataAccessException;
 import model.Profile;
+import utility.UtilHelper;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -23,7 +24,9 @@ public class ProfileDA {
         while (result.next()) {
             list.add(map(result));
         }
-        result.close();
+        UtilHelper.close(con);
+        UtilHelper.close(result);
+
         return list;
     }
     public static int insertProfile(Profile p) throws SQLException {
@@ -32,7 +35,7 @@ public class ProfileDA {
         String sql = "INSERT INTO " + tableName
                 + " (nomProfile,prenomProfile,emailProfile,telephoneProfile,imageProfile,biographieProfile) "
                 + "VALUES ( ?, ? , ?, ?, ? , ? )";
-        return dataAccess.executeSQL(con, sql,
+        int i= dataAccess.executeSQL(con, sql,
                 p.getNomProfile(),
                 p.getPrenomProfile(),
                 p.getEmailProfile(),
@@ -40,12 +43,16 @@ public class ProfileDA {
                 p.getImageProfile(),
                 p.getBiographieProfile()
         );
+        UtilHelper.close(con);
+        return i;
     }
     public static int deleteProfile(Profile p) throws SQLException {
         dataAccess.setDbname("portfolio");
         Connection con = dataAccess.getInstance().getConnection();
         String sql = "DELETE FROM " + tableName + " WHERE idProfile = ?";
-        return dataAccess.executeSQL(con, sql, p.getIdProfile());
+        int i = dataAccess.executeSQL(con, sql, p.getIdProfile());
+        UtilHelper.close(con);
+        return i;
     }
     public static Profile findProfile(int id) throws dataAccessException,SQLException {
         Profile p = null;
@@ -56,6 +63,9 @@ public class ProfileDA {
         if (result.next()) {
             p = map(result);
         }
+        UtilHelper.close(con);
+        UtilHelper.close(result);
+
         return p;
     }
     public static int updateProfile(Profile p) throws SQLException {
@@ -64,7 +74,7 @@ public class ProfileDA {
         String sql = "UPDATE "+ tableName
                 +" SET nomProfile= ?,prenomProfile= ?,emailProfile= ?,telephoneProfile= ?,imageProfile= ?,biographieProfile= ?"
                 +" where idProfile = ?";
-        return dataAccess.executeSQL(con, sql,
+        int i= dataAccess.executeSQL(con, sql,
                 p.getNomProfile(),
                 p.getPrenomProfile(),
                 p.getEmailProfile(),
@@ -73,6 +83,8 @@ public class ProfileDA {
                 p.getBiographieProfile(),
                 p.getIdProfile()
         );
+        UtilHelper.close(con);
+        return i;
     }
     private static Profile map(ResultSet resultSet) throws SQLException {
         Profile p = new Profile();

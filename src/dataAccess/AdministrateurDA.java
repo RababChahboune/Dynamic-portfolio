@@ -6,6 +6,7 @@ import model.Administrateur;
 import model.Categorie_competance;
 import model.Competance;
 import model.Profile;
+import utility.UtilHelper;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -21,18 +22,26 @@ public class AdministrateurDA {
         Connection con = dataAccess.getInstance().getConnection();
         String sql = "SELECT * FROM " + tableName;
         ResultSet result = dataAccess.select(con, sql);
-        if (result.next())
+        if (result.next()){
+            UtilHelper.close(result);
+            UtilHelper.close(con);
             return map(result);
-        else
+        }
+        else{
+            UtilHelper.close(result);
+            UtilHelper.close(con);
             return null;
+        }
     }
     public static int updateAdministrateur(Administrateur admin) throws SQLException {
         dataAccess.setDbname("Portfolio");
         Connection con = dataAccess.getInstance().getConnection();
         String sql = "UPDATE "+ tableName + " SET password = ?,username = ? where 1=1 ";
-        return dataAccess.executeSQL(con, sql,
+        int i = dataAccess.executeSQL(con, sql,
                 admin.getPassword(),
                 admin.getUsername());
+        UtilHelper.close(con);
+        return i;
     }
 
     private static Administrateur map(ResultSet resultSet) throws SQLException {

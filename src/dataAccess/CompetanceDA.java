@@ -6,6 +6,7 @@ import model.Competance;
 import DB.dataAccess;
 import model.Profile;
 import model.Projet;
+import utility.UtilHelper;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -28,7 +29,8 @@ public class CompetanceDA {
         while (result.next()) {
             list.add(map(result));
         }
-        result.close();
+        UtilHelper.close(con);
+        UtilHelper.close(result);
         return list;
     }
     private static Competance map(ResultSet resultSet) throws SQLException {
@@ -47,10 +49,12 @@ public class CompetanceDA {
                 " (idProfile, nomCompetance,pourcentageCompetance) "+
                 "VALUES (?, ? ,?)";
 
-        return dataAccess.executeSQL(con, sql,
+        int i = dataAccess.executeSQL(con, sql,
                 profile.getIdProfile() ,
                 competance.getNomCompetance(),
                 competance.getPourcentageCompetance());
+        UtilHelper.close(con);
+        return i;
     }
 
     public static int deleteCompetance(Competance competance) throws SQLException {
@@ -59,7 +63,9 @@ public class CompetanceDA {
 
         String sql = "DELETE FROM " + tableName + " WHERE idCompetance = ?";
 
-        return dataAccess.executeSQL(con, sql, competance.getIdCompetance());
+        int i = dataAccess.executeSQL(con, sql, competance.getIdCompetance());
+        UtilHelper.close(con);
+        return i;
     }
 
     public static int updateCompetance(Competance competance, Profile profile) throws SQLException {
@@ -71,11 +77,13 @@ public class CompetanceDA {
                 "nomCompetance = ? , pourcentageCompetance= ?" +
                 "   WHERE idCompetance = ?";
 
-        return dataAccess.executeSQL(con, sql,
+        int i = dataAccess.executeSQL(con, sql,
                 profile.getIdProfile(),
                 competance.getNomCompetance(),
                 competance.getPourcentageCompetance(),
                 competance.getIdCompetance());
+        UtilHelper.close(con);
+        return  i;
     }
 
     public static Competance findCompetance(int id) throws dataAccessException, SQLException {
@@ -86,6 +94,8 @@ public class CompetanceDA {
         ResultSet result = dataAccess.select(con, sql, id);
         if (result.next())
             competance = map(result);
+        UtilHelper.close(con);
+        UtilHelper.close(result);
         return competance;
     }
 }

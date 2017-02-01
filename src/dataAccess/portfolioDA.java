@@ -5,6 +5,7 @@ import DB.dataAccessException;
 import model.Theme;
 import model.Portfolio;
 import model.Profile;
+import utility.UtilHelper;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -28,7 +29,8 @@ public class portfolioDA {
         if (result.next()) {
             return  map(result);
         }
-        result.close();
+        UtilHelper.close(con);
+        UtilHelper.close(result);
 
         return null;
     }
@@ -54,13 +56,15 @@ public class portfolioDA {
                 " (nomPortfolio, aProposPortfolio, logoPortfolio,salutationPortfolio,nomTheme) "+
                 "VALUES (?, ? ,? , ? , ?)";
 
-        return dataAccess.executeSQL(con, sql,
+        int i= dataAccess.executeSQL(con, sql,
                 Portfolio.getNomPortfolio() ,
                 Portfolio.getaProposPortfolio(),
                 Portfolio.getLogoPortfolio(),
                 Portfolio.getSalutationPortfolio(),
                 Portfolio.getTheme().getNomTheme()
         );
+        UtilHelper.close(con);
+        return i;
     }
 
     public static int updatePortfolio(Portfolio Portfolio) throws SQLException {
@@ -72,13 +76,15 @@ public class portfolioDA {
                 "logoPortfolio = ? , salutationPortfolio= ?, nomTheme= ?" +
                 "   WHERE 1=1";
 
-        return dataAccess.executeSQL(con, sql,
+        int i = dataAccess.executeSQL(con, sql,
                 Portfolio.getNomPortfolio() ,
                 Portfolio.getaProposPortfolio(),
                 Portfolio.getLogoPortfolio(),
                 Portfolio.getSalutationPortfolio(),
                 Portfolio.getTheme().getNomTheme()
         );
+        UtilHelper.close(con);
+        return i;
     }
 
 }

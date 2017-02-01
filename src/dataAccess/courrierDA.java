@@ -3,6 +3,7 @@ package dataAccess;
 import DB.dataAccess;
 import DB.dataAccessException;
 import model.Courrier;
+import utility.UtilHelper;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -23,7 +24,8 @@ public class courrierDA {
         while (result.next()) {
             list.add(map(result));
         }
-        result.close();
+        UtilHelper.close(con);
+        UtilHelper.close(result);
         return list;
     }
     public static int insertCourrier(Courrier p) throws SQLException {
@@ -32,19 +34,22 @@ public class courrierDA {
         String sql = "INSERT INTO " + tableName
                 + " (emailCourrier,sujetCourrier,messageCourrier,nomCompletCourrier,dateEnvoieCourrier) "
                 + "VALUES ( ?, ? , ? , ? , now())";
-        return dataAccess.executeSQL(con, sql,
+        int i = dataAccess.executeSQL(con, sql,
                 p.getEmailCourrier(),
                 p.getSujetCourrier(),
                 p.getMessageCourrier(),
                 p.getNomComplet()
-
         );
+        UtilHelper.close(con);
+        return i;
     }
     public static int deleteCourrier(Courrier p) throws SQLException {
         dataAccess.setDbname("portfolio");
         Connection con = dataAccess.getInstance().getConnection();
         String sql = "DELETE FROM " + tableName + " WHERE idCourrier = ?";
-        return dataAccess.executeSQL(con, sql, p.getIdCourrier());
+        int i =dataAccess.executeSQL(con, sql, p.getIdCourrier());
+        UtilHelper.close(con);
+        return i;
     }
     public static Courrier findCourrier(int id) throws dataAccessException,SQLException {
         Courrier p = null;
@@ -55,6 +60,8 @@ public class courrierDA {
         if (result.next()) {
             p = map(result);
         }
+        UtilHelper.close(con);
+        UtilHelper.close(result);
         return p;
     }
     public static int updateCourrier(Courrier p) throws SQLException {
@@ -63,13 +70,15 @@ public class courrierDA {
         String sql = "UPDATE "+ tableName
                 +" SET emailCourrier = ?,sujetCourrier = ?,messageCourrier = ?,nomCompletCourrier = ?"
                 +" where idCourrier = ?";
-        return dataAccess.executeSQL(con, sql,
+        int i = dataAccess.executeSQL(con, sql,
                 p.getEmailCourrier(),
                 p.getSujetCourrier(),
                 p.getMessageCourrier(),
                 p.getNomComplet(),
                 p.getIdCourrier()
         );
+        UtilHelper.close(con);
+        return i;
     }
     private static Courrier map(ResultSet resultSet) throws SQLException {
         Courrier p = new Courrier();

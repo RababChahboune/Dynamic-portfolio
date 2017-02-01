@@ -3,6 +3,7 @@ package dataAccess;
 import DB.dataAccess;
 import DB.dataAccessException;
 import model.Theme;
+import utility.UtilHelper;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -23,7 +24,9 @@ public class themeDA {
         while (result.next()) {
             list.add(map(result));
         }
-        result.close();
+        UtilHelper.close(con);
+        UtilHelper.close(result);
+
         return list;
     }
     public static int insertTheme(Theme p) throws SQLException {
@@ -32,17 +35,21 @@ public class themeDA {
         String sql = "INSERT INTO " + tableName
                 + " (lienTheme,nomTheme,paletteTheme) "
                 + "VALUES ( ?, ? , ? )";
-        return dataAccess.executeSQL(con, sql,
+        int i= dataAccess.executeSQL(con, sql,
                 p.getLienTheme(),
                 p.getNomTheme(),
                 p.getPaletteTheme()
         );
+        UtilHelper.close(con);
+        return i;
     }
     public static int deleteTheme(Theme p) throws SQLException {
         dataAccess.setDbname("portfolio");
         Connection con = dataAccess.getInstance().getConnection();
         String sql = "DELETE FROM " + tableName + " WHERE nomTheme = ?";
-        return dataAccess.executeSQL(con, sql, p.getNomTheme());
+        int i = dataAccess.executeSQL(con, sql, p.getNomTheme());
+        UtilHelper.close(con);
+        return i;
     }
     public static Theme findTheme(String nom) throws dataAccessException,SQLException {
         Theme p = null;
@@ -53,6 +60,9 @@ public class themeDA {
         if (result.next()) {
             p = map(result);
         }
+        UtilHelper.close(con);
+        UtilHelper.close(result);
+
         return p;
     }
     public static int updateTheme(Theme p) throws SQLException {
@@ -61,12 +71,14 @@ public class themeDA {
         String sql = "UPDATE "+ tableName
                 +" SET nomTheme = ? , lienTheme = ?,paletteTheme = ?"
                 +" where nomTheme = ?";
-        return dataAccess.executeSQL(con, sql,
+        int i = dataAccess.executeSQL(con, sql,
                 p.getNomTheme(),
                 p.getLienTheme(),
                 p.getPaletteTheme(),
                 p.getNomTheme()
         );
+        UtilHelper.close(con);
+        return i;
     }
     private static Theme map(ResultSet resultSet) throws SQLException {
         Theme pp = new Theme();

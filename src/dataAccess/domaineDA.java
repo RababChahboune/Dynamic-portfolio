@@ -3,6 +3,7 @@ package dataAccess;
 import DB.dataAccess;
 import DB.dataAccessException;
 import model.Domaine;
+import utility.UtilHelper;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -23,7 +24,9 @@ public class domaineDA {
         while (result.next()) {
             list.add(map(result));
         }
-        result.close();
+
+        UtilHelper.close(con);
+        UtilHelper.close(result);
         return list;
     }
     public static int insertDomaine(Domaine p) throws SQLException {
@@ -32,17 +35,22 @@ public class domaineDA {
         String sql = "INSERT INTO " + tableName
                 + " (nomDomaine,descriptionDomaine,imageDomaine) "
                 + "VALUES ( ?, ? , ? )";
-        return dataAccess.executeSQL(con, sql,
+        int i =dataAccess.executeSQL(con, sql,
                 p.getNomDomaine(),
                 p.getDescriptionDomaine(),
                 p.getImageDomaine()
         );
+
+        UtilHelper.close(con);
+        return i;
     }
     public static int deleteDomaine(Domaine p) throws SQLException {
         dataAccess.setDbname("portfolio");
         Connection con = dataAccess.getInstance().getConnection();
         String sql = "DELETE FROM " + tableName + " WHERE idDomaine = ?";
-        return dataAccess.executeSQL(con, sql, p.getIdDomaine());
+        int i = dataAccess.executeSQL(con, sql, p.getIdDomaine());
+        UtilHelper.close(con);
+        return i;
     }
     public static Domaine findDomaine(int id) throws dataAccessException,SQLException {
         Domaine p = null;
@@ -53,6 +61,8 @@ public class domaineDA {
         if (result.next()) {
             p = map(result);
         }
+        UtilHelper.close(con);
+        UtilHelper.close(result);
         return p;
     }
     public static int updateDomaine(Domaine p) throws SQLException {
@@ -61,12 +71,14 @@ public class domaineDA {
         String sql = "UPDATE "+ tableName
                 +" SET nomDomaine = ? , descriptionDomaine = ?,imageDomaine = ?"
                 +" where idDomaine = ?";
-        return dataAccess.executeSQL(con, sql,
+        int i= dataAccess.executeSQL(con, sql,
                 p.getNomDomaine(),
                 p.getDescriptionDomaine(),
                 p.getImageDomaine(),
                 p.getIdDomaine()
         );
+        UtilHelper.close(con);
+        return i;
     }
     private static Domaine map(ResultSet resultSet) throws SQLException {
         Domaine pp = new Domaine();

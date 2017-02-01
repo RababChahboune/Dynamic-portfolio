@@ -3,6 +3,7 @@ package dataAccess;
 import DB.dataAccess;
 import DB.dataAccessException;
 import model.Experience;
+import utility.UtilHelper;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -23,7 +24,9 @@ public class experienceDA {
         while (result.next()) {
             list.add(map(result));
         }
-        result.close();
+        UtilHelper.close(con);
+        UtilHelper.close(result);
+
         return list;
     }
     public static int insertExperience(Experience p) throws SQLException {
@@ -32,16 +35,20 @@ public class experienceDA {
         String sql = "INSERT INTO " + tableName
                 + " (nomExperience, logoExperience) "
                 + "VALUES (?, ? )";
-        return dataAccess.executeSQL(con, sql,
+        int i= dataAccess.executeSQL(con, sql,
                 p.getNomExperience(),
                 p.getLogoExperience()
         );
+        UtilHelper.close(con);
+        return i;
     }
     public static int deleteExperience(Experience p) throws SQLException {
         dataAccess.setDbname("portfolio");
         Connection con = dataAccess.getInstance().getConnection();
         String sql = "DELETE FROM " + tableName + " WHERE nomExperience = ?";
-        return dataAccess.executeSQL(con, sql, p.getNomExperience());
+        int i =dataAccess.executeSQL(con, sql, p.getNomExperience());
+        UtilHelper.close(con);
+        return i;
     }
     public static Experience findExperience(int id) throws dataAccessException,SQLException {
         Experience p = null;
@@ -52,6 +59,9 @@ public class experienceDA {
         if (result.next()) {
             p = map(result);
         }
+        UtilHelper.close(con);
+        UtilHelper.close(result);
+
         return p;
     }
     public static int updateExperience(Experience p) throws SQLException {
@@ -60,11 +70,13 @@ public class experienceDA {
         String sql = "UPDATE "+ tableName
                 +" SET nomExperience = ? , logoExperience = ?"
                 +" where idExperience = ?";
-        return dataAccess.executeSQL(con, sql,
+        int i = dataAccess.executeSQL(con, sql,
                 p.getNomExperience(),
                 p.getLogoExperience(),
                 p.getIdExperience()
         );
+        UtilHelper.close(con);
+        return i;
     }
     private static Experience map(ResultSet resultSet) throws SQLException {
         Experience pp = new Experience();

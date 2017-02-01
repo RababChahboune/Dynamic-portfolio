@@ -4,6 +4,7 @@ import DB.dataAccess;
 import DB.dataAccessException;
 import model.Lien;
 import model.Profile;
+import utility.UtilHelper;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -24,7 +25,8 @@ public class lienDA {
         while (result.next()) {
             list.add(map(result));
         }
-        result.close();
+        UtilHelper.close(con);
+        UtilHelper.close(result);
         return list;
     }
     public static int insertLien(Lien p,Profile profile) throws SQLException {
@@ -33,18 +35,23 @@ public class lienDA {
         String sql = "INSERT INTO " + tableName
                 + " (nomLien, idProfile ,urlLien,imageLien) "
                 + "VALUES ( ?, ? , ? , ? )";
-        return dataAccess.executeSQL(con, sql,
+        int i=dataAccess.executeSQL(con, sql,
                 p.getNomLien(),
                 profile.getIdProfile(),
                 p.getUrlLien(),
                 p.getImageLien()
         );
+        UtilHelper.close(con);
+
+        return i;
     }
     public static int deleteLien(Lien p) throws SQLException {
         dataAccess.setDbname("portfolio");
         Connection con = dataAccess.getInstance().getConnection();
         String sql = "DELETE FROM " + tableName + " WHERE idLien = ?";
-        return dataAccess.executeSQL(con, sql, p.getIdLien());
+        int i= dataAccess.executeSQL(con, sql, p.getIdLien());
+        UtilHelper.close(con);
+        return i;
     }
     public static Lien findLien(int id) throws dataAccessException,SQLException {
         Lien p = null;
@@ -55,6 +62,9 @@ public class lienDA {
         if (result.next()) {
             p = map(result);
         }
+        UtilHelper.close(con);
+        UtilHelper.close(result);
+
         return p;
     }
     public static int updateLien(Lien p,Profile profile) throws SQLException {
@@ -63,13 +73,15 @@ public class lienDA {
         String sql = "UPDATE "+ tableName
                 +" SET nomLien = ? , idProfile = ? , urlLien = ?,imageLien = ?"
                 +" where idLien = ?";
-        return dataAccess.executeSQL(con, sql,
+        int i= dataAccess.executeSQL(con, sql,
                 p.getNomLien(),
                 profile.getIdProfile(),
                 p.getUrlLien(),
                 p.getImageLien(),
                 p.getIdLien()
         );
+        UtilHelper.close(con);
+        return i;
     }
     private static Lien map(ResultSet resultSet) throws SQLException {
         Lien pp = new Lien();

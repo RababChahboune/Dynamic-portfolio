@@ -1,6 +1,7 @@
 package dataAccess;
 import model.Categorie_projet;
 import DB.*;
+import utility.UtilHelper;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -21,7 +22,8 @@ public class Categorie_projetDA
         while (result.next()) {
             list.add(map(result));
         }
-        result.close();
+        UtilHelper.close(con);
+        UtilHelper.close(result);
         return list;
     }
     public static int insertCategorie_projet(Categorie_projet p) throws SQLException {
@@ -30,17 +32,21 @@ public class Categorie_projetDA
         String sql = "INSERT INTO " + tableName
                 + " (nomProjetCategorie,descriptionProjetCategorie,imageProjetCategorie) "
                 + "VALUES ( ?, ? , ? )";
-        return dataAccess.executeSQL(con, sql,
+        int i = dataAccess.executeSQL(con, sql,
                 p.getNomProjetCategorie(),
                 p.getDescriptionProjetCategorie(),
                 p.getImageProjetCategorie()
         );
+        UtilHelper.close(con);
+        return i;
     }
     public static int deleteCategorie_projet(Categorie_projet p) throws SQLException {
         dataAccess.setDbname("portfolio");
         Connection con = dataAccess.getInstance().getConnection();
         String sql = "DELETE FROM " + tableName + " WHERE idProjetCategorie = ?";
-        return dataAccess.executeSQL(con, sql, p.getIdProjetCategorie());
+        int i = dataAccess.executeSQL(con, sql, p.getIdProjetCategorie());
+        UtilHelper.close(con);
+        return i;
     }
     public static Categorie_projet findCategorie_projet(String key,Object value) throws dataAccessException,SQLException {
         Categorie_projet p = null;
@@ -51,6 +57,8 @@ public class Categorie_projetDA
         if (result.next()) {
             p = map(result);
         }
+        UtilHelper.close(con);
+        UtilHelper.close(result);
         return p;
     }
     public static int updateCategorie_projet(Categorie_projet p) throws SQLException {
@@ -59,12 +67,14 @@ public class Categorie_projetDA
         String sql = "UPDATE "+ tableName
                 +" SET nomProjetCategorie = ? , descriptionProjetCategorie = ?,imageProjetCategorie = ?"
                 +" where idProjetCategorie = ?";
-        return dataAccess.executeSQL(con, sql,
+        int i = dataAccess.executeSQL(con, sql,
                 p.getNomProjetCategorie(),
                 p.getDescriptionProjetCategorie(),
                 p.getImageProjetCategorie(),
                 p.getIdProjetCategorie()
         );
+        UtilHelper.close(con);
+        return i;
     }
     private static Categorie_projet map(ResultSet resultSet) throws SQLException {
         Categorie_projet pp = new Categorie_projet();

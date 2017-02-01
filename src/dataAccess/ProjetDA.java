@@ -3,6 +3,7 @@ package dataAccess;
 import model.Categorie_projet;
 import model.Projet;
 import DB.*;
+import utility.UtilHelper;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -27,7 +28,8 @@ public class ProjetDA {
         while (result.next()) {
             list.add(map(result));
         }
-        result.close();
+        UtilHelper.close(con);
+        UtilHelper.close(result);
         return list;
     }
     public static int insertProjet(Projet p) throws SQLException {
@@ -36,7 +38,7 @@ public class ProjetDA {
         String sql = "INSERT INTO " + tableName
                 + " (nomProjet, descriptionProjet,projetProjet,imageProjet,etoileProjet,idProjetCategorie) "
                 + "VALUES ( ?, ? , ?, ? , ?, ? )";
-        return dataAccess.executeSQL(con, sql,
+        int i= dataAccess.executeSQL(con, sql,
                 p.getNomProjet(),
                 p.getDescriptionProjet(),
                 p.getProjetProjet(),
@@ -44,6 +46,8 @@ public class ProjetDA {
                 p.isEtoileProjet(),
                 p.getCategorie_projet().getIdProjetCategorie()
         );
+        UtilHelper.close(con);
+        return i;
     }
     public static int deleteProjet(Projet p) throws SQLException {
         dataAccess.setDbname("portfolio");
@@ -60,6 +64,8 @@ public class ProjetDA {
         if (result.next()) {
             p = map(result);
         }
+        UtilHelper.close(con);
+        UtilHelper.close(result);
         return p;
     }
     public static int updateProjet(Projet p) throws SQLException {
@@ -68,7 +74,7 @@ public class ProjetDA {
         String sql = "UPDATE "+ tableName
                 +" SET nomProjet = ? , descriptionProjet = ?,projetProjet = ?,imageProjet = ?,etoileProjet = ?, idProjetCategorie = ?"
                 +" where idProjet = ?";
-        return dataAccess.executeSQL(con, sql,
+        int i= dataAccess.executeSQL(con, sql,
                 p.getNomProjet(),
                 p.getDescriptionProjet(),
                 p.getProjetProjet(),
@@ -77,6 +83,8 @@ public class ProjetDA {
                 p.getCategorie_projet().getIdProjetCategorie(),
                 p.getIdProjet()
                 );
+        UtilHelper.close(con);
+        return i;
     }
     private static Projet map(ResultSet resultSet) throws SQLException {
         Projet p = new Projet();
