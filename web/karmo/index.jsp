@@ -81,13 +81,13 @@
 				<section class="box-intro bg-film">
 						<div class="table-cell">
 
-								<h3 class="box-headline letters rotate-2">
+								<h3  style="color:white" class="box-headline letters rotate-2">
 										<span class="box-words-wrapper">
 												<b class="is-visible"><%=portfolio.getSalutationPortfolio()%></b>
 												<b><%=portfolio.getSalutationPortfolio()%></b>
 										</span>
 								</h3>
-								<h1>WE ARE <%=portfolio.getNomPortfolio()%></h1>
+								<h1 style="color:white" >WE ARE <%=portfolio.getNomPortfolio()%></h1>
 
 						</div>
 

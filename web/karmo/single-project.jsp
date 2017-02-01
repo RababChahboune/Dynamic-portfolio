@@ -82,8 +82,8 @@
 	<div class="site-hero_2">
 		<div class="section-overlay"></div>
 		<div class="page-title">
-			<h2><%=project.getNomProjet()%></h2>
-			<div class="small-title">home / portfolio </div>
+			<h2 style="color: #fff;"><%=project.getNomProjet()%></h2>
+			<div  style="color: #fff;" class="small-title">home / portfolio </div>
 		</div>
 	</div>
 
