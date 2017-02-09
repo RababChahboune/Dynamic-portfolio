@@ -23,9 +23,10 @@ public class AdministrateurDA {
         String sql = "SELECT * FROM " + tableName;
         ResultSet result = dataAccess.select(con, sql);
         if (result.next()){
+            Administrateur administrateur = map(result);
             UtilHelper.close(result);
             UtilHelper.close(con);
-            return map(result);
+            return administrateur;
         }
         else{
             UtilHelper.close(result);

@@ -1,3 +1,4 @@
+
 <%@ page import="model.Portfolio" %>
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="dataAccess.portfolioDA" %><%--
@@ -13,7 +14,6 @@
     try {
         p = portfolioDA.getPortfolio();
         response.sendRedirect(p.getTheme().getNomTheme()+"/");
-
     } catch (SQLException e) {
         e.printStackTrace();
     }
