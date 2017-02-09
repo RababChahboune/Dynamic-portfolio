@@ -18,9 +18,8 @@
                     if(c.getValue().equals(a.getUsername()))
                         foundCookie = true;
             }
-            if(!foundCookie){
+            if(!foundCookie)
                 response.sendRedirect("login.jsp");
-            }
         }
     }
 %>

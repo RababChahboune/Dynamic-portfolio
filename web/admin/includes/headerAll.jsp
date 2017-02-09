@@ -10,6 +10,7 @@
   Time: 18:08
 --%>
 <!-- Header File for all folders -->
+
 <%!  ArrayList<Courrier> courriers ;
     public static long getDateDiff(Date date1, Date date2, TimeUnit timeUnit) {
         long diffInMillies = date2.getTime() - date1.getTime();

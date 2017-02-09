@@ -66,6 +66,7 @@
     <script src="../lib/dist/js/admin/profile.js"></script>
 </head>
 <body class="hold-transition skin-purple sidebar-mini fixed">
+<jsp:include page="includes/verificationAll.jsp" />
 <jsp:include page="includes/headerAll.jsp"/>
 <jsp:include page="includes/sideBarAll.jsp"/>
 <div class="wrapper">
