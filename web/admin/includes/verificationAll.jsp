@@ -24,7 +24,7 @@
         }
     }
     if(!foundCookie){
-        if(session.getAttribute("username") == null || session.getAttribute("username").equals("")){
+        if(request.getSession().getAttribute("username") == null || session.getAttribute("username").equals("")){
             System.out.println("login redirect");
             response.sendRedirect("/admin/login.jsp");
         }else{

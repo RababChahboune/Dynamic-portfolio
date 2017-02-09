@@ -12,19 +12,26 @@
 %>
 <%
     cookies = request.getCookies();
-    if(cookies!=null){
-        a = AdministrateurDA.getAdministrateur();
-        foundCookie = false;
-        for(Cookie c : cookies){
-            if(c.getName().equals("username"))
-                if(c.getValue().equals(a.getUsername()))
-                    foundCookie = true;
+    if(session.getAttribute("username") == null){
+        System.out.println("no session detected");
+        if(cookies!=null){
+            a = AdministrateurDA.getAdministrateur();
+            foundCookie = false;
+            for(Cookie c : cookies){
+                if(c.getName().equals("username"))
+                    if(c.getValue().equals(a.getUsername()))
+                        foundCookie = true;
+            }
+            if(foundCookie){
+                System.out.println("Cookies detected");
+                response.sendRedirect("home.jsp");
+            }else{
+                System.out.println("no cookies detected");
+            }
         }
-        if(foundCookie){
-            response.sendRedirect("home.jsp");
-        }
+    }else{
+        response.sendRedirect("home.jsp");
     }
-
 %>
 <html>
 <head>

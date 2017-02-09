@@ -1,6 +1,29 @@
 <%@ page import="model.Administrateur" %>
 <%@ page import="dataAccess.AdministrateurDA" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%!
+    Administrateur a;
+    Cookie[] cookies;
+    boolean foundCookie;
+%>
+<%
+    foundCookie = false;
+    cookies = request.getCookies();
+    if(session.getAttribute("username") == null){
+        if(cookies!=null){
+            a = AdministrateurDA.getAdministrateur();
+            foundCookie = false;
+            for(Cookie c : cookies){
+                if(c.getName().equals("username"))
+                    if(c.getValue().equals(a.getUsername()))
+                        foundCookie = true;
+            }
+            if(!foundCookie){
+                response.sendRedirect("login.jsp");
+            }
+        }
+    }
+%>
 <html>
 <head>
     <meta charset="utf-8">

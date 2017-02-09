@@ -24,16 +24,16 @@ public class loginServlet extends HttpServlet {
             Administrateur admin = AdministrateurDA.getAdministrateur();
             if(action.equals("login")){
                 if(admin.getUsername().equals(username) && admin.getPassword().equals(password)){
-                    if(!rememberMe.equals("0")) {
+                    if(rememberMe.equals("on")) {
                         Cookie c = new Cookie("username", username);
                         c.setMaxAge(24*60*60);
-                        response.addCookie(c);  // response is an instance of type HttpServletReponse
+                        response.addCookie(c);   // response is an instance of type HttpServletReponse
                     }
                     HttpSession session = request.getSession();
                     session.setAttribute("username", username);
                     response.sendRedirect("admin/home.jsp");
                 }else{
-                    response.sendRedirect("admin/login.jsp");
+                    response.sendRedirect("admin/login.jsp?status=wrong");
                 }
             }
             else if(action.equals("lockScreen")){
