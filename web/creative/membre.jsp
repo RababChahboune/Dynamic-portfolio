@@ -4,23 +4,25 @@
 <%@ page import="model.*" %><%--
   Created by IntelliJ IDEA.
   User: Rabab Chahboune
-  Date: 1/30/2017
-  Time: 10:44 PM
+  Date: 2/9/2017
+  Time: 8:47 PM
   To change this template use File | Settings | File Templates.
 --%>
 <!DOCTYPE html>
 
 <%!
-    Portfolio p;
+    Portfolio portfolio;
+    Profile p;
 %>
 <%  try{
-   p = portfolioDA.getPortfolio();
+    portfolio = portfolioDA.getPortfolio();
+    p = ProfileDA.findProfile(Integer.parseInt(request.getParameter("idProfile")));
 }catch(SQLException e){
     System.out.println(e);
 }
 %>
 
-<html lang="en">
+<html lang="fr">
 
 <head>
 
@@ -30,7 +32,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title><%= p.getNomPortfolio()%></title>
+    <title><%= portfolio.getNomPortfolio() %></title>
 
     <!-- Bootstrap Core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -64,7 +66,7 @@
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand page-scroll" href="#page-top"><%=p.getNomPortfolio()%></a>
+            <a class="navbar-brand page-scroll" href="#page-top"><%=portfolio.getNomPortfolio()%></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -74,16 +76,13 @@
                     <a class="page-scroll" href="#about">A propos</a>
                 </li>
                 <li>
-                    <a class="page-scroll" href="#membres">Membres</a>
+                    <a class="page-scroll" href="#cursus">Cursus</a>
                 </li>
                 <li>
-                    <a class="page-scroll" href="#services">Domaine</a>
+                    <a class="page-scroll" href="#compétance">Compétance</a>
                 </li>
                 <li>
-                    <a class="page-scroll" href="#experience">Experience</a>
-                </li>
-                <li>
-                    <a class="page-scroll" href="#portfolio">Projet</a>
+                    <a class="page-scroll" href="#lien">Lien</a>
                 </li>
                 <li>
                     <a class="page-scroll" href="#contact">Contacter nous</a>
@@ -98,9 +97,11 @@
 <header>
     <div class="header-content">
         <div class="header-content-inner">
-            <h1 id="homeHeading"><%= p.getNomPortfolio() %></h1>
+            <h3 id="homeHeading"><%= p.getPrenomProfile() +" "+p.getNomProfile() %></h3>
             <hr>
-            <p><%= p.getSalutationPortfolio() %></p>
+            <img src="../lib/dist/img/profile/<% if(!p.getImageProfile().equals("0")) out.print(p.getImageProfile()); else out.print("default.png");%>" width="100">
+            <br>
+            <br>
             <a href="#about" class="btn btn-primary btn-xl page-scroll">Find Out More</a>
         </div>
     </div>
@@ -112,29 +113,32 @@
             <div class="col-lg-8 col-lg-offset-2 text-center">
                 <h2 class="section-heading">A propos</h2>
                 <hr class="light">
-                <p class="text-faded"><%=p.getaProposPortfolio()%></p>
+                <p class="text-faded"><%=p.getEmailProfile()%></p>
+                <p class="text-faded"><%=p.getTelephoneProfile()%></p>
+                <p class="text-faded"><%=p.getBiographieProfile()%></p>
                 <a href="#membres" class="page-scroll btn btn-default btn-xl sr-button">Get Started!</a>
             </div>
         </div>
     </div>
 </section>
 
-<section id="membres">
+<section id="cursus">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2 class="section-heading">Membres</h2>
+                <h2 class="section-heading">Cursus</h2>
                 <hr class="primary">
             </div>
         </div>
     </div>
     <div class="container">
         <div class="row">
-            <% for(Profile profile : ProfileDA.getProfileList()){%>
+            <% for(Cursus cursus: p.getCursus()){%>
             <div class="col-lg-3 col-md-6 text-center">
                 <div class="service-box">
-                    <a href="membre.jsp?idProfile=<%=profile.getIdProfile()%>"><img src="../lib/dist/img/profile/<% if(!profile.getImageProfile().equals("0")) out.print(profile.getImageProfile()); else out.print("default.png");%>" width="100"></a>
-                    <h2><a href="membre.jsp?idProfile=<%=profile.getIdProfile()%>"><%=profile.getNomProfile()+" "+profile.getPrenomProfile()%></a></h2>
+                    <h4><%=cursus.getNomCursus()%> : <%=cursus.getAnnee_debutCursus()%>-<%=cursus.getAnnee_finCursus()%></h4>
+                    <p>A <%=cursus.getEtablissementCursus()%></p>
+                    <p>Remarque : <%=cursus.getRemarqueCursus()%></p>
                 </div>
             </div>
             <%}%>
@@ -142,23 +146,22 @@
     </div>
 </section>
 
-<section id="services">
+<section id="compétance">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2 class="section-heading">Domaine</h2>
+                <h2 class="section-heading">Compétance</h2>
                 <hr class="primary">
             </div>
         </div>
     </div>
     <div class="container">
         <div class="row">
-            <% for(Domaine d: domaineDA.getDomaineList()){%>
+            <% for(Competance c: p.getCompetance()){%>
             <div class="col-lg-3 col-md-6 text-center">
                 <div class="service-box">
-                    <img src="../lib/dist/img/domaine/<% if(!d.getImageDomaine().equals("0")) out.print(d.getImageDomaine()); else out.print("default.png");%>" width="100">
-                    <h2><%=d.getNomDomaine()%></h2>
-                    <p><%=d.getDescriptionDomaine()%></p>
+                    <h2><%=c.getNomCompetance()%></h2>
+                    <p><%=c.getPourcentageCompetance()%>%</p>
                 </div>
             </div>
             <%}%>
@@ -166,53 +169,22 @@
     </div>
 </section>
 
-<section id="experience">
+<section id="lien">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2 class="section-heading">Experience</h2>
+                <h2 class="section-heading">Lien</h2>
                 <hr class="primary">
             </div>
         </div>
     </div>
     <div class="container">
         <div class="row">
-            <% for(Experience e: experienceDA.getExperienceList()){%>
+            <% for(Lien l : p.getLien()){%>
             <div class="col-lg-3 col-md-6 text-center">
                 <div class="service-box">
-                    <img src="../lib/dist/img/partenaire/<% if(!e.getLogoExperience().equals("0")) out.print(e.getLogoExperience()); else out.print("default.png");%>" width="100">
-                    <h2><%=e.getNomExperience()%></h2>
+                    <a href="<%=l.getUrlLien()%>"><img src="../lib/dist/img/lien/<% if(!l.getImageLien().equals("0")) out.print(l.getImageLien()); else out.print("default.png");%>" width="100"></a>
                 </div>
-            </div>
-            <%}%>
-        </div>
-    </div>
-</section>
-
-<section class="no-padding" id="portfolio">
-    <div class="container-fluid">
-        <div class="row no-gutter popup-gallery">
-            <%for(Projet projet : ProjetDA.getProjetList()){%>
-            <div class="col-lg-4 col-sm-6">
-                <a href="../lib/dist/img/projet/<% if(!projet.getImageProjet().equals("0")) out.print(projet.getImageProjet()); else out.print("default.png");%>" class="portfolio-box">
-                    <img style="height: 300px; width: 500px;" src="../lib/dist/img/projet/<% if(!projet.getImageProjet().equals("0")) out.print(projet.getImageProjet()); else out.print("default.png");%>" class="img-responsive" alt="">
-                    <div class="portfolio-box-caption">
-                        <div class="portfolio-box-caption-content">
-                            <div class="project-category text-faded">
-                                <%=projet.getCategorie_projet().getNomProjetCategorie()%>
-                            </div>
-                            <div class="project-name">
-                                <%=projet.getNomProjet()%>
-                            </div>
-                            <div class="project-name">
-                                <%=projet.getDescriptionProjet()%>
-                            </div>
-                            <div class="project-name">
-                                <%=projet.getProjetProjet()%>
-                            </div>
-                        </div>
-                    </div>
-                </a>
             </div>
             <%}%>
         </div>
@@ -275,3 +247,4 @@
 </body>
 
 </html>
+
