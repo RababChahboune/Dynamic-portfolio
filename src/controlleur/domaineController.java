@@ -1,9 +1,14 @@
 package controlleur;
 
 import com.geekonjava.fileupload.FileUploading;
+import dataAccess.AdministrateurDA;
+import dataAccess.Categorie_projetDA;
+import dataAccess.courrierDA;
 import dataAccess.domaineDA;
+import model.Administrateur;
 import model.Domaine;
 import utility.Check;
+import utility.verifySession;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -20,9 +25,9 @@ import java.util.HashMap;
 /**
  * Created by Rabab Chahboune on 12/12/2016.
  */
-@WebServlet(name = "domaineController")
 public class domaineController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("POOOOOOOOOOOOOOOST");
         ServletContext context = this.getServletContext();
         PrintWriter out = response.getWriter();
         Domaine d;
@@ -35,7 +40,7 @@ public class domaineController extends HttpServlet {
         dataname.add("descriptionDomaine");
         dataname.add("action");
         HashMap map = FileUploading.UploadFile(imagepath, dataname, imagename, request);
-        if(map.get("action").toString().equals("ajouterDomaine")){
+        if(map.get("action").toString().equals("ajouterdomaine")){
             try {
                 String imageDomaine = Check.checkInput(map.get("imageDomaine").toString());
                 d = new Domaine();
@@ -47,7 +52,9 @@ public class domaineController extends HttpServlet {
                 e.printStackTrace();
             }
         }
-        else if(map.get("action").toString().equals("modifierDomaine")){
+        else if(map.get("action").toString().equals("modifierdomaine")){
+            System.out.println(map.get("action")+"----------------");
+
             try {
                 int idDomaine = Integer.parseInt(Check.checkInput(map.get("idDomaine").toString()));
                 d = domaineDA.findDomaine(idDomaine);
@@ -65,15 +72,52 @@ public class domaineController extends HttpServlet {
         }
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if(request.getParameter("action").equals("supprimerDomaine")){
-            try {
-                int idDomaine = Integer.parseInt(Check.checkInput(request.getParameter("id")));
-                Domaine d = domaineDA.findDomaine(idDomaine);
-                domaineDA.deleteDomaine(d);
-                response.sendRedirect("admin/home.jsp");
-            } catch (SQLException e) {
-                e.printStackTrace();
+        response.setContentType("text/html; charset=UTF-8");
+        try {
+            if(!verifySession.check(request,response)){
+                response.sendRedirect("admin/index");
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        Domaine domaine = new Domaine("","","");
+        Administrateur administrateur = null;
+        try {
+            administrateur = AdministrateurDA.getAdministrateur();
+            request.setAttribute("administrateur",administrateur);
+            request.setAttribute("portfolio",administrateur.getProfile());
+            request.setAttribute("courrier", courrierDA.getCourrierList());
+            request.setAttribute("categorie", Categorie_projetDA.getCategorie_projetList());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        if(request.getParameter("action") != null){
+            if(request.getParameter("action").equals("supprimerDomaine")){
+                try {
+                    int idDomaine = Integer.parseInt(Check.checkInput(request.getParameter("id")));
+                    Domaine d = domaineDA.findDomaine(idDomaine);
+                    domaineDA.deleteDomaine(d);
+                    response.sendRedirect("homeServlet");
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            else if(request.getParameter("action").equals("modifierDomaine")){
+                try {
+                    domaine = domaineDA.findDomaine(Integer.parseInt(request.getParameter("id")));
+                    request.setAttribute("domaine",domaine);
+                    request.getRequestDispatcher("admin/domaine.jsp?action=modifierdomaine").forward(request,response);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }else{
+                request.setAttribute("domaine",domaine);
+                request.getRequestDispatcher("admin/domaine.jsp?action=ajouterdomaine").forward(request,response);
+            }
+        }else{
+            request.setAttribute("domaine",domaine);
+            request.getRequestDispatcher("admin/domaine.jsp?action=ajouterdomaine").forward(request,response);
         }
     }
 }

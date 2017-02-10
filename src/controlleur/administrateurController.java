@@ -1,8 +1,12 @@
 package controlleur;
 
 import dataAccess.AdministrateurDA;
+import dataAccess.Categorie_projetDA;
+import dataAccess.courrierDA;
+import dataAccess.domaineDA;
 import model.Administrateur;
 import utility.Check;
+import utility.verifySession;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,5 +45,19 @@ public class administrateurController extends HttpServlet {
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        response.setContentType("text/html; charset=UTF-8");
+        try {
+            if(!verifySession.check(request,response)){
+                response.sendRedirect("admin/index");
+            }
+            Administrateur administrateur = AdministrateurDA.getAdministrateur();
+            request.setAttribute("portfolio",administrateur.getProfile());
+            request.setAttribute("categorie", Categorie_projetDA.getCategorie_projetList());
+            request.setAttribute("administrateur",administrateur);
+            request.setAttribute("courrier", courrierDA.getCourrierList());
+            request.getRequestDispatcher("admin/administrateur.jsp").forward(request,response);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -75,6 +75,6 @@ public class lienController extends HttpServlet {
         }
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("GET");
+        response.setContentType("text/html; charset=UTF-8");
     }
 }

@@ -4,7 +4,9 @@
   Time: 18:22
 --%>
 <!-- Footer for all pages-->
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=utf-8" pageEncoding="UTF-8"%>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
 <footer class="main-footer">
     <strong>Copyright &copy; 2016 Rabab Chanhboune et Mohamed Reda Benchraa.</strong>
 </footer>

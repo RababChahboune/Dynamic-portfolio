@@ -1,10 +1,13 @@
 package controlleur;
 
 import com.geekonjava.fileupload.FileUploading;
-import dataAccess.portfolioDA;
+import dataAccess.*;
+import model.Administrateur;
+import model.Courrier;
 import model.Portfolio;
 import model.Theme;
 import utility.Check;
+import utility.verifySession;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -54,6 +57,24 @@ public class portfolioController extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        response.setContentType("text/html; charset=UTF-8");
+        try {
+            if(!verifySession.check(request,response)){
+                response.sendRedirect("admin/index");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            Administrateur administrateur = AdministrateurDA.getAdministrateur();
+            request.setAttribute("portfolio",administrateur.getProfile());
+            request.setAttribute("categorie", Categorie_projetDA.getCategorie_projetList());
+            request.setAttribute("administrateur",administrateur);
+            request.setAttribute("courrier", courrierDA.getCourrierList());
+            request.setAttribute("domaine", domaineDA.getDomaineList());
+            request.getRequestDispatcher("admin/information.jsp").forward(request,response);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

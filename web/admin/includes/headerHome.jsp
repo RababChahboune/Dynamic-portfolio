@@ -5,13 +5,10 @@
   Time: 18:09
 --%>
 <!-- Header Dashboard -->
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%!
-    Administrateur administrateur;
-%>
-<%
-    administrateur = AdministrateurDA.getAdministrateur();
-%>
+<%@ page contentType="text/html; charset=utf-8" pageEncoding="UTF-8"%>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<%Administrateur administrateur = (Administrateur) request.getAttribute("administrateur");%>
 <div class="row">
     <div class="col-lg-3 col-xs-6">
         <!-- small box -->

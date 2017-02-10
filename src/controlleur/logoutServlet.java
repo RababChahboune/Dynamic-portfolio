@@ -37,6 +37,8 @@ public class logoutServlet extends HttpServlet {
         response.sendRedirect("admin/login.jsp");
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html; charset=UTF-8");
+
         doPost(request,response);
     }
 }

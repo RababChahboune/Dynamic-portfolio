@@ -6,13 +6,10 @@
   Time: 18:42
 --%>
 <!-- Partner list in dashboard -->
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%!
-    Administrateur administrateur;
-%>
-<%
-    administrateur = AdministrateurDA.getAdministrateur();
-%>
+<%@ page contentType="text/html; charset=utf-8" pageEncoding="UTF-8"%>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<%Administrateur administrateur = (Administrateur) request.getAttribute("administrateur");%>
 <div class="col-md-8">
     <div class="box box-info">
         <div class="box-header with-border">
@@ -25,16 +22,16 @@
             <ul class="users-list clearfix menu">
                 <% for(Experience experience : administrateur.getExperience()){ %>
                 <li>
-                    <a href="/DynamicPortfolio/experienceController?action=supprimerExperience&id=<%=experience.getIdExperience()%>"><span class="label label-danger pull-right"><span class="fa fa-times"></span></span></a>
-                    <a href="partenaire.jsp?action=modifierExperience&id=<%=experience.getIdExperience()%>"><span class="label label-info pull-right"><span class="fa fa-pencil"></span></span></a>
-                    <img src="../lib/dist/img/partenaire/<% if(!experience.getLogoExperience().equals("0")) out.print(experience.getLogoExperience()); else out.print("default.png");%>" width=150 alt="partenaire Image">
+                    <a href="<%=request.getContextPath()%>/experienceController?action=supprimerExperience&id=<%=experience.getIdExperience()%>"><span class="label label-danger pull-right"><span class="fa fa-times"></span></span></a>
+                    <a href="<%=request.getContextPath()%>/experienceController?action=modifierExperience&id=<%=experience.getIdExperience()%>"><span class="label label-info pull-right"><span class="fa fa-pencil"></span></span></a>
+                    <img src="<%=request.getContextPath()%>/lib/dist/img/partenaire/<% if(!experience.getLogoExperience().equals("0")) out.print(experience.getLogoExperience()); else out.print("default.png");%>" width=150 alt="partenaire Image">
                     <a class="users-list-name" href="#"><%=experience.getNomExperience()%></a>
                 </li>
                 <%}%>
             </ul>
         </div>
         <div class="box-footer text-center">
-            <a href="partenaire.jsp?action=ajouterExperience" class="btn btn-sm btn-default btn-flat pull-right">Ajoter un partenaire</a>
+            <a href="<%=request.getContextPath()%>/experienceController?action=ajouterExperience" class="btn btn-sm btn-default btn-flat pull-right">Ajoter un partenaire</a>
         </div>
     </div>
 </div>

@@ -4,7 +4,7 @@
 $(document).ready ( function(){
     $(".mailbox-name").click(function(e) {
         e.preventDefault();
-        $.get("../courrierController", {idCourrier : $(this).attr('id')} , function(response) {
+        $.get("courrierController", {idCourrier : $(this).attr('id')} , function(response) {
             $("#idCourrier").val(response.idCourrier);
             $("#emailCourrier").html(response.emailCourrier);
             $("#sujetCourrier").html(response.sujetCourrier);
@@ -14,8 +14,8 @@ $(document).ready ( function(){
         });
     });
     $("#deleteButton").click(function(e) {
-        $.post("../courrierController", {idCourrier : $("#idCourrier").val(),action:"supprimerCourrier"} , function(response) {
-            $(location).attr('href', '../admin/courrier.jsp')
+        $.post("courrierController", {idCourrier : $("#idCourrier").val(),action:"supprimerCourrier"} , function(response) {
+            $(location).attr('href', 'courrierController')
         });
     });
     $("#deleteAll").click(function(e) {
@@ -23,8 +23,8 @@ $(document).ready ( function(){
         $('#idCour :checked').each(function() {
             allVals.push($(this).val());
         });
-        $.post("../courrierController", {idCourrier : allVals.join(","),action:"supprimerCourrier"} , function(response) {
-            $(location).attr('href', '../admin/courrier.jsp')
+        $.post("courrierController", {idCourrier : allVals.join(","),action:"supprimerCourrier"} , function(response) {
+            $(location).attr('href', 'courrierController')
         });
     });
 

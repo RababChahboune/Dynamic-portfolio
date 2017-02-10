@@ -3,6 +3,7 @@ package controlleur;
 import dataAccess.AdministrateurDA;
 import model.Administrateur;
 import utility.Check;
+import utility.verifySession;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,11 +28,11 @@ public class loginServlet extends HttpServlet {
                     if(rememberMe.equals("on")) {
                         Cookie c = new Cookie("username", username);
                         c.setMaxAge(24*60*60);
-                        response.addCookie(c);   // response is an instance of type HttpServletReponse
+                        response.addCookie(c);
                     }
                     HttpSession session = request.getSession();
                     session.setAttribute("username", username);
-                    response.sendRedirect("admin/home.jsp");
+                    response.sendRedirect("homeServlet");
                 }else{
                     response.sendRedirect("admin/login.jsp?status=wrong");
                 }
@@ -40,7 +41,7 @@ public class loginServlet extends HttpServlet {
                 if(admin.getPassword().equals(password)){
                     HttpSession session = request.getSession();
                     session.setAttribute("username", username);
-                    response.sendRedirect("admin/home.jsp");
+                    response.sendRedirect("homeServlet");
                 }else{
                     response.sendRedirect("admin/lockScreen.jsp");
                 }
@@ -51,6 +52,17 @@ public class loginServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request,response);
+        response.setContentType("text/html; charset=UTF-8");
+
+        try {
+            if(verifySession.check(request,response)){
+                response.sendRedirect("homeServlet");
+            }else{
+                response.sendRedirect("login.jsp");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        //doPost(request,response);
     }
 }

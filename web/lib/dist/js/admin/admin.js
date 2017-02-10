@@ -4,7 +4,7 @@
 $(document).ready ( function(){
     $("#submit").click(function(e) {
         e.preventDefault();
-        $.post("../administrateurController",$('form').serialize(), function(response) {
+        $.post("administrateurController",$('form').serialize(), function(response) {
             alert(response);
             $("input[name=oldUsername]").val("");
             $("input[name=oldPassword]").val("");
@@ -14,6 +14,6 @@ $(document).ready ( function(){
     });
     $("#return").click(function(e) {
         e.preventDefault();
-        $(location).attr('href', '../admin/home.jsp')
+        $(location).attr('href', 'homeServlet')
     });
 })

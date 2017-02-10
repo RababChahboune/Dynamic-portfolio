@@ -1,9 +1,13 @@
 package controlleur;
 
 import com.geekonjava.fileupload.FileUploading;
+import dataAccess.AdministrateurDA;
 import dataAccess.Categorie_projetDA;
+import dataAccess.courrierDA;
+import model.Administrateur;
 import model.Categorie_projet;
 import utility.Check;
+import utility.verifySession;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -35,6 +39,7 @@ public class catProjectController extends HttpServlet {
         HashMap map = FileUploading.UploadFile(imagepath, dataname, imagename, request);
         Categorie_projet cp;
         PrintWriter out = response.getWriter();
+        System.out.println(map.get("action").toString()+"---------------------");
         if(map.get("action").toString().equals("ajouterCategorieProjet")){
             try {
                 String imageProjetCategorie = Check.checkInput(map.get("imageProjetCategorie").toString());
@@ -70,15 +75,52 @@ public class catProjectController extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            if(request.getParameter("action").equals("supprimerCategorieProjet")){
-            try {
-                int idProjetCategorie = Integer.parseInt(Check.checkInput(request.getParameter("id")));
-                Categorie_projet cp = Categorie_projetDA.findCategorie_projet("idProjetCategorie",idProjetCategorie);
-                Categorie_projetDA.deleteCategorie_projet(cp);
-                response.sendRedirect("admin/home.jsp");
-            } catch (SQLException e) {
-                e.printStackTrace();
+        response.setContentType("text/html; charset=UTF-8");
+
+        Categorie_projet cp = new Categorie_projet("","","");
+        Administrateur administrateur = null;
+        try {
+            if(!verifySession.check(request,response)){
+                response.sendRedirect("admin/index");
             }
+            administrateur = AdministrateurDA.getAdministrateur();
+            request.setAttribute("administrateur",administrateur);
+            request.setAttribute("portfolio",administrateur.getProfile());
+            request.setAttribute("courrier", courrierDA.getCourrierList());
+            request.setAttribute("categorie", Categorie_projetDA.getCategorie_projetList());
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        if(request.getParameter("action") != null){
+            if(request.getParameter("action").equals("modifierCategorieProjet")){
+                try {
+                    cp = Categorie_projetDA.findCategorie_projet("idProjetCategorie",Integer.parseInt(request.getParameter("id")));
+                    request.setAttribute("cat",cp);
+                    request.getRequestDispatcher("admin/categorieProjet.jsp?action=modifierCategorieProjet").forward(request,response);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }else
+                if(request.getParameter("action").equals("supprimerCategorieProjet")){
+                try {
+                    int idProjetCategorie = Integer.parseInt(Check.checkInput(request.getParameter("id")));
+                    cp = Categorie_projetDA.findCategorie_projet("idProjetCategorie",idProjetCategorie);
+                    Categorie_projetDA.deleteCategorie_projet(cp);
+                    response.sendRedirect("homeServlet");
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }else {
+                    System.out.println("ajoutercat");
+
+                    request.setAttribute("cat",cp);
+                request.getRequestDispatcher("admin/categorieProjet.jsp?action=ajouterCategorieProjet").forward(request,response);
+            }
+        }else{
+            request.setAttribute("cat",cp);
+            request.setAttribute("action","ajouterCategorieProjet");
+            request.getRequestDispatcher("admin/categorieProjet.jsp?action=ajouterCategorieProjet").forward(request,response);
+        }
+
     }
 }

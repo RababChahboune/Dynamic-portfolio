@@ -8,14 +8,10 @@
   Time: 18:41
 --%>
 <!-- Project list in dashboard -->
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%!
-    Administrateur administrateur;
-%>
-<%
-    administrateur = AdministrateurDA.getAdministrateur();
-    System.out.printf(administrateur.getProjet().size()+"");
-%>
+<%@ page contentType="text/html; charset=utf-8" pageEncoding="UTF-8"%>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<%Administrateur administrateur = (Administrateur) request.getAttribute("administrateur");%>
 <div class="col-md-8">
     <div class="box box-info">
         <div class="box-header with-border">
@@ -44,8 +40,8 @@
                         <td><a href=""><span class="label label-<% if(p.isEtoileProjet()) out.print("warning");else out.print("default");%>"><span class="fa fa-star"></span></span></a></td>
                         <td><%=p.getCategorie_projet().getNomProjetCategorie()%></td>
                         <td>
-                            <a href="projet.jsp?action=modifierProjet&id=<%=p.getIdProjet()%>"><span class="label label-info"><span class="fa fa-pencil"></span></span></a>
-                            <a href="/DynamicPortfolio/projectController?action=supprimerProjet&id=<%=p.getIdProjet()%>"> <span class="label label-danger"><span class="fa fa-times"></span></span></a>
+                            <a href="<%=request.getContextPath()%>/projectController?action=modifierProjet&id=<%=p.getIdProjet()%>"><span class="label label-info"><span class="fa fa-pencil"></span></span></a>
+                            <a href="<%=request.getContextPath()%>/projectController?action=supprimerProjet&id=<%=p.getIdProjet()%>"> <span class="label label-danger"><span class="fa fa-times"></span></span></a>
                         </td>
                     </tr>
                     <%}%>
@@ -54,7 +50,7 @@
             </div>
         </div>
         <div class="box-footer clearfix">
-            <a href="projet.jsp?action=ajouterProjet" class="btn btn-sm btn-default btn-flat pull-right">Ajoter un projet</a>
+            <a href="<%=request.getContextPath()%>/projectController?action=ajouterProjet" class="btn btn-sm btn-default btn-flat pull-right">Ajoter un projet</a>
         </div>
     </div>
 </div>

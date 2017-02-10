@@ -1,11 +1,15 @@
 package controlleur;
 
 import com.geekonjava.fileupload.FileUploading;
+import dataAccess.AdministrateurDA;
 import dataAccess.Categorie_projetDA;
 import dataAccess.ProjetDA;
+import dataAccess.courrierDA;
+import model.Administrateur;
 import model.Categorie_projet;
 import model.Projet;
 import utility.Check;
+import utility.verifySession;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -83,17 +87,57 @@ public class projectController extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            if(request.getParameter("action").equals("supprimerProjet")){
-            int idProjet = Integer.parseInt(Check.checkInput(request.getParameter("id")));
-                Projet p;
+        response.setContentType("text/html; charset=UTF-8");
+        try {
+            if(!verifySession.check(request,response)){
+                response.sendRedirect("admin/index");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        Projet p = new Projet("", "", "", "", false, null);
+        Administrateur administrateur = null;
+        try {
+            administrateur = AdministrateurDA.getAdministrateur();
+            request.setAttribute("portfolio", administrateur.getProfile());
+            request.setAttribute("administrateur", administrateur);
+            request.setAttribute("courrier", courrierDA.getCourrierList());
+            request.setAttribute("categorie", Categorie_projetDA.getCategorie_projetList());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            ArrayList<Categorie_projet> cps = Categorie_projetDA.getCategorie_projetList();
+            request.setAttribute("cps", Categorie_projetDA.getCategorie_projetList());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if (request.getParameter("action") != null) {
+            if (request.getParameter("action").equals("modifierProjet")) {
                 try {
-                    p = ProjetDA.findProjet(idProjet);
-                    ProjetDA.deleteProjet(p);
-                    response.sendRedirect("admin/home.jsp");
+                    p = ProjetDA.findProjet(Integer.parseInt(request.getParameter("id")));
+                    request.setAttribute("projet", p);
+                    request.getRequestDispatcher("admin/projet.jsp?action=modifierProjet").forward(request, response);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
-
+            } else if (request.getParameter("action").equals("supprimerProjet")) {
+                int idProjet = Integer.parseInt(Check.checkInput(request.getParameter("id")));
+                try {
+                    p = ProjetDA.findProjet(idProjet);
+                    ProjetDA.deleteProjet(p);
+                    response.sendRedirect("homeServlet");
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                request.setAttribute("projet", p);
+                request.getRequestDispatcher("admin/projet.jsp?action=ajouterProjet").forward(request, response);
+            }
+        } else {
+            request.setAttribute("projet", p);
+            request.getRequestDispatcher("admin/projet.jsp?action=ajouterProjet").forward(request, response);
         }
     }
 }

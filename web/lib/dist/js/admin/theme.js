@@ -3,8 +3,8 @@
  */
 $(document).ready ( function(){
     $("button").click(function() {
-        $.post("../themeController", {'themeName':  $('select').find(":selected").text() }, function(response) {
-            $("#themeImg").attr("src","../lib/dist/img/theme/"+response);
+        $.post("themeController", {'themeName':  $('select').find(":selected").text() }, function(response) {
+            $("#themeImg").attr("src","lib/dist/img/theme/"+response);
         });
     });
 })

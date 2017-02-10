@@ -4,38 +4,10 @@
   Date: 11/12/2016
   Time: 22:11
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%!
-    Administrateur a;
-    Cookie[] cookies;
-    boolean foundCookie;
-%>
-<%
-    cookies = request.getCookies();
-    if(session.getAttribute("username") == null){
-        System.out.println("no session detected");
-        if(cookies!=null){
-            a = AdministrateurDA.getAdministrateur();
-            foundCookie = false;
-            for(Cookie c : cookies){
-                if(c.getName().equals("username"))
-                    if(c.getValue().equals(a.getUsername()))
-                        foundCookie = true;
-            }
-            if(foundCookie){
-                System.out.println("Cookies detected");
-                response.sendRedirect("home.jsp");
-            }else{
-                System.out.println("no cookies detected");
-            }
-        }
-    }else{
-        response.sendRedirect("home.jsp");
-    }
-%>
+<%@ page contentType="text/html; charset=utf-8" pageEncoding="UTF-8"%>
 <html>
 <head>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Log in</title>
     <!-- Tell the browser to be responsive to screen width -->

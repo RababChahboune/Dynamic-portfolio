@@ -6,7 +6,9 @@
   Time: 18:44
 --%>
 <!-- Domaine list in dashboard -->
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=utf-8" pageEncoding="UTF-8"%>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
 <%!
     Administrateur administrateur;
 %>
@@ -27,10 +29,10 @@
             <ul class="products-list product-list-in-box menu">
                 <% for(Domaine d: administrateur.getDomaine()){ %>
                 <li class="item">
-                    <a href="/DynamicPortfolio/domaineController?action=supprimerDomaine&id=<%=d.getIdDomaine()%>"><span class="label label-danger pull-right"><span class="fa fa-times"></span></span></a>
-                    <a href="domaine.jsp?action=modifierDomaine&id=<%=d.getIdDomaine()%>"><span class="label label-info pull-right"><span class="fa fa-pencil"></span></span></a>
+                    <a href="<%=request.getContextPath()%>/domaineController?action=supprimerDomaine&id=<%=d.getIdDomaine()%>"><span class="label label-danger pull-right"><span class="fa fa-times"></span></span></a>
+                    <a href="<%=request.getContextPath()%>/domaineController?action=modifierDomaine&id=<%=d.getIdDomaine()%>"><span class="label label-info pull-right"><span class="fa fa-pencil"></span></span></a>
                     <div class="product-img">
-                        <img src="../lib/dist/img/domaine/<% if(!d.getImageDomaine().equals("0")) out.print(d.getImageDomaine()); else out.print("default.png");%>" alt="domaine Image">
+                        <img src="<%=request.getContextPath()%>/lib/dist/img/domaine/<% if(!d.getImageDomaine().equals("0")) out.print(d.getImageDomaine()); else out.print("default.png");%>" alt="domaine Image">
                     </div>
                     <div class="product-info">
                         <a href="javascript:void(0)" class="product-title">
@@ -43,7 +45,7 @@
             </ul>
         </div>
         <div class="box-footer text-center">
-            <a href="domaine.jsp?action=ajouterDomaine" class="btn btn-sm btn-default btn-flat pull-right">Ajoter un domaine</a>
+            <a href="<%=request.getContextPath()%>/domaineController?action=ajouterDomaine" class="btn btn-sm btn-default btn-flat pull-right">Ajoter un domaine</a>
         </div>
     </div>
 </div>

@@ -1,10 +1,11 @@
 package controlleur;
 
-import dataAccess.themeDA;
+import dataAccess.*;
+import model.Administrateur;
 import model.Portfolio;
-import dataAccess.portfolioDA;
 import model.Theme;
 import utility.Check;
+import utility.verifySession;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,6 +41,22 @@ public class themeController extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        response.setContentType("text/html; charset=UTF-8");
+        try {
+            if(!verifySession.check(request,response)){
+                response.sendRedirect("admin/index");
+            }
+            Administrateur administrateur = AdministrateurDA.getAdministrateur();
+            String selectedThemeImage =themeDA.findTheme(administrateur.getPortfolio().getTheme().getNomTheme()).getPaletteTheme();
+            request.setAttribute("administrateur",administrateur);
+            request.setAttribute("portfolio",administrateur.getProfile());
+            request.setAttribute("categorie", Categorie_projetDA.getCategorie_projetList());
+            request.setAttribute("courrier", courrierDA.getCourrierList());
+            request.setAttribute("theme", themeDA.getThemeList());
+            request.setAttribute("selectedThemeImage", selectedThemeImage);
+            request.getRequestDispatcher("admin/theme.jsp").include(request,response);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

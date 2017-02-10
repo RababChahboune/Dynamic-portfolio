@@ -3,7 +3,7 @@
   Date: 11/12/2016
   Time: 23:44
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=utf-8" pageEncoding="UTF-8"%>
 <html>
 <head>
     <title>Title</title>
@@ -11,21 +11,21 @@
 <body>
 <html>
 <head>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Log in</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
-    <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/lib/bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="../lib/dist/css/AdminLTE.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/lib/dist/css/AdminLTE.css">
     <!-- iCheck -->
-    <link rel="stylesheet" href="../lib/plugins/iCheck/square/blue.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/lib/plugins/iCheck/square/blue.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -39,9 +39,9 @@
     <!-- /.login-logo -->
     <div class="login-box-body">
         <div class="login-logo">
-            <img src="../lib/dist/img/logo.png" width="164" height="164">
+            <img src="<%=request.getContextPath()%>/lib/dist/img/logo.png" width="164" height="164">
         </div>
-        <form action="../loginController" method="post">
+        <form action="<%=request.getContextPath()%>/loginController" method="post">
             <div class="form-group has-feedback">
                 <input type="text" value="lockScreen" name ="action" hidden>
                 <input type="password" class="form-control" placeholder="Mot de passe" name="password">
@@ -62,11 +62,11 @@
 <!-- /.login-box -->
 
 <!-- jQuery 2.2.3 -->
-<script src="../lib/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="<%=request.getContextPath()%>/lib/plugins/jQuery/jquery-2.2.3.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
-<script src="../lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="<%=request.getContextPath()%>/lib/bootstrap/js/bootstrap.min.js"></script>
 <!-- iCheck -->
-<script src="../lib/plugins/iCheck/icheck.min.js"></script>
+<script src="<%=request.getContextPath()%>/lib/plugins/iCheck/icheck.min.js"></script>
 </body>
 </html>
 

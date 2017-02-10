@@ -1,10 +1,15 @@
 package controlleur;
 
 import com.geekonjava.fileupload.FileUploading;
+import dataAccess.AdministrateurDA;
+import dataAccess.Categorie_projetDA;
 import dataAccess.ProfileDA;
+import dataAccess.courrierDA;
+import model.Administrateur;
 import model.Domaine;
 import model.Profile;
 import utility.Check;
+import utility.verifySession;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -52,7 +57,7 @@ public class profileController extends HttpServlet {
                 p.setImageProfile(imageProfile);
                 p.setBiographieProfile(Check.checkInput(map.get("biographieProfile").toString()));
                 ProfileDA.insertProfile(p);
-                response.sendRedirect("admin/home.jsp");
+                response.sendRedirect("homeServlet");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -80,15 +85,47 @@ public class profileController extends HttpServlet {
         }
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if(request.getParameter("action").equals("supprimerProfile")){
+        response.setContentType("text/html; charset=UTF-8");
+        try {
+            if(!verifySession.check(request,response)){
+                response.sendRedirect("admin/index");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        Administrateur administrateur = null;
+        try {
+            administrateur = AdministrateurDA.getAdministrateur();
+            request.setAttribute("administrateur", administrateur);
+            request.setAttribute("categorie", Categorie_projetDA.getCategorie_projetList());
+            request.setAttribute("portfolio", administrateur.getProfile());
+            request.setAttribute("courrier", courrierDA.getCourrierList());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if(request.getParameter("action") !=null) {
+            if (request.getParameter("action").equals("supprimerProfile")) {
+                try {
+                    int idProfile = Integer.parseInt(request.getParameter("idProfile"));
+                    Profile p = ProfileDA.findProfile(idProfile);
+                    ProfileDA.deleteProfile(p);
+                    response.sendRedirect("homeServlet");
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (request.getParameter("action").equals("ajouterProfile")) {
+                request.getRequestDispatcher("admin/ajouterProfile.jsp").forward(request, response);
+            }
+        }else {
+            Profile profile = new Profile(0);
             try {
-                int idProfile = Integer.parseInt(request.getParameter("idProfile"));
-                Profile p = ProfileDA.findProfile(idProfile);
-                ProfileDA.deleteProfile(p);
-                response.sendRedirect("admin/home.jsp");
+                profile = ProfileDA.findProfile(Integer.parseInt(request.getParameter("id")));
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+            request.setAttribute("profile", profile);
+            request.getRequestDispatcher("admin/profile.jsp?id?" + request.getAttribute("id")).forward(request, response);
         }
     }
 }

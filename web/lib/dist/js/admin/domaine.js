@@ -3,7 +3,7 @@
  */
 $(document).ready ( function(){
     $('form').ajaxForm(function(respond) {
-        alert(respond);
-        $(location).attr('href', '../admin/home.jsp')
+        //alert(respond);
+        $(location).attr('href', 'homeServlet')
     });
 })

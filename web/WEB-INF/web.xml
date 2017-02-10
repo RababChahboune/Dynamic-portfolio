@@ -3,6 +3,12 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
+    <welcome-file-list>
+        <welcome-file>index</welcome-file>
+    </welcome-file-list>
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
     <servlet>
         <servlet-name>loginServlet</servlet-name>
         <servlet-class>controlleur.loginServlet</servlet-class>
@@ -10,6 +16,10 @@
     <servlet-mapping>
         <servlet-name>loginServlet</servlet-name>
         <url-pattern>loginController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>loginServlet</servlet-name>
+        <url-pattern>admin/index</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -127,5 +137,14 @@
     <servlet-mapping>
         <servlet-name>PortfolioServlet</servlet-name>
         <url-pattern>portfolioController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>homeServlet</servlet-name>
+        <servlet-class>controlleur.homeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>homeServlet</servlet-name>
+        <url-pattern>homeServlet</url-pattern>
     </servlet-mapping>
 </web-app>

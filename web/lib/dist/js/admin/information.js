@@ -4,6 +4,6 @@
 $(document).ready ( function(){
     $('form').ajaxForm(function(respond) {
         alert(respond);
-        $(location).attr('href', '../admin/information.jsp')
+        $(location).attr('href', 'portfolioController')
     });
 })

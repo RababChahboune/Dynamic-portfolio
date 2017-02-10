@@ -8,13 +8,9 @@
   Time: 18:42
 --%>
 <!-- Project category list in dashboard -->
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%!
-    ArrayList<Categorie_projet> cat;
-%>
-<%
-    cat = Categorie_projetDA.getCategorie_projetList();
-%>
+<%@ page contentType="text/html; charset=utf-8" pageEncoding="UTF-8"%>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<%ArrayList<Categorie_projet> cat = (ArrayList<Categorie_projet>) request.getAttribute("categorie");%>
 <div class="col-md-4">
     <div class="box box-info">
         <div class="box-header with-border">
@@ -41,8 +37,8 @@
                         <td><%=p.getNomProjetCategorie()%></td>
                         <td><%=p.getDescriptionProjetCategorie()%></td>
                         <td>
-                            <a href="categorieProjet.jsp?action=modifierCategorieProjet&id=<%=p.getIdProjetCategorie()%>"><span class="label label-info"> <span class="fa fa-pencil"></span></span></a>
-                            <a href="/DynamicPortfolio/catProjectController?action=supprimerCategorieProjet&id=<%=p.getIdProjetCategorie()%>"> <span class="label label-danger"><span class="fa fa-times"></span></span></a>
+                            <a href="<%=request.getContextPath()%>/catProjectController?action=modifierCategorieProjet&id=<%=p.getIdProjetCategorie()%>"><span class="label label-info"> <span class="fa fa-pencil"></span></span></a>
+                            <a href="<%=request.getContextPath()%>/catProjectController?action=supprimerCategorieProjet&id=<%=p.getIdProjetCategorie()%>"> <span class="label label-danger"><span class="fa fa-times"></span></span></a>
                         </td>
                     </tr>
                     <%}%>
@@ -51,7 +47,7 @@
             </div>
         </div>
         <div class="box-footer clearfix">
-            <a href="categorieProjet.jsp?action=ajouterCategorieProjet" class="btn btn-sm btn-default btn-flat pull-right">Ajouter une catégories</a>
+            <a href="<%=request.getContextPath()%>/catProjectController?action=ajouterCategorieProjet" class="btn btn-sm btn-default btn-flat pull-right">Ajouter une catégories</a>
         </div>
     </div>
 </div>
