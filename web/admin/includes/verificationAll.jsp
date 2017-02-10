@@ -12,7 +12,7 @@
     boolean foundCookie;
 %>
 <%
-    foundCookie = false;
+    /*foundCookie = false;
     cookies = request.getCookies();
     if(session.getAttribute("username") == null){
         if(cookies!=null){
@@ -26,5 +26,5 @@
             if(!foundCookie)
                 response.sendRedirect("login.jsp");
         }
-    }
+    }*/
 %>
