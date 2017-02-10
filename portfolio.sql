@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 01, 2017 at 01:01 AM
+-- Generation Time: Feb 10, 2017 at 01:22 AM
 -- Server version: 5.5.32
 -- PHP Version: 5.4.19
 
@@ -73,14 +73,17 @@ CREATE TABLE IF NOT EXISTS `categorie_projet` (
   `descriptionProjetCategorie` varchar(254) DEFAULT NULL,
   `imageProjetCategorie` varchar(254) DEFAULT NULL,
   PRIMARY KEY (`idProjetCategorie`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
 
 --
 -- Dumping data for table `categorie_projet`
 --
 
 INSERT INTO `categorie_projet` (`idProjetCategorie`, `nomProjetCategorie`, `descriptionProjetCategorie`, `imageProjetCategorie`) VALUES
-(12, '3D', '4d projects', '302818paypal.png');
+(17, 'Poster', 'Designing beautiful posters.', ''),
+(14, 'Web Design', 'Build web interfaces', ''),
+(15, 'Video clip', 'Making video clips', ''),
+(16, 'Logos', 'Making logos for enterprises ', '');
 
 -- --------------------------------------------------------
 
@@ -95,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `competance` (
   `pourcentageCompetance` int(11) DEFAULT NULL,
   PRIMARY KEY (`idCompetance`),
   KEY `FK_ASSOCIATION13` (`idProfile`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
 
 --
 -- Dumping data for table `competance`
@@ -109,7 +112,10 @@ INSERT INTO `competance` (`idCompetance`, `idProfile`, `nomCompetance`, `pourcen
 (6, 1, 'java', 100),
 (11, 8, 'CSS4', 50),
 (10, 2, 'CSS4', 47),
-(12, 8, 'J2EE', 83);
+(12, 8, 'J2ee', 25),
+(14, 8, 'HTML5', 85),
+(15, 8, 'Javascript', 76),
+(16, 10, 'Project management', 78);
 
 -- --------------------------------------------------------
 
@@ -125,16 +131,16 @@ CREATE TABLE IF NOT EXISTS `courrier` (
   `dateEnvoieCourrier` datetime DEFAULT NULL,
   `nomCompletCourrier` varchar(254) DEFAULT NULL,
   PRIMARY KEY (`idCourrier`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=28 ;
 
 --
 -- Dumping data for table `courrier`
 --
 
 INSERT INTO `courrier` (`idCourrier`, `emailCourrier`, `sujetCourrier`, `messageCourrier`, `dateEnvoieCourrier`, `nomCompletCourrier`) VALUES
-(16, 'test@test.com', 'test', 'hello', '2017-01-30 22:29:01', 'harry poter'),
-(15, 'test@test.com', 'test', 'helllo', '2016-12-26 11:28:59', 'harry poter'),
-(21, 'az@az0.c', 'az', 'az', '2017-01-31 01:27:21', 'az');
+(21, 'az@az0.c', 'az', 'az', '2017-01-31 01:27:21', 'az'),
+(26, 'test@test.com', 'test', 'hello', '2017-02-09 20:42:59', 'harry poter'),
+(27, 'test@test.com', 'test', 'hello', '2017-02-09 20:42:59', 'harry poter');
 
 -- --------------------------------------------------------
 
@@ -152,7 +158,7 @@ CREATE TABLE IF NOT EXISTS `cursus` (
   `remarqueCursus` varchar(254) DEFAULT NULL,
   PRIMARY KEY (`id_cursus`),
   KEY `FK_ASSOCIATION14` (`idProfile`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
 
 --
 -- Dumping data for table `cursus`
@@ -161,7 +167,13 @@ CREATE TABLE IF NOT EXISTS `cursus` (
 INSERT INTO `cursus` (`id_cursus`, `idProfile`, `nomCursus`, `annee_debutCursus`, `annee_finCursus`, `etablissementCursus`, `remarqueCursus`) VALUES
 (6, 1, 'something', '2016', '2019', 'Hell', 'HOLA!'),
 (7, 2, 'DEV', '2015', '2018', 'Ensias', 'yes'),
-(11, 8, 'Ensias', '2015', '2018', 'Ensias', 'GOOD');
+(11, 8, 'Native UX and UI Designer', '2014', 'Présent', 'Fanatix', 'My role was to help produce number of consumer products for web and native apps. I work alongside the CEO, SVP of Mobile Applications and Commercial Director.'),
+(13, 9, 'a', 'a', 'a', 'a', 'a'),
+(14, 8, 'Co-Founder and Events Co-ordinator', '2013', '2016', 'Infiltration Airsoft', 'High tech events co-ordinator running airsoft games around the the UK. Running events with 300 players and up to 50 staff at any one time. '),
+(15, 8, 'UX and UI Designer - Contract', '2013', '2013', 'Wirehive', 'Joined this venture as a brand consultant to help setup a new hosting solutions business that already had relationships with many of the UKs largest IT and design based agencies.'),
+(16, 8, 'Senior UX and UI Designer', '2007', '2010', 'Fubra', 'Working within a large team of developers, my responsibilities included native app design, website design and iconography.'),
+(17, 8, 'Bulk Check Manager', '2006', '2007', 'Travelex', 'Successfully managed a team of fifteen people within a highly competitive foreign exchange company. Each day my team had to handle,'),
+(18, 10, 'UX AND UI DESIGNER - CONTRACT', '2015', '2016', 'Wirshark', 'Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc ');
 
 -- --------------------------------------------------------
 
@@ -175,14 +187,17 @@ CREATE TABLE IF NOT EXISTS `domaine` (
   `descriptionDomaine` varchar(254) DEFAULT NULL,
   `imageDomaine` varchar(254) DEFAULT NULL,
   PRIMARY KEY (`idDomaine`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
 
 --
 -- Dumping data for table `domaine`
 --
 
 INSERT INTO `domaine` (`idDomaine`, `nomDomaine`, `descriptionDomaine`, `imageDomaine`) VALUES
-(5, 'Web', 'Web Design', 'aaass.jpg');
+(13, 'Web', 'Building web application', '4111387html.png'),
+(14, 'Graphic design', 'Creating beautiful art', '2437451tools.png'),
+(15, 'Branding', 'We do branding', '7250570tag.png'),
+(16, 'Videos', 'Creating professional videos', '7442994presentation.png');
 
 -- --------------------------------------------------------
 
@@ -195,15 +210,17 @@ CREATE TABLE IF NOT EXISTS `experience` (
   `nomExperience` varchar(254) NOT NULL,
   `logoExperience` varchar(254) DEFAULT NULL,
   PRIMARY KEY (`idExperience`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Dumping data for table `experience`
 --
 
 INSERT INTO `experience` (`idExperience`, `nomExperience`, `logoExperience`) VALUES
-(4, 'NVIDEA', '98402logo 1.png'),
-(9, 'ZZ', '7933468paypal.png');
+(13, 'Visa', '4680454visa.png'),
+(12, 'Master Card', '5117363mastercard.png'),
+(14, 'Amazon', '6217643amazon.png'),
+(15, 'Paypal', '6889798paypal.png');
 
 -- --------------------------------------------------------
 
@@ -219,7 +236,7 @@ CREATE TABLE IF NOT EXISTS `lien` (
   `imageLien` varchar(254) DEFAULT NULL,
   PRIMARY KEY (`idLien`),
   KEY `FK_ASSOCIATION16` (`idProfile`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=29 ;
 
 --
 -- Dumping data for table `lien`
@@ -227,9 +244,10 @@ CREATE TABLE IF NOT EXISTS `lien` (
 
 INSERT INTO `lien` (`idLien`, `idProfile`, `nomLien`, `urlLien`, `imageLien`) VALUES
 (24, 1, 'facebook', 'https://www.facebook.com/MedRedaBenchraa', '1282297default-50x50.gif'),
-(25, 8, 'facebook', 'https://web.facebook.com/', '9402565facebook-flat-vector-logo-400x400.png'),
+(25, 8, 'Facebook', 'https://www.facebook.com/', '9402565facebook-flat-vector-logo-400x400.png'),
 (22, 2, 'facebook', 'http://www.facebook.com', '6789804mestro.png'),
-(26, 8, 'Twitter', 'www.facebook.com', '5041824twitter-logo-final.png');
+(26, 8, 'Twitter', 'www.facebook.com', '5041824twitter-logo-final.png'),
+(28, 10, 'Facebook', 'www.facebook.com', '4162939facebook-flat-vector-logo-400x400.png');
 
 -- --------------------------------------------------------
 
@@ -251,7 +269,7 @@ CREATE TABLE IF NOT EXISTS `portfolio` (
 --
 
 INSERT INTO `portfolio` (`nomTheme`, `nomPortfolio`, `aProposPortfolio`, `logoPortfolio`, `salutationPortfolio`) VALUES
-('karmo', 'RR Labs', 'BESTEVER', '4066431logo.png', 'Welcome to my site');
+('Edge', 'RR LABS', 'BESTEVER', '7723643deviantart.png', 'Welcome to my website');
 
 -- --------------------------------------------------------
 
@@ -268,14 +286,17 @@ CREATE TABLE IF NOT EXISTS `profile` (
   `imageProfile` varchar(254) DEFAULT NULL,
   `biographieProfile` varchar(254) DEFAULT NULL,
   PRIMARY KEY (`idProfile`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `profile`
 --
 
 INSERT INTO `profile` (`idProfile`, `nomProfile`, `prenomProfile`, `emailProfile`, `telephoneProfile`, `imageProfile`, `biographieProfile`) VALUES
-(8, 'Rabab', 'C', 'rc@gmail.com', '0652535253', '2790640avatar2.png', 'Zdaf');
+(8, 'Hamo', 'Rabi', 'hamo.rabi@gmail.com', '0652535253', '7801080reza.jpg', 'I am a highly experienced UX and UI designer with over 10 years in the field. I am an energetic, ambitious\r\nperson who enjoys working with others and am passionate about what I do, with an eye for detail.'),
+(10, 'Frank', 'Kron', 'F.kron@yahoo.de', '062859645', '8933792.jpg', 'My name is Cassandra Duncan. I grew up an only child. I was also an only grandchild on both sides. The youngest of all my cousins and the only child in a small neighborhood that consisted of a bunch of adults.'),
+(11, 'Anna', 'len', 'Anna.l@hotmail.de', '0652538595', '7632845.jpg', 'Accustomed to being around primarily adults, I was always mature for my age. Even my own friends often annoyed me during my adolescent years. I had a lot of people who invested in me'),
+(12, 'Simon', 'phen', 'simon.phen@gmail.com', '0652857595', '9999654.jpg', 'Iâ??m proud to say this new role suits me. Iâ??m driven, not to do great things for myself, but to spur my son on to even greater ones.');
 
 -- --------------------------------------------------------
 
@@ -293,7 +314,7 @@ CREATE TABLE IF NOT EXISTS `projet` (
   `etoileProjet` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`idProjet`),
   KEY `FK_ASSOCIATION8` (`idProjetCategorie`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 --
 -- Dumping data for table `projet`
@@ -303,7 +324,11 @@ INSERT INTO `projet` (`idProjet`, `idProjetCategorie`, `nomProjet`, `description
 (1, 8, 'JJ', '<u>AA<b> &nbsp;jl</b></u>', 'AAA', '0', 1),
 (9, 1, 'zz', '<p><b>zz</b></p>', 'zz', '2192626icons.png', 1),
 (12, 6, 'Boom', '<p><b>az<u>&nbsp;</u></b><b><u>ZZE</u></b></p>', 'BAH', '6772344photo2.png', 0),
-(14, 12, 'FRANK', '<p><b><u><p>THIS IS A TEXT</p></u></b></p>', 'ZOOM', '1412633photo1.png', 0);
+(16, 14, 'Wirehive', '<p><br></p><p><img alt="" src="http://media.dunkedcdn.com/assets/prod/7652/750x0_p1af8ga2ij1ouktvr1vmh1av3r4s8.jpg" title="Image: http://media.dunkedcdn.com/assets/prod/7652/750x0_p1af8ga2ij1ouktvr1vmh1av3r4s8.jpg"><br></p>', 'I was lucky enough to work with the guys at Wirehive to create their name, branding and website from the beginning', '32641071.jpg', 0),
+(17, 14, 'LVNRM', '<p><img src="http://media.dunkedcdn.com/assets/prod/7652/750x0_p1afgf1bip1qh43ga8j6tgmjk93.jpg" title="Image: http://media.dunkedcdn.com/assets/prod/7652/750x0_p1afgf1bip1qh43ga8j6tgmjk93.jpg"><br></p>', 'LVNRM or Livingroom was a startup I created to gather designers together in their front rooms to share and discuss their startup ideas. ', '78240772.jpg', 0),
+(18, 16, 'fanatix', '<p>\r\n\r\nI have been working at fanatix since early 2014 as lead design. Designing the new fanatix app on both iOS and Android devices.<br></p>', 'I have been working at fanatix since early 2014 as lead design. Designing the new fanatix app on both iOS and Android devices.', '37680835.jpg', 0),
+(19, 17, 'Infiltration Airsoft', '<p>\r\n\r\nnfiltration Airsoft is a company I co-founded. It has been running for three years and runs high tech airsoft events around the UK<br></p>', '', '26499344.jpg', 0),
+(20, 15, 'Remember The War', '<p><img src="http://media.dunkedcdn.com/assets/prod/7652/750x0_p1afgfgmhb1nj51eld1ts01a4b7u84.jpg" title="Image: http://media.dunkedcdn.com/assets/prod/7652/750x0_p1afgfgmhb1nj51eld1ts01a4b7u84.jpg"><br></p>', 'Remember The War was a crowd funded project I created with the aim in educating the younger generations on the second World War. ', '8706133bw-2.png', 0);
 
 -- --------------------------------------------------------
 
@@ -323,9 +348,8 @@ CREATE TABLE IF NOT EXISTS `theme` (
 --
 
 INSERT INTO `theme` (`nomTheme`, `lienTheme`, `paletteTheme`) VALUES
-('Flat', 'flat.xml', 'Flat.png'),
-('Modern', 'Modern', 'Modern.png'),
-('karmo', 'karmo', 'karmo.png\r\n'),
+('Edge', 'Edge', 'Edge.JPG'),
+('Karmo', 'karmo', 'karmo.png\r\n'),
 ('creative', 'creative.xml', 'creative.JPG');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
