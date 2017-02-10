@@ -31,7 +31,6 @@
                     <thead>
                     <tr>
                         <th>Nom projet</th>
-                        <th>Description</th>
                         <th>Eloilé</th>
                         <th>Catégorie</th>
                         <th>Options</th>
@@ -42,7 +41,6 @@
 
                     <tr>
                         <td><%=p.getNomProjet()%></td>
-                        <td><%=p.getDescriptionProjet()%></td>
                         <td><a href=""><span class="label label-<% if(p.isEtoileProjet()) out.print("warning");else out.print("default");%>"><span class="fa fa-star"></span></span></a></td>
                         <td><%=p.getCategorie_projet().getNomProjetCategorie()%></td>
                         <td>

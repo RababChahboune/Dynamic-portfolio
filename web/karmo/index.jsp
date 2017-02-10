@@ -201,6 +201,7 @@
 				</div>
 			</div>
 			<div class="row">
+				<%for(Domaine domaine : administrateur.getDomaine()){%>
 ex				<div class="col-lg-3 right col-full right-0">
 					<img width="100px" src="../lib/dist/img/domaine/<%=domaine.getImageDomaine()%>">
 					<h6><%=domaine.getNomDomaine()%></h6>

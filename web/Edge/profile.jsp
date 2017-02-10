@@ -52,7 +52,7 @@
       <div class="for-sticky">
         <!--LOGO-->
         <div class="col-md-2 col-xs-6 logo">
-          <a href="index.jsp"><img alt="logo" class="logo-nav" src="../lib/dist/img/portfolio/<%=portfolio.getLogoPortfolio()%>"></a>
+          <a href="index.jsp"><%=portfolio.getNomPortfolio()%></a>
         </div>
         <!--/.LOGO END-->
       </div>

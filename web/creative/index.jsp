@@ -205,9 +205,6 @@
                                 <%=projet.getNomProjet()%>
                             </div>
                             <div class="project-name">
-                                <%=projet.getDescriptionProjet()%>
-                            </div>
-                            <div class="project-name">
                                 <%=projet.getProjetProjet()%>
                             </div>
                         </div>

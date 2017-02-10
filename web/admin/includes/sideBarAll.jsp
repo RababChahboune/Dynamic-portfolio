@@ -35,7 +35,6 @@
                 <a href="courrier.jsp">
                     <i class="fa fa-envelope"></i> <span>Courrier</span>
                     <span class="pull-right-container">
-                            <small class="label pull-right bg-yellow">5</small>
                         </span>
                 </a>
             </li>
