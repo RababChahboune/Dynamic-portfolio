@@ -5,12 +5,14 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="UTF-8"%>
 
 <%!
+  Administrateur administrateur;
   Profile profile;
   Portfolio portfolio;
 %>
 <%
-  profile = ProfileDA.findProfile(Integer.parseInt(request.getParameter("id")));
-  portfolio = portfolioDA.getPortfolio();
+  profile = (Profile) request.getAttribute("profile");
+  administrateur = (Administrateur) request.getAttribute("administrateur");
+  portfolio = administrateur.getPortfolio();
 %>
 <html lang="en">
   <head>
@@ -23,12 +25,12 @@
     <!--Fav-->
 
     <!--styles-->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/owl.carousel.css" rel="stylesheet">
-    <link href="css/owl.theme.css" rel="stylesheet">
-    <link href="css/magnific-popup.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/responsive.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/Edge/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/Edge/css/owl.carousel.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/Edge/css/owl.theme.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/Edge/css/magnific-popup.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/Edge/css/style.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/Edge/css/responsive.css" rel="stylesheet">
     
     <!--fonts google-->
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,700' rel='stylesheet' type='text/css'>
@@ -42,7 +44,7 @@
     <!--PRELOADER-->
     <div id="preloader">
       <div id="status">
-        <img alt="logo" src="../lib/dist/img/portfolio/<%=portfolio.getLogoPortfolio()%>">
+        <img alt="logo" src="<%=request.getContextPath()%>/lib/dist/img/portfolio/<%=portfolio.getLogoPortfolio()%>">
       </div>
     </div>
     <!--/.PRELOADER END-->
@@ -111,7 +113,7 @@
         <section id="about">
           <div class="col-md-6 col-xs-12 no-pad">
             <div class="bg-about">
-              <input id="bg" type="hidden" value="../lib/dist/img/profile/<%=profile.getImageProfile()%>">
+              <input id="bg" type="hidden" value="<%=request.getContextPath()%>/lib/dist/img/profile/<%=profile.getImageProfile()%>">
             </div>
           </div>
           <div class="col-md-6 col-sm-12 col-xs-12 white-col">
@@ -247,7 +249,7 @@
             <ul class="socials">
               <%for (Lien lien : profile.getLien()){%>
               <li class="twitter">
-                <a href="<%=lien.getUrlLien()%>" data-hover="<%=lien.getNomLien()%>"><img width="30" src="../lib/dist/img/lien/<%=lien.getImageLien()%>"> <%=lien.getNomLien()%></a>
+                <a href="<%=lien.getUrlLien()%>" data-hover="<%=lien.getNomLien()%>"><img width="30" src="<%=request.getContextPath()%>/lib/dist/img/lien/<%=lien.getImageLien()%>"> <%=lien.getNomLien()%></a>
               </li>
               <%}%>
             </ul>
@@ -256,7 +258,7 @@
           <div class="footer-bottom">
             <div class="container">
               <div class="row">
-                <img width="100" src="../lib/dist/img/portfolio/<%=portfolio.getLogoPortfolio()%>" alt="logo bottom" class="center-block" />
+                <img width="100" src="<%=request.getContextPath()%>/lib/dist/img/portfolio/<%=portfolio.getLogoPortfolio()%>" alt="logo bottom" class="center-block" />
               </div>
             </div>
           </div>
@@ -269,16 +271,16 @@
     </div>
     
 
-    <script src="js/jquery-1.9.1.min.js" type="text/javascript"></script>
-    <script src="js/jquery.appear.js" type="text/javascript"></script>
-    <script src="js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="js/classie.js" type="text/javascript"></script>
-    <script src="js/owl.carousel.min.js" type="text/javascript"></script>
-    <script src="js/jquery.magnific-popup.min.js" type="text/javascript"></script>
-    <script src="js/masonry.pkgd.min.js" type="text/javascript"></script>
-    <script src="js/masonry.js" type="text/javascript"></script>
-    <script src="js/smooth-scroll.min.js" type="text/javascript"></script>
-    <script src="js/typed.js" type="text/javascript"></script>
-    <script src="js/main.js" type="text/javascript"></script>
+    <script src="<%=request.getContextPath()%>/Edge/js/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script src="<%=request.getContextPath()%>/Edge/js/jquery.appear.js" type="text/javascript"></script>
+    <script src="<%=request.getContextPath()%>/Edge/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="<%=request.getContextPath()%>/Edge/js/classie.js" type="text/javascript"></script>
+    <script src="<%=request.getContextPath()%>/Edge/js/owl.carousel.min.js" type="text/javascript"></script>
+    <script src="<%=request.getContextPath()%>/Edge/js/jquery.magnific-popup.min.js" type="text/javascript"></script>
+    <script src="<%=request.getContextPath()%>/Edge/js/masonry.pkgd.min.js" type="text/javascript"></script>
+    <script src="<%=request.getContextPath()%>/Edge/js/masonry.js" type="text/javascript"></script>
+    <script src="<%=request.getContextPath()%>/Edge/js/smooth-scroll.min.js" type="text/javascript"></script>
+    <script src="<%=request.getContextPath()%>/Edge/js/typed.js" type="text/javascript"></script>
+    <script src="<%=request.getContextPath()%>/Edge/js/main.js" type="text/javascript"></script>
   </body>
 </html>

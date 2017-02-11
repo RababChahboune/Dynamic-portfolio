@@ -10,16 +10,8 @@
 --%>
 <!DOCTYPE html>
 
-<%!
-    Portfolio p;
-%>
-<%  try{
-   p = portfolioDA.getPortfolio();
-}catch(SQLException e){
-    System.out.println(e);
-}
-%>
-
+<%!Administrateur administrateur;%>
+<%administrateur = (Administrateur) request.getAttribute("administrateur");%>
 <html lang="en">
 
 <head>
@@ -30,21 +22,21 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title><%= p.getNomPortfolio()%></title>
+    <title><%= administrateur.getPortfolio().getNomPortfolio()%></title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/creative/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="<%=request.getContextPath()%>/creative/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 
     <!-- Plugin CSS -->
-    <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/creative/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
 
     <!-- Theme CSS -->
-    <link href="css/creative.min.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/creative/css/creative.min.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -64,7 +56,7 @@
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand page-scroll" href="#page-top"><%=p.getNomPortfolio()%></a>
+            <a class="navbar-brand page-scroll" href="#page-top"><%=administrateur.getPortfolio().getNomPortfolio()%></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -98,9 +90,9 @@
 <header>
     <div class="header-content">
         <div class="header-content-inner">
-            <h1 id="homeHeading"><%= p.getNomPortfolio() %></h1>
+            <h1 id="homeHeading"><%= administrateur.getPortfolio().getNomPortfolio() %></h1>
             <hr>
-            <p><%= p.getSalutationPortfolio() %></p>
+            <p><%= administrateur.getPortfolio().getSalutationPortfolio() %></p>
             <a href="#about" class="btn btn-primary btn-xl page-scroll">Find Out More</a>
         </div>
     </div>
@@ -112,7 +104,7 @@
             <div class="col-lg-8 col-lg-offset-2 text-center">
                 <h2 class="section-heading">A propos</h2>
                 <hr class="light">
-                <p class="text-faded"><%=p.getaProposPortfolio()%></p>
+                <p class="text-faded"><%=administrateur.getPortfolio().getaProposPortfolio()%></p>
                 <a href="#membres" class="page-scroll btn btn-default btn-xl sr-button">Get Started!</a>
             </div>
         </div>
@@ -130,11 +122,12 @@
     </div>
     <div class="container">
         <div class="row">
-            <% for(Profile profile : ProfileDA.getProfileList()){%>
+            <% for(Profile profile : administrateur.getProfile()){%>
             <div class="col-lg-3 col-md-6 text-center">
                 <div class="service-box">
-                    <a href="membre.jsp?idProfile=<%=profile.getIdProfile()%>"><img src="../lib/dist/img/profile/<% if(!profile.getImageProfile().equals("0")) out.print(profile.getImageProfile()); else out.print("default.png");%>" width="100"></a>
-                    <h2><a href="membre.jsp?idProfile=<%=profile.getIdProfile()%>"><%=profile.getNomProfile()+" "+profile.getPrenomProfile()%></a></h2>
+                    <%request.setAttribute("idProfile",profile.getIdProfile());%>
+                    <a href="<%=request.getContextPath()%>/membreController?idProfile=<%=profile.getIdProfile()%>"><img class="img-circle" src="<%=request.getContextPath()%>/lib/dist/img/profile/<% if(!profile.getImageProfile().equals("0")) out.print(profile.getImageProfile()); else out.print("default.png");%>" width="100"></a>
+                    <h2><a href="<%=request.getContextPath()%>/membreController?idProfile=<%=profile.getIdProfile()%>"><%=profile.getNomProfile()+" "+profile.getPrenomProfile()%></a></h2>
                 </div>
             </div>
             <%}%>
@@ -153,10 +146,10 @@
     </div>
     <div class="container">
         <div class="row">
-            <% for(Domaine d: domaineDA.getDomaineList()){%>
+            <% for(Domaine d: administrateur.getDomaine()){%>
             <div class="col-lg-3 col-md-6 text-center">
                 <div class="service-box">
-                    <img src="../lib/dist/img/domaine/<% if(!d.getImageDomaine().equals("0")) out.print(d.getImageDomaine()); else out.print("default.png");%>" width="100">
+                    <img src="<%=request.getContextPath()%>/lib/dist/img/domaine/<% if(!d.getImageDomaine().equals("0")) out.print(d.getImageDomaine()); else out.print("default.png");%>" width="100">
                     <h2><%=d.getNomDomaine()%></h2>
                     <p><%=d.getDescriptionDomaine()%></p>
                 </div>
@@ -177,10 +170,10 @@
     </div>
     <div class="container">
         <div class="row">
-            <% for(Experience e: experienceDA.getExperienceList()){%>
+            <% for(Experience e: administrateur.getExperience()){%>
             <div class="col-lg-3 col-md-6 text-center">
                 <div class="service-box">
-                    <img src="../lib/dist/img/partenaire/<% if(!e.getLogoExperience().equals("0")) out.print(e.getLogoExperience()); else out.print("default.png");%>" width="100">
+                    <img src="<%=request.getContextPath()%>/lib/dist/img/partenaire/<% if(!e.getLogoExperience().equals("0")) out.print(e.getLogoExperience()); else out.print("default.png");%>" width="100">
                     <h2><%=e.getNomExperience()%></h2>
                 </div>
             </div>
@@ -192,10 +185,10 @@
 <section class="no-padding" id="portfolio">
     <div class="container-fluid">
         <div class="row no-gutter popup-gallery">
-            <%for(Projet projet : ProjetDA.getProjetList()){%>
+            <%for(Projet projet : administrateur.getProjet()){%>
             <div class="col-lg-4 col-sm-6">
-                <a href="../lib/dist/img/projet/<% if(!projet.getImageProjet().equals("0")) out.print(projet.getImageProjet()); else out.print("default.png");%>" class="portfolio-box">
-                    <img style="height: 300px; width: 500px;" src="../lib/dist/img/projet/<% if(!projet.getImageProjet().equals("0")) out.print(projet.getImageProjet()); else out.print("default.png");%>" class="img-responsive" alt="">
+                <a href="<%=request.getContextPath()%>/lib/dist/img/projet/<% if(!projet.getImageProjet().equals("0")) out.print(projet.getImageProjet()); else out.print("default.png");%>" class="portfolio-box">
+                    <img style="height: 300px; width: 500px;" src="<%=request.getContextPath()%>/lib/dist/img/projet/<% if(!projet.getImageProjet().equals("0")) out.print(projet.getImageProjet()); else out.print("default.png");%>" class="img-responsive" alt="">
                     <div class="portfolio-box-caption">
                         <div class="portfolio-box-caption-content">
                             <div class="project-category text-faded">
@@ -263,11 +256,11 @@
 
 <!-- Plugin JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-<script src="vendor/scrollreveal/scrollreveal.min.js"></script>
-<script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+<script src="<%=request.getContextPath()%>/creative/vendor/scrollreveal/scrollreveal.min.js"></script>
+<script src="<%=request.getContextPath()%>/creative/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
 
 <!-- Theme JavaScript -->
-<script src="js/creative.min.js"></script>
+<script src="<%=request.getContextPath()%>/creative/js/creative.min.js"></script>
 
 </body>
 

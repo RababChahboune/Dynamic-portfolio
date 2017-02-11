@@ -11,12 +11,7 @@
     Portfolio p;
 %>
 <%
-    try {
-        p = portfolioDA.getPortfolio();
-        response.sendRedirect(p.getTheme().getNomTheme()+"/");
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
+    response.sendRedirect(request.getContextPath()+"/indexController");
 %>
 
 

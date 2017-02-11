@@ -1,15 +1,15 @@
-<%@ page import="dataAccess.portfolioDA" %>
-<%@ page import="dataAccess.AdministrateurDA" %>
 <%@ page import="model.*" %>
 <%@ page import="dataAccess.lienDA" %>
-<%@ page import="dataAccess.Categorie_projetDA" %>
+<%@ page import="java.util.ArrayList" %>
 <%!
 	Administrateur administrateur;
 	Portfolio portfolio;
+	ArrayList<Categorie_projet> cps;
 %>
 <%
-	administrateur = AdministrateurDA.getAdministrateur();
+	administrateur = (Administrateur) request.getAttribute("administrateur");
 	portfolio = administrateur.getPortfolio();
+	cps = (ArrayList<Categorie_projet>) request.getAttribute("cps");
 %>
 <html>
 <head>
@@ -22,12 +22,12 @@
 	<meta name="description" content="KARMO is a creative and modern template for digital agencies">
 
 	<!-- STYLES -->
-	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-	<link rel="stylesheet" href="assets/css/flexslider.css">
-	<link rel="stylesheet" href="assets/css/animsition.min.css">
-	<link rel="stylesheet" href="assets/css/style.css">
-	<link rel="stylesheet" href="assets/css/owl.carousel.css">
-	<link rel="stylesheet" href="assets/css/owl.theme.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/karmo/assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/karmo/assets/css/flexslider.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/karmo/assets/css/animsition.min.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/karmo/assets/css/style.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/karmo/assets/css/owl.carousel.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/karmo/assets/css/owl.theme.css">
 
 	<!-- Fontawesome -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
@@ -46,7 +46,7 @@
 				<!-- box header -->
 				<div class="box-header">
 						<div class="box-logo">
-								<a href="index.jsp"><img src="../lib/dist/img/portfolio/<%=portfolio.getLogoPortfolio()%>" width="80" alt="Logo"></a>
+								<a href="index.jsp"><img src="<%=request.getContextPath()%>/lib/dist/img/portfolio/<%=portfolio.getLogoPortfolio()%>" width="80" alt="Logo"></a>
 						</div>
 						<!-- box-nav -->
 						<a class="box-primary-nav-trigger" href="#0">
@@ -61,7 +61,7 @@
 						<ul class="box-primary-nav">
 							<li class="box-label"><%=portfolio.getNomPortfolio()%></li>
 							<li><a href="#">Accueil</a></li>
-							<li><a href="#services">Apropos</a></li>
+							<li><a href="#Apropos">Apropos</a></li>
 							<li><a href="#Statistique">Statistique</a></li>
 							<li><a href="#Equipe">Equipe</a></li>
 							<li><a href="#Service">Service</a></li>
@@ -100,11 +100,11 @@
 	</header>
 
 	<!-- HISTORY OF AGENCY -->
-	<section id="about" class="about mt-150 mb-50">
+	<section id="Apropos" class="about mt-150 mb-50">
 		<div class="container">
 			<div class="row center">
 				<div class="col-md-8 col-md-offset-2">
-					<img src="assets/img/about.png" alt="Khaki HTML Template" width="300">
+					<img src="<%=request.getContextPath()%>/karmo/assets/img/about.png" alt="Khaki HTML Template" width="300">
 					<div class="km-space"></div>
 					<h5 class="lead"><%=portfolio.getaProposPortfolio()%></h5>
 				</div>
@@ -113,7 +113,7 @@
 	</section>
 
 	<!-- FACTS  -->
-	<div id="facts" class="facts mt-100 mbr-box mbr-section mbr-section--relative">
+	<div id="Statistique" class="facts mt-100 mbr-box mbr-section mbr-section--relative">
 		<div class="container">
 			<div class="row text-center">
 			    <div class="col-xs-12 col-lg-3 col-md-3">
@@ -149,7 +149,7 @@
 	</div>
 
 	<!-- TEAM -->
-	<section id="team" class="team mbr-box mbr-section mbr-section--relative">
+	<section id="Equipe" class="team mbr-box mbr-section mbr-section--relative">
 		<svg preserveAspectRatio="none" viewBox="0 0 100 102" height="100" width="100%" version="1.1" xmlns="http://www.w3.org/2000/svg">
 			<path d="M0 0 L50 100 L100 0 Z" fill="#ffeedb" stroke="#ffeedb"></path>
 		</svg>
@@ -168,12 +168,12 @@
                 <div class="team-member col-md-3 col-sm-3 text-center">
                     <div class="member-thumb">
                     	<div class="cover"><div class="cover-inner-left"></div></div>
-                        <img src="../lib/dist/img/profile/<%=profile.getImageProfile()%>" alt="Team Member" class="img-responsive">
+                        <img src="<%=request.getContextPath()%>/lib/dist/img/profile/<%=profile.getImageProfile()%>" alt="Team Member" class="img-responsive">
                         <div class="team_cover"><div class="team_cover_inner"></div></div>
                             <div class="overlay">
                                 <div class="social-links">
 									<% for(Lien lien : lienDA.getLienList(profile)){%>
-                                    <a href="<%=lien.getUrlLien()%>"><img src="../lib/dist/img/lien/<%=lien.getImageLien()%>"></a>
+                                    <a href="<%=lien.getUrlLien()%>"><img src="<%=request.getContextPath()%>/lib/dist/img/lien/<%=lien.getImageLien()%>"></a>
 									<%}%>
                                 </div>
                             </div>
@@ -189,7 +189,7 @@
 	</section>
 
 	<!-- SERVICES PARALAX -->
-	<section id="services" class="services mbr-box mbr-section mbr-section--relative mbr-section--fixed-size mbr-section--full-height mbr-section--bg-adapted mbr-parallax-background"  style="background-image: url(assets/img/services.jpg);">
+	<section id="Service" class="services mbr-box mbr-section mbr-section--relative mbr-section--fixed-size mbr-section--full-height mbr-section--bg-adapted mbr-parallax-background"  style="background-image: url(assets/img/services.jpg);">
 		<div class="section-overlay"></div>
 		<div class="container">
 			<div class="row center">
@@ -203,7 +203,7 @@
 			<div class="row">
 				<%for(Domaine domaine : administrateur.getDomaine()){%>
 ex				<div class="col-lg-3 right col-full right-0">
-					<img width="100px" src="../lib/dist/img/domaine/<%=domaine.getImageDomaine()%>">
+					<img width="100px" src="<%=request.getContextPath()%>/lib/dist/img/domaine/<%=domaine.getImageDomaine()%>">
 					<h6><%=domaine.getNomDomaine()%></h6>
 					<p><%=domaine.getDescriptionDomaine()%></p>
 				</div>
@@ -213,7 +213,7 @@ ex				<div class="col-lg-3 right col-full right-0">
 	</section>
 
 	<!-- PORTFOLIO -->
-	<section class="portfolio">
+	<section class="portfolio" id="Portfolio">
 		<div class="top-right-separator hidden-xs"></div>
 		<div class="container">
 			<div class="col-md-8 col-md-offset-2 col-sm-12">
@@ -230,7 +230,7 @@ ex				<div class="col-lg-3 right col-full right-0">
 					<nav class="categories">
 						<ul class="portfolio_filter">
 							<li><a href="" class="active" data-filter="*">Tous</a></li>
-							<%for(Categorie_projet cp : Categorie_projetDA.getCategorie_projetList()){%>
+							<%for(Categorie_projet cp : cps){%>
 							<li><a href="" data-filter=".<%=cp.getNomProjetCategorie()%>"><%=cp.getNomProjetCategorie()%></a></li>
 							<%}%>
 						</ul>
@@ -244,8 +244,8 @@ ex				<div class="col-lg-3 right col-full right-0">
 					<%for(Projet cp : administrateur.getProjet()){%>
 					<!-- single work -->
 					<div class="col-md-4 <%=cp.getCategorie_projet().getNomProjetCategorie()%>">
-						<a href="single-project.jsp?id=<%=cp.getIdProjet()%>" class="portfolio_item work-grid">
-							<img src="../lib/dist/img/projet/<%=cp.getImageProjet()%>" alt="image">
+						<a href="<%=request.getContextPath()%>/singleProjectController?id=<%=cp.getIdProjet()%>" class="portfolio_item work-grid">
+							<img src="<%=request.getContextPath()%>/lib/dist/img/projet/<%=cp.getImageProjet()%>" alt="image">
 							<div class="portfolio_item_hover">
 								<div class="item_info">
 									<span><%=cp.getNomProjet()%></span>
@@ -266,7 +266,7 @@ ex				<div class="col-lg-3 right col-full right-0">
 	<!-- portfolio -->
 
 	<!-- CLIENTS -->
-	<div id="clients" class="clients mt-100 mbr-box mbr-section mbr-section--relative">
+	<div id="Client" class="clients mt-100 mbr-box mbr-section mbr-section--relative">
 		<svg preserveAspectRatio="none" viewBox="0 0 100 102" height="100" width="100%" version="1.1" xmlns="http://www.w3.org/2000/svg">
 			<path d="M0 0 L50 100 L100 0 Z" fill="#fff" stroke="#fff"></path>
 		</svg>
@@ -276,7 +276,7 @@ ex				<div class="col-lg-3 right col-full right-0">
 						</div>
 						<div id="owl-demo">
 							<%for(Experience experience : administrateur.getExperience()){%>
-								<div class="item"><img width="100px" src="../lib/dist/img/partenaire/<%=experience.getLogoExperience()%>" alt="<%=experience.getNomExperience()%>"></div>
+								<div class="item"><img width="100px" src="<%=request.getContextPath()%>/lib/dist/img/partenaire/<%=experience.getLogoExperience()%>" alt="<%=experience.getNomExperience()%>"></div>
 							<%}%>
 						</div>
 				</div>
@@ -288,7 +288,7 @@ ex				<div class="col-lg-3 right col-full right-0">
 			<div class="col-md-6 col-sm-12">
 				<div class="row">
 					<h4>Travaillons ensemble</h4>
-					<a href="contact.jsp" class="default-btn"> Contacter <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+					<a href="<%=request.getContextPath()%>/contactUsController" class="default-btn"> Contacter <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
 				</div>
 			</div>
 
@@ -323,7 +323,7 @@ ex				<div class="col-lg-3 right col-full right-0">
                     <!-- Start Contact Widget -->
                     <div class="col-md-6 col-xs-12">
                         <div class="footer-widget contact-widget">
-                            <img width="100px" src="../lib/dist/img/portfolio/<%=portfolio.getLogoPortfolio()%>" class="logo-footer img-responsive" alt="Footer Logo" />
+                            <img width="100px" src="<%=request.getContextPath()%>/lib/dist/img/portfolio/<%=portfolio.getLogoPortfolio()%>" class="logo-footer img-responsive" alt="Footer Logo" />
                             <ul class="social-icons">
                                 <li>
                                     <a class="facebook" href="#"><i class="fa fa-facebook"></i></a>
@@ -366,12 +366,12 @@ ex				<div class="col-lg-3 right col-full right-0">
                         <div class="footer-widget company-links">
                             <h4><%=portfolio.getNomPortfolio()%></h4>
 							<ul class="footer-links">
-                                <li><a href="#">Apropos</a></li>
-                                <li><a href="#">Statistique</a></li>
-								<li><a href="#">Equipe</a></li>
-								<li><a href="#">Service</a></li>
-                                <li><a href="#">Portfolio</a></li>
-                                <li><a href="#">Client</a></li>
+                                <li><a href="#Apropos">Apropos</a></li>
+                                <li><a href="#Statistique">Statistique</a></li>
+								<li><a href="#Equipe">Equipe</a></li>
+								<li><a href="#Service">Service</a></li>
+                                <li><a href="#Portfolio">Portfolio</a></li>
+                                <li><a href="#Client">Client</a></li>
 							</ul>
                         </div>
                     </div><!-- .col-md-3 -->
@@ -391,19 +391,19 @@ ex				<div class="col-lg-3 right col-full right-0">
 	</footer>
 
 	<!-- SCRIPTS -->
-	<script type="text/javascript" src="assets/js/jquery-2.2.3.min.js"></script>
-	<script type="text/javascript" src="assets/js/animated-headline.js"></script>
-	<script type="text/javascript" src="assets/js/menu.js"></script>
-	<script type="text/javascript" src="assets/js/modernizr.js"></script>
-	<script type="text/javascript" src="assets/js/isotope.pkgd.min.js"></script>
-	<script type="text/javascript" src="assets/js/jquery.flexslider-min.js"></script>
-	<script type="text/javascript" src="assets/js/jquery.animsition.min.js"></script>
-	<script type="text/javascript" src="assets/js/init.js"></script>
-	<script type="text/javascript" src="assets/js/main.js"></script>
-	<script type="text/javascript" src="assets/js/smooth-scroll.js"></script>
-	<script type="text/javascript" src="assets/js/numscroller.js"></script>
-	<script type="text/javascript" src="assets/js/wow.min.js"></script>
-	<script type="text/javascript" src="assets/js/owl.carousel.min.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/karmo/assets/js/jquery-2.2.3.min.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/karmo/assets/js/animated-headline.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/karmo/assets/js/menu.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/karmo/assets/js/modernizr.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/karmo/assets/js/isotope.pkgd.min.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/karmo/assets/js/jquery.flexslider-min.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/karmo/assets/js/jquery.animsition.min.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/karmo/assets/js/init.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/karmo/assets/js/main.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/karmo/assets/js/smooth-scroll.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/karmo/assets/js/numscroller.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/karmo/assets/js/wow.min.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/karmo/assets/js/owl.carousel.min.js"></script>
 
 	<script type="text/javascript">
 		$(window).load(function() {

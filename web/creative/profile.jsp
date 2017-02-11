@@ -11,15 +11,13 @@
 <!DOCTYPE html>
 
 <%!
-    Portfolio portfolio;
+   Administrateur administrateur;
     Profile p;
 %>
-<%  try{
-    portfolio = portfolioDA.getPortfolio();
-    p = ProfileDA.findProfile(Integer.parseInt(request.getParameter("idProfile")));
-}catch(SQLException e){
-    System.out.println(e);
-}
+<%
+    administrateur = (Administrateur) request.getAttribute("administrateur");
+    p = (Profile) request.getAttribute("profile");
+    System.out.println(p);
 %>
 
 <html lang="fr">
@@ -32,21 +30,21 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title><%= portfolio.getNomPortfolio() %></title>
+    <title><%= administrateur.getPortfolio().getNomPortfolio() %></title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/creative/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="<%=request.getContextPath()%>/creative/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 
     <!-- Plugin CSS -->
-    <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/creative/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
 
     <!-- Theme CSS -->
-    <link href="css/creative.min.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/creative/css/creative.min.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -66,7 +64,7 @@
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand page-scroll" href="#page-top"><%=portfolio.getNomPortfolio()%></a>
+            <a class="navbar-brand page-scroll" href="#page-top"><%=administrateur.getPortfolio().getNomPortfolio()%></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -99,7 +97,7 @@
         <div class="header-content-inner">
             <h3 id="homeHeading"><%= p.getPrenomProfile() +" "+p.getNomProfile() %></h3>
             <hr>
-            <img src="../lib/dist/img/profile/<% if(!p.getImageProfile().equals("0")) out.print(p.getImageProfile()); else out.print("default.png");%>" width="100">
+            <img class = "img-circle" src="<%=request.getContextPath()%>/lib/dist/img/profile/<% if(!p.getImageProfile().equals("0")) out.print(p.getImageProfile()); else out.print("default.png");%>" width="100">
             <br>
             <br>
             <a href="#about" class="btn btn-primary btn-xl page-scroll">Find Out More</a>
@@ -183,7 +181,7 @@
             <% for(Lien l : p.getLien()){%>
             <div class="col-lg-3 col-md-6 text-center">
                 <div class="service-box">
-                    <a href="<%=l.getUrlLien()%>"><img src="../lib/dist/img/lien/<% if(!l.getImageLien().equals("0")) out.print(l.getImageLien()); else out.print("default.png");%>" width="100"></a>
+                    <a href="<%=l.getUrlLien()%>"><img src="<%=request.getContextPath()%>/lib/dist/img/lien/<% if(!l.getImageLien().equals("0")) out.print(l.getImageLien()); else out.print("default.png");%>" width="100"></a>
                 </div>
             </div>
             <%}%>
@@ -194,7 +192,7 @@
 <section id="contact">
     <div class="container">
         <div class="row">
-            <form class="form-horizontal" method="post" action="../courrierController">
+            <form class="form-horizontal" method="post" action="<%=request.getContextPath()%>/courrierController">
                 <input type="hidden" value="envoyerCourrier" name="action">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Email</label>
@@ -231,18 +229,18 @@
 </section>
 
 <!-- jQuery -->
-<script src="vendor/jquery/jquery.min.js"></script>
+<script src="<%=request.getContextPath()%>/creative/vendor/jquery/jquery.min.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
-<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="<%=request.getContextPath()%>/creative/vendor/bootstrap/js/bootstrap.min.js"></script>
 
 <!-- Plugin JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-<script src="vendor/scrollreveal/scrollreveal.min.js"></script>
-<script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+<script src="<%=request.getContextPath()%>/creative/vendor/scrollreveal/scrollreveal.min.js"></script>
+<script src="<%=request.getContextPath()%>/creative/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
 
 <!-- Theme JavaScript -->
-<script src="js/creative.min.js"></script>
+<script src="<%=request.getContextPath()%>/creative/js/creative.min.js"></script>
 
 </body>
 

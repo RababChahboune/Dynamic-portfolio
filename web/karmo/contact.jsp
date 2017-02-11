@@ -1,14 +1,11 @@
 <%@ page import="model.Portfolio" %>
 <%@ page import="dataAccess.portfolioDA" %>
-<%!
-	Portfolio portfolio;
-%>
-<%
-	portfolio = portfolioDA.getPortfolio();
-%>
+<%@ page import="model.Administrateur" %>
+<%!Administrateur administrateur;%>
+<%administrateur = (Administrateur) request.getAttribute("administrateur");%>
 <html lang="en">
 <head>
-	<title><%=portfolio.getNomPortfolio()%></title>
+	<title><%=administrateur.getPortfolio().getNomPortfolio()%></title>
 	<!-- META TAGS -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -17,12 +14,12 @@
 	<meta name="description" content="KARMO is a creative and modern template for digital agencies">
 
 	<!-- STYLES -->
-	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-	<link rel="stylesheet" href="assets/css/flexslider.css">
-	<link rel="stylesheet" href="assets/css/animsition.min.css">
-	<link rel="stylesheet" href="assets/css/style.css">
-	<link rel="stylesheet" href="assets/css/owl.carousel.css">
-	<link rel="stylesheet" href="assets/css/owl.theme.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/karmo/assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/karmo/assets/css/flexslider.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/karmo/assets/css/animsition.min.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/karmo/assets/css/style.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/karmo/assets/css/owl.carousel.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/karmo/assets/css/owl.theme.css">
 
 	<!-- Fontawesome -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
@@ -41,7 +38,7 @@
 				<!-- box header -->
 				<div class="box-header">
 						<div class="box-logo">
-								<a href="index.jsp"><img src="../lib/dist/img/portfolio/<%=portfolio.getLogoPortfolio()%>" width="80" alt="Logo"></a>
+								<a href="index.jsp"><img src="<%=request.getContextPath()%>/lib/dist/img/portfolio/<%=administrateur.getPortfolio().getLogoPortfolio()%>" width="80" alt="Logo"></a>
 						</div>
 						<!-- box-nav -->
 						<a class="box-primary-nav-trigger" href="#0">
@@ -93,7 +90,7 @@
 			</div>
             <!-- CONTACT FORM -->
             <div class="contact-form bottom">
-                <form method="POST" action="../courrierController">
+                <form method="POST" action="<%=request.getContextPath()%>/courrierController">
 					<input hidden name="action" value="envoyerCourrier"/>
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     <div class="form-group">
@@ -130,7 +127,7 @@
                     <!-- Start Contact Widget -->
                     <div class="col-md-6 col-xs-12">
                         <div class="footer-widget contact-widget">
-                            <img src="assets/img/footerlogo.png" class="logo-footer img-responsive" alt="Footer Logo" />
+							<img width="100px" src="<%=request.getContextPath()%>/lib/dist/img/portfolio/<%=administrateur.getPortfolio().getLogoPortfolio()%>" class="logo-footer img-responsive" alt="Footer Logo" />
                             <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
                             <ul class="social-icons">
                                 <li>
@@ -207,19 +204,19 @@
 	</footer>
 
 	<!-- SCRIPTS -->
-	<script type="text/javascript" src="assets/js/jquery-2.2.3.min.js"></script>
-	<script type="text/javascript" src="assets/js/animated-headline.js"></script>
-	<script type="text/javascript" src="assets/js/menu.js"></script>
-	<script type="text/javascript" src="assets/js/modernizr.js"></script>
-	<script type="text/javascript" src="assets/js/isotope.pkgd.min.js"></script>
-	<script type="text/javascript" src="assets/js/jquery.flexslider-min.js"></script>
-	<script type="text/javascript" src="assets/js/jquery.animsition.min.js"></script>
-	<script type="text/javascript" src="assets/js/init.js"></script>
-	<script type="text/javascript" src="assets/js/main.js"></script>
-	<script type="text/javascript" src="assets/js/smooth-scroll.js"></script>
-	<script type="text/javascript" src="assets/js/numscroller.js"></script>
-	<script type="text/javascript" src="assets/js/wow.min.js"></script>
-	<script type="text/javascript" src="assets/js/owl.carousel.min.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/karmo/assets/js/jquery-2.2.3.min.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/karmo/assets/js/animated-headline.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/karmo/assets/js/menu.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/karmo/assets/js/modernizr.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/karmo/assets/js/isotope.pkgd.min.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/karmo/assets/js/jquery.flexslider-min.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/karmo/assets/js/jquery.animsition.min.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/karmo/assets/js/init.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/karmo/assets/js/main.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/karmo/assets/js/smooth-scroll.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/karmo/assets/js/numscroller.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/karmo/assets/js/wow.min.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/karmo/assets/js/owl.carousel.min.js"></script>
 
 	<script type="text/javascript">
 		$(window).load(function() {

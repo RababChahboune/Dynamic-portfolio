@@ -7,7 +7,7 @@
   Portfolio portfolio;
 %>
 <%
-  administrateur = AdministrateurDA.getAdministrateur();
+  administrateur = (Administrateur) request.getAttribute("administrateur");
   portfolio = administrateur.getPortfolio();
 %>
 <html lang="en">
@@ -20,12 +20,12 @@
     <meta content="BdgPixel" name="author">
 
     <!--styles-->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/owl.carousel.css" rel="stylesheet">
-    <link href="css/owl.theme.css" rel="stylesheet">
-    <link href="css/magnific-popup.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/responsive.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/Edge/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/Edge/css/owl.carousel.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/Edge/css/owl.theme.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/Edge/css/magnific-popup.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/Edge/css/style.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/Edge/css/responsive.css" rel="stylesheet">
     
     <!--fonts google-->
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,700' rel='stylesheet' type='text/css'>
@@ -39,7 +39,7 @@
     <!--PRELOADER-->
     <div id="preloader">
       <div id="status">
-        <img alt="logo" src="../lib/dist/img/portfolio/<%=portfolio.getLogoPortfolio()%>">
+        <img alt="logo" src="<%=request.getContextPath()%>/lib/dist/img/portfolio/<%=portfolio.getLogoPortfolio()%>">
       </div>
     </div>
     <!--/.PRELOADER END-->
@@ -125,7 +125,7 @@
                 <ul class="portfolio-image">
                   <%for(Projet cp : administrateur.getProjet()){%>
                   <li class="col-md-6">
-                    <a href="../lib/dist/img/projet/<%=cp.getImageProjet()%>"><img alt="image" src="../lib/dist/img/projet/<%=cp.getImageProjet()%>">
+                    <a href="<%=request.getContextPath()%>/lib/dist/img/projet/<%=cp.getImageProjet()%>"><img alt="image" src="<%=request.getContextPath()%>/lib/dist/img/projet/<%=cp.getImageProjet()%>">
                       <div class="decription-wrap">
                         <div class="image-bg">
                            <p class="desc"><%=cp.getDescriptionProjet()%></p>
@@ -158,7 +158,7 @@
                     <%for(Domaine domaine : administrateur.getDomaine()){%>
                     <li>
                       <div class="col-md-4 col-sm-4">
-                        <img width="30" src="../lib/dist/img/domaine/<%=domaine.getImageDomaine()%>">
+                        <img width="30" src="<%=request.getContextPath()%>/lib/dist/img/domaine/<%=domaine.getImageDomaine()%>">
                         <p class="head-sm">
                           <%=domaine.getNomDomaine()%>
                         </p>
@@ -187,7 +187,7 @@
                   <%for(Experience experience : administrateur.getExperience()){%>
                   <div class="list-testimonial">
                     <div class="content-testimonial">
-                      <img width="100px" src="../lib/dist/img/partenaire/<%=experience.getLogoExperience()%>">
+                      <img width="100px" src="<%=request.getContextPath()%>/lib/dist/img/partenaire/<%=experience.getLogoExperience()%>">
                       <p class="people">
                         <%=experience.getNomExperience()%>
                       </p>
@@ -215,13 +215,13 @@
                   <%for(Profile profile : administrateur.getProfile()){%>
                   <div class="grid-item">
                     <div class="wrap-article">
-                      <img alt="blog-1" class="img-circle text-center" src="../lib/dist/img/profile/<%=profile.getImageProfile()%>">
+                      <img alt="blog-1" class="img-circle text-center" src="<%=request.getContextPath()%>/lib/dist/img/profile/<%=profile.getImageProfile()%>">
                       <p class="subtitle fancy">
                         <span><%=profile.getEmailProfile()%></span>
                       </p>
                       <a href="#">
                         <h3 class="title">
-                         <a href="profile.jsp?id=<%=profile.getIdProfile()%>"> <%=profile.getNomProfile()%> <%=profile.getPrenomProfile()%></a>
+                         <a href="<%=request.getContextPath()%>/membreController?idProfile=<%=profile.getIdProfile()%>"> <%=profile.getNomProfile()%> <%=profile.getPrenomProfile()%></a>
                         </h3>
                       </a>
                       <p class="content-blog"><%=profile.getBiographieProfile()%> </p>
@@ -269,7 +269,7 @@
           <div class="footer-bottom">
             <div class="container">
               <div class="row">
-                <img width="100" src="../lib/dist/img/portfolio/<%=portfolio.getLogoPortfolio()%>" alt="logo bottom" class="center-block" />
+                <img width="100" src="<%=request.getContextPath()%>/lib/dist/img/portfolio/<%=portfolio.getLogoPortfolio()%>" alt="logo bottom" class="center-block" />
               </div>
             </div>
           </div>
@@ -282,16 +282,16 @@
     </div>
     
 
-    <script src="js/jquery-1.9.1.min.js" type="text/javascript"></script>
-    <script src="js/jquery.appear.js" type="text/javascript"></script>
-    <script src="js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="js/classie.js" type="text/javascript"></script>
-    <script src="js/owl.carousel.min.js" type="text/javascript"></script>
-    <script src="js/jquery.magnific-popup.min.js" type="text/javascript"></script>
-    <script src="js/masonry.pkgd.min.js" type="text/javascript"></script>
-    <script src="js/masonry.js" type="text/javascript"></script>
-    <script src="js/smooth-scroll.min.js" type="text/javascript"></script>
-    <script src="js/typed.js" type="text/javascript"></script>
-    <script src="js/main.js" type="text/javascript"></script>
+    <script src="<%=request.getContextPath()%>/Edge/js/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script src="<%=request.getContextPath()%>/Edge/js/jquery.appear.js" type="text/javascript"></script>
+    <script src="<%=request.getContextPath()%>/Edge/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="<%=request.getContextPath()%>/Edge/js/classie.js" type="text/javascript"></script>
+    <script src="<%=request.getContextPath()%>/Edge/js/owl.carousel.min.js" type="text/javascript"></script>
+    <script src="<%=request.getContextPath()%>/Edge/js/jquery.magnific-popup.min.js" type="text/javascript"></script>
+    <script src="<%=request.getContextPath()%>/Edge/js/masonry.pkgd.min.js" type="text/javascript"></script>
+    <script src="<%=request.getContextPath()%>/Edge/js/masonry.js" type="text/javascript"></script>
+    <script src="<%=request.getContextPath()%>/Edge/js/smooth-scroll.min.js" type="text/javascript"></script>
+    <script src="<%=request.getContextPath()%>/Edge/js/typed.js" type="text/javascript"></script>
+    <script src="<%=request.getContextPath()%>/Edge/js/main.js" type="text/javascript"></script>
   </body>
 </html>

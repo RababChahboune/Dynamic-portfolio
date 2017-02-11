@@ -43,7 +43,7 @@ public class courrierController extends HttpServlet {
                 c.setMessageCourrier(messageCourrier);
                 c.setNomComplet(nomComplet);
                 courrierDA.insertCourrier(c);
-                response.sendRedirect(portfolioDA.getPortfolio().getTheme().getNomTheme()+"/");
+                response.sendRedirect("indexController");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
